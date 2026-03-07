@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/styleForms.css">
+    <link rel="stylesheet" href="../css/stylePrincipal.css">
+    <title>Iniciar Sesión | Salus CMA</title>
+</head>
+<body>
+
+<header>
+    <a href="../index.html">
+        <img src="../img/logo.png" alt="Logo Salus CMA" id="logo" />
+    </a>
+    <div class="centro">
+        <nav>
+            <h1>Salus CMA</h1>
+            <ul>
+                <li><a href="../index.html">Inicio</a></li>
+                <li><a href="vision.html">Visión y Misión</a></li>
+                <li><a href="personal.html">Personal</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+                <li><a href="mapaPrincipal.html">Mapa de sitio</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="perfil-container">
+        <a href="loginn.html">
+            <img id="perfil" src="../img/perfil.png" alt="Perfil">
+            <p>Iniciar sesión</p>
+        </a>
+    </div>
+</header>
+
+<main>
+    <h2>Iniciar Sesión</h2>
+
+    <form id="formLogin">
+
+        <label>Usuario:</label>
+        <input type="text" name="usuario" id="input-usuario" required
+            title="Introduce tu usuario."><br><br>
+
+        <label>Contraseña:</label>
+        <input type="password" name="contrasena" id="input-contrasena" required
+            title="Introduce tu contraseña."><br><br>
+
+        <label id="mensajeLogin" style="color:red; display:block; margin-bottom:10px;"></label>
+
+        <button type="submit">Entrar</button>
+
+        <p>¿Aún no estás registrado?</p>
+        <a href="registro.html">Registrarse</a>
+        <br>
+        <p>¿Olvidaste la contraseña?</p>
+        <a href="recuperarContrasena.html">Recuperar</a>
+
+    </form>
+</main>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-section contact" id="footer-contacto">
+            <h3>Contacto</h3>
+        </div>
+        <div class="footer-section links" id="footer-redes">
+            <h3>Enlaces</h3>
+        </div>
+        <div id="footer-mapa-container"></div>
+    </div>
+</footer>
+
+<script src="../js/footer.js"></script>
+<script src="../js/login.js"></script>
+
+</body>
+</html>

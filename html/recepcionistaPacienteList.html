@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/stylePrincipal.css">
+    <link rel="stylesheet" href="../css/tabla.css">
+    <title>Pacientes | Salus CMA</title>
+</head>
+<body>
+
+<header>
+    <a href="recepcionistaPrincipal.html">
+        <img src="../img/logo.png" alt="logo" id="logo" />
+    </a>
+    <div class="centro">
+        <nav>
+            <h1>Salus CMA</h1>
+            <ul>
+                <li><a href="../index.html">Inicio</a></li>
+                <li><a href="vision.html">Visión y Misión</a></li>
+                <li><a href="personal.html">Personal</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+                <li><a href="mapaPrincipal.html">Mapa de sitio</a></li>
+            </ul>
+            <hr>
+            <ul>
+                <li><a href="recepcionistaPrincipal.html">Inicio</a></li>
+                <li><a>Pacientes</a>
+                    <ul class="submenu">
+                        <li><a href="recepcionistaPaciente.html">Registrar</a></li>
+                        <li><a href="recepcionistaPacienteList.html">Listado</a></li>
+                    </ul>
+                </li>
+                <li><a>Citas</a>
+                    <ul class="submenu">
+                        <li><a href="recepcionistaCita.html">Registrar</a></li>
+                        <li><a href="recepcionistaCitaList.html">Listado</a></li>
+                    </ul>
+                </li>
+                <li><a href="recepcionistaHorarioList.html">Horarios</a></li>
+                <li><a href="recepcionistaMapa.html">Mapa de Sitio</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="perfil-container" id="perfil-container">
+        
+        <a href="loginn.html">
+            <img id="perfil" src="../img/perfil.png" alt="Perfil">
+            <p>Iniciar sesión</p>
+        </a>
+    </div>
+</header>
+
+
+<main>
+    <h2>Pacientes</h2>
+
+    <table id="tablaPacientes">
+        <thead>
+            <tr>
+                <th>CURP</th>
+                <th>Nombre</th>
+                <th>Apellido Paterno</th>
+                <th>Apellido Materno</th>
+                <th>Fecha de Nacimiento</th>
+                <th>Correo</th>
+                <th>Usuario</th>
+                <th>
+                    <button type="button"
+                        onclick="window.location.href='recepcionistaPaciente.html'">
+                        Ir a registro
+                    </button>
+                </th>
+            </tr>
+        </thead>
+        <tbody id="tbody-pacientes">
+            
+            <tr id="fila-1" class="filaPaciente">
+                <td>GOMC900101HVZRZR01</td>
+                <td>Carlos</td>
+                <td>González</td>
+                <td>Morales</td>
+                <td>1990-01-01</td>
+                <td>carlos@email.com</td>
+                <td>carlosgm</td>
+                <td>
+                    <button type="button"
+                        onclick="window.location.href='recepcionistaPacienteEdit.html?id_pacientes=1'">
+                        Editar
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script src="eliminarPacientes.js"></script>
+
+    <div class="contenedor-botones">
+        <button id="prevPaciente">&laquo; Anterior</button>
+        <span id="paginaPaciente">Página 1 de 1</span>
+        <button id="nextPaciente">Siguiente &raquo;</button>
+    </div>
+
+    <script>
+        const filasPaciente = document.querySelectorAll('.filaPaciente');
+        const filasPorPaginaPaciente = 10;
+        let paginaActualPaciente = 0;
+        const totalPaginasPaciente = Math.ceil(filasPaciente.length / filasPorPaginaPaciente);
+        const spanPaginaPaciente = document.getElementById('paginaPaciente');
+
+        function mostrarPaginaPaciente(pagina) {
+            filasPaciente.forEach((fila, index) => {
+                fila.style.display = (index >= pagina * filasPorPaginaPaciente && index < (pagina + 1) * filasPorPaginaPaciente) ? '' : 'none';
+            });
+            spanPaginaPaciente.textContent = `Página ${pagina + 1} de ${totalPaginasPaciente}`;
+        }
+
+        document.getElementById('prevPaciente').addEventListener('click', () => {
+            paginaActualPaciente = (paginaActualPaciente - 1 + totalPaginasPaciente) % totalPaginasPaciente;
+            mostrarPaginaPaciente(paginaActualPaciente);
+        });
+
+        document.getElementById('nextPaciente').addEventListener('click', () => {
+            paginaActualPaciente = (paginaActualPaciente + 1) % totalPaginasPaciente;
+            mostrarPaginaPaciente(paginaActualPaciente);
+        });
+
+        mostrarPaginaPaciente(paginaActualPaciente);
+    </script>
+</main>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-section contact" id="footer-contacto">
+            
+            <h3>Contacto</h3>
+            <p>Email: <a href="mailto:contacto@saluscma.com">contacto@saluscma.com</a></p>
+            <p>Teléfono: <a href="tel:7821234567">782 123 4567</a></p>
+            <p>Dirección: Av. Ejemplo 123, Poza Rica, Ver.</p>
+        </div>
+        <div class="footer-section links" id="footer-redes">
+            
+            <h3>Enlaces</h3>
+            <a href="#"><img src="../img/facebook.png" alt="Facebook" width="30" height="30"></a>
+            <a href="#"><img src="../img/instagram.png" alt="Instagram" width="30" height="30"></a>
+        </div>
+        <div id="footer-mapa-container">
+            
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

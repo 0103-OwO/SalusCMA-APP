@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/styleForms.css">
+    <link rel="stylesheet" href="../css/stylePrincipal.css">
+    <title>Registro Paciente | Salus CMA</title>
+</head>
+<body>
+
+<header>
+    <a href="recepcionistaPrincipal.html">
+        <img src="../img/logo.png" alt="logo" id="logo" />
+    </a>
+    <div class="centro">
+        <nav>
+            <h1>Salus CMA</h1>
+            <ul>
+                <li><a href="../index.html">Inicio</a></li>
+                <li><a href="vision.html">Visión y Misión</a></li>
+                <li><a href="personal.html">Personal</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+                <li><a href="mapaPrincipal.html">Mapa de sitio</a></li>
+            </ul>
+            <hr>
+            <ul>
+                <li><a href="recepcionistaPrincipal.html">Inicio</a></li>
+                <li><a>Pacientes</a>
+                    <ul class="submenu">
+                        <li><a href="recepcionistaPaciente.html">Registrar</a></li>
+                        <li><a href="recepcionistaPacienteList.html">Listado</a></li>
+                    </ul>
+                </li>
+                <li><a>Citas</a>
+                    <ul class="submenu">
+                        <li><a href="recepcionistaCita.html">Registrar</a></li>
+                        <li><a href="recepcionistaCitaList.html">Listado</a></li>
+                    </ul>
+                </li>
+                <li><a href="recepcionistaHorarioList.html">Horarios</a></li>
+                <li><a href="recepcionistaMapa.html">Mapa de Sitio</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="perfil-container" id="perfil-container">
+        
+        <a href="loginn.html">
+            <img id="perfil" src="../img/perfil.png" alt="Perfil">
+            <p>Iniciar sesión</p>
+        </a>
+    </div>
+</header>
+
+
+<main>
+    <h2>Registrar Paciente</h2>
+    <form id="formPaciente" method="POST">
+
+        <label>CURP:</label>
+        <input type="text" name="curp" maxlength="18"
+            pattern="^[A-Z]{4}\d{6}[HM][A-Z]{5}[A-Z0-9]\d$"
+            title="Ingrese una CURP válida" required><br><br>
+
+        <label>Nombre:</label>
+        <input type="text" name="nombre"
+            pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,50}$"
+            title="Ingrese solo letras" required><br><br>
+
+        <label>Apellido Paterno:</label>
+        <input type="text" name="app"
+            pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,50}$"
+            title="Ingrese solo letras" required><br><br>
+
+        <label>Apellido Materno:</label>
+        <input type="text" name="apm"
+            pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,50}$"
+            title="Ingrese solo letras" required><br><br>
+
+        <label>Fecha de Nacimiento:</label>
+        <input type="date" name="fecha_nac" id="fecha_nac"
+            title="La fecha no puede ser posterior a hoy" required><br><br>
+
+        <label>Correo electrónico:</label>
+        <input type="email" name="correo"
+            pattern="^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-z]{2,}$"
+            title="Ingrese un correo válido" required><br><br>
+
+        <label>Usuario:</label>
+        <input type="text" name="usuario"
+            pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,50}$"
+            title="Ingrese solo letras" required><br><br>
+
+        <label>Contraseña:</label>
+        <input type="password" name="contrasena" minlength="8"
+            pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&]{8,}$"
+            title="Debe tener al menos 8 caracteres, incluyendo una letra y un número." required><br><br>
+
+        <label id="mensajePaciente" style="color:red; display:block; margin-bottom:10px;"></label>
+
+        <button type="button" onclick="window.location.href='recepcionistaPacienteList.html'">Cancelar</button>
+        <button type="reset">Limpiar</button>
+        <button type="submit" name="btnGuardar">Guardar</button>
+
+    </form>
+    <script>
+        document.getElementById('fecha_nac').max = new Date().toISOString().split('T')[0];
+    </script>
+    <script src="agregarPacientes.js"></script>
+</main>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-section contact" id="footer-contacto">
+            
+            <h3>Contacto</h3>
+            <p>Email: <a href="mailto:contacto@saluscma.com">contacto@saluscma.com</a></p>
+            <p>Teléfono: <a href="tel:7821234567">782 123 4567</a></p>
+            <p>Dirección: Av. Ejemplo 123, Poza Rica, Ver.</p>
+        </div>
+        <div class="footer-section links" id="footer-redes">
+            
+            <h3>Enlaces</h3>
+            <a href="#"><img src="../img/facebook.png" alt="Facebook" width="30" height="30"></a>
+            <a href="#"><img src="../img/instagram.png" alt="Instagram" width="30" height="30"></a>
+        </div>
+        <div id="footer-mapa-container">
+            
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

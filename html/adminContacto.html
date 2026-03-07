@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/styleForms.css">
+    <link rel="stylesheet" href="../css/stylePrincipal.css">
+    <title>Contacto - Modificar</title>
+</head>
+
+<body>
+
+    <header>
+        <a href="adminPrincipal.html">
+            <img src="../img/logo.png" alt="Logo Salus CMA" id="logo" />
+        </a>
+        <div class="centro">
+            <nav>
+                <h1>Salus CMA</h1>
+
+                <ul>
+                    <li><a href="../index.html">Inicio</a></li>
+                    <li><a href="vision.html">Visión y Misión</a></li>
+                    <li><a href="personal.html">Personal</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                    <li><a href="mapaPrincipal.html">Mapa de sitio</a></li>
+                </ul>
+
+                <hr>
+
+                <ul>
+                    <li><a href="adminPrincipal.html">Inicio</a></li>
+                    <li><a href="adminPaciente.html">Paciente</a></li>
+                    <li><a href="adminCitas.html">Citas</a></li>
+                    <li><a href="adminHistorial.html">Historial</a></li>
+                    <li><a>Consultorio</a>
+                        <ul class="submenu">
+                            <li><a href="adminConsultorio.html">Registrar</a></li>
+                            <li><a href="adminConsultorioList.html">Listado</a></li>
+                        </ul>
+                    </li>
+                    <li><a>Trabajador</a>
+                        <ul class="submenu">
+                            <li><a href="adminTrabajador.html">Registrar</a></li>
+                            <li><a href="adminTrabajadorList.html">Listado</a></li>
+                        </ul>
+                    </li>
+                    <li><a>Especialidades</a>
+                        <ul class="submenu">
+                            <li><a href="adminEspecialidad.html">Registrar</a></li>
+                            <li><a href="adminEspecialidadList.html">Listado</a></li>
+                        </ul>
+                    </li>
+                    <li><a>Horarios</a>
+                        <ul class="submenu">
+                            <li><a href="adminHorario.html">Registrar</a></li>
+                            <li><a href="adminHorarioList.html">Listado</a></li>
+                        </ul>
+                    </li>
+                    <li><a>Usuarios</a>
+                        <ul class="submenu">
+                            <li><a href="adminUsuario.html">Registrar</a></li>
+                            <li><a href="adminUsuarioList.html">Listado</a></li>
+                        </ul>
+                    </li>
+                    <li><a>Información</a>
+                        <ul class="submenu">
+                            <li><a href="adminLogo.html">Logo</a></li>
+                            <li><a href="adminImagenPrincipal.html">Imagen central</a></li>
+                            <li><a href="adminMision.html">Misión</a></li>
+                            <li><a href="adminVision.html">Visión</a></li>
+                            <li><a href="adminValores.html">Valores</a></li>
+                            <li><a href="adminHistoria.html">Historia</a></li>
+                            <li><a href="adminContacto.html">Contacto</a></li>
+                            <li><a href="adminFooter.html">Footer</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="adminMapa.html">Mapa de Sitio</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="perfil-container" id="perfil-container">
+            <a href="loginn.html">
+                <img id="perfil" src="../img/perfil.png" alt="Perfil">
+                <p>Iniciar sesión</p>
+            </a>
+        </div>
+    </header>
+    <main>
+        <h2>Modificar Contacto</h2>
+
+        <form id="formContacto">
+
+
+            <input type="hidden" id="input-id-contacto" name="id_contacto" value="1">
+
+            <label for="direccion">Dirección:</label><br>
+
+            <textarea id="direccion" name="direccion" rows="4" cols="30" maxlength="100" title="Ingrese la dirección"
+                required>Av. Ejemplo 123, Col. Centro, Poza Rica, Ver.</textarea><br><br>
+
+            <label for="correo">Correo:</label><br>
+
+            <input type="email" id="correo" name="correo" maxlength="100" value="contacto@saluscma.com"
+                title="Ingrese un correo válido" required><br><br>
+
+            <label for="telefono">Teléfono:</label><br>
+
+            <input type="text" id="telefono" name="telefono" maxlength="15" value="7821234567"
+                title="Ingrese solo números, espacios o guiones"
+                oninput="this.value = this.value.replace(/[^0-9\- ]/g, '')" required><br><br>
+
+
+            <label id="mensajeContacto" style="display: block; margin-bottom: 10px; color: red;"></label>
+
+            <button type="button" onclick="window.location.href='adminPrincipal.html'">Cancelar</button>
+            <button type="reset">Limpiar</button>
+            <button type="submit" id="btnActualizar">Guardar</button>
+
+        </form>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section contact" id="footer-contacto">
+                <h3>Contacto</h3>
+                <p>Email: <a href="mailto:contacto@saluscma.com">contacto@saluscma.com</a></p>
+                <p>Teléfono: <a href="tel:7821234567">782 123 4567</a></p>
+                <p>Dirección: Av. Ejemplo 123, Poza Rica, Ver.</p>
+            </div>
+            <div class="footer-section links" id="footer-redes">
+                <h3>Enlaces</h3>
+                <a href="#"><img src="../img/facebook.png" alt="Facebook" width="30" height="30"></a>
+                <a href="#"><img src="../img/instagram.png" alt="Instagram" width="30" height="30"></a>
+            </div>
+            <div id="footer-mapa-container">
+
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
