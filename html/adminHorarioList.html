@@ -19,7 +19,7 @@
             <nav>
                 <h1>Salus CMA</h1>
 
-                
+
                 <ul>
                     <li><a href="../index.html">Inicio</a></li>
                     <li><a href="vision.html">Visión y Misión</a></li>
@@ -30,7 +30,7 @@
 
                 <hr>
 
-                
+
                 <ul>
                     <li><a href="adminPrincipal.html">Inicio</a></li>
                     <li><a href="adminPaciente.html">Paciente</a></li>
@@ -91,7 +91,7 @@
         </div>
     </header>
 
-    
+
     <main>
         <h2>Horarios</h2>
 
@@ -104,15 +104,14 @@
                     <th>Fecha Fin</th>
                     <th>Trabajador</th>
                     <th>
-                        <button type="button"
-                            onclick="window.location.href='adminHorario.html'">
+                        <button type="button" onclick="window.location.href='adminHorario.html'">
                             Ir a registro
                         </button>
                     </th>
                 </tr>
             </thead>
             <tbody id="tbody-horarios">
-                
+
                 <tr id="fila-1" class="filaHorario">
                     <td>08:00</td>
                     <td>14:00</td>
@@ -125,7 +124,7 @@
                         <button type="button" class="borrar-btn" data-id="1">Eliminar</button>
                     </td>
                 </tr>
-                
+
                 <tr id="fila-2" class="filaHorario">
                     <td>14:00</td>
                     <td>20:00</td>
@@ -138,7 +137,7 @@
                         <button type="button" class="borrar-btn" data-id="2">Eliminar</button>
                     </td>
                 </tr>
-                
+
                 <tr id="fila-3" class="filaHorario">
                     <td>09:00</td>
                     <td>15:00</td>
@@ -162,25 +161,27 @@
 
     </main>
 
-    
+
+    <script src="../js/global.js"></script>
     <footer>
         <div class="footer-container">
             <div class="footer-section contact" id="footer-contacto">
                 <h3>Contacto</h3>
-                <p>Email: <a href="mailto:contacto@saluscma.com">contacto@saluscma.com</a></p>
-                <p>Teléfono: <a href="tel:7821234567">782 123 4567</a></p>
-                <p>Dirección: Av. Ejemplo 123, Poza Rica, Ver.</p>
+                <p>Dirección: <span id="info-direccion">Cargando...</span></p>
+                <p>Teléfono: <span id="info-tel">Cargando...</span></p>
+                <p>Email: <span id="info-email">Cargando...</span></p>
             </div>
             <div class="footer-section links" id="footer-redes">
                 <h3>Enlaces</h3>
-                <a href="#"><img src="../img/facebook.png" alt="Facebook" width="30" height="30"></a>
-                <a href="#"><img src="../img/instagram.png" alt="Instagram" width="30" height="30"></a>
+                <a href="" id="link-fb"><img src="" alt="Facebook" width="30" height="30" id="icon-fb"></a>
+                <a href="" id="link-ig"><img src="" alt="Instagram" width="30" height="30" id="icon-ig"></a>
+                <a href="" id="link-x"><img src="" alt="X" width="30" height="30" id="icon-x"></a>
             </div>
             <div id="footer-mapa-container">
-                
             </div>
         </div>
     </footer>
 
 </body>
+
 </html>

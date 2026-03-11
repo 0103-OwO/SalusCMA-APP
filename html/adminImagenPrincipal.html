@@ -13,13 +13,13 @@
 
     <header>
         <a href="adminPrincipal.html">
-            <img src="../img/logo.png" alt="Logo Salus CMA" id="logo" />
+            <img src="" alt="Logo Salus CMA" id="logo" />
         </a>
         <div class="centro">
             <nav>
                 <h1>Salus CMA</h1>
 
-                
+
                 <ul>
                     <li><a href="../index.html">Inicio</a></li>
                     <li><a href="vision.html">Visión y Misión</a></li>
@@ -30,7 +30,7 @@
 
                 <hr>
 
-                
+
                 <ul>
                     <li><a href="adminPrincipal.html">Inicio</a></li>
                     <li><a href="adminPaciente.html">Paciente</a></li>
@@ -85,58 +85,62 @@
 
         <div class="perfil-container" id="perfil-container">
             <a href="loginn.html">
-                <img id="perfil" src="../img/perfil.png" alt="Perfil">
+                <img id="perfil" src="" alt="Perfil">
                 <p>Iniciar sesión</p>
             </a>
         </div>
     </header>
 
-    
+
     <main>
-        <h2>Modificar Imagen Principal</h2>
+        <h2>Modificar Banners de Publicidad</h2>
+        <form id="formPublicidad">
+            <div class="banner-group">
+                <label>Publicidad 1 Actual:</label><br>
+                <img id="preview-banner-1" src="#" alt="Banner 1" style="max-width: 200px;"><br>
+                <input type="file" id="file-banner-1" name="img_uno" accept="image/*"><br><br>
+            </div>
 
-        <form id="formImagenPrincipal">
+            <div class="banner-group">
+                <label>Publicidad 2 Actual:</label><br>
+                <img id="preview-banner-2" src="#" alt="Banner 2" style="max-width: 200px;"><br>
+                <input type="file" id="file-banner-2" name="img_dos" accept="image/*"><br><br>
+            </div>
 
-            
-            <input type="hidden" id="input-id-img" name="id_img" value="1">
+            <div class="banner-group">
+                <label>Publicidad 3 Actual:</label><br>
+                <img id="preview-banner-3" src="#" alt="Banner 3" style="max-width: 200px;"><br>
+                <input type="file" id="file-banner-3" name="img_tres" accept="image/*"><br><br>
+            </div>
 
-            
-            <label>Imagen principal actual:</label><br>
-            <img id="img-preview-principal" src="../img/default.png"
-                alt="Imagen principal" style="max-width: 300px;"><br><br>
-
-            <label for="img_principal">Cambiar imagen principal (PNG/JPG/JPEG):</label><br>
-            <input type="file" id="img_principal" name="img_principal" accept="image/*"><br><br>
-
-            
-            <label id="mensajeImagen" style="display: block; margin-bottom: 10px; color: red;"></label>
+            <label id="mensajePublicidad" style="display: block; margin-bottom: 10px; color: red;"></label>
 
             <button type="button" onclick="window.location.href='adminPrincipal.html'">Cancelar</button>
             <button type="reset">Limpiar</button>
-            <button type="submit" id="btnActualizar">Guardar</button>
-
+            <button type="submit" id="btnGuardarBanners">Guardar Todos los Cambios</button>
         </form>
     </main>
-
-    
+    <script src="../js/global.js"></script>
+    <script src="../js/adminPublicidad.js"></script>
     <footer>
         <div class="footer-container">
             <div class="footer-section contact" id="footer-contacto">
                 <h3>Contacto</h3>
-                <p>Email: <a href="mailto:contacto@saluscma.com">contacto@saluscma.com</a></p>
-                <p>Teléfono: <a href="tel:7821234567">782 123 4567</a></p>
-                <p>Dirección: Av. Ejemplo 123, Poza Rica, Ver.</p>
+                <p>Dirección: <span id="info-direccion">Cargando...</span></p>
+                <p>Teléfono: <span id="info-tel">Cargando...</span></p>
+                <p>Email: <span id="info-email">Cargando...</span></p>
             </div>
             <div class="footer-section links" id="footer-redes">
                 <h3>Enlaces</h3>
-                <a href="#"><img src="../img/facebook.png" alt="Facebook" width="30" height="30"></a>
-                <a href="#"><img src="../img/instagram.png" alt="Instagram" width="30" height="30"></a>
+                <a href="" id="link-fb"><img src="" alt="Facebook" width="30" height="30" id="icon-fb"></a>
+                <a href="" id="link-ig"><img src="" alt="Instagram" width="30" height="30" id="icon-ig"></a>
+                <a href="" id="link-x"><img src="" alt="X" width="30" height="30" id="icon-x"></a>
             </div>
             <div id="footer-mapa-container">
-                
             </div>
         </div>
     </footer>
 
 </body>
+
 </html>

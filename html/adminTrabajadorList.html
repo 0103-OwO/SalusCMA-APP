@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="../css/tabla.css">
     <title>Trabajador - Listado | Salus CMA</title>
     <style>
-        .oculto { display: none; }
+        .oculto {
+            display: none;
+        }
     </style>
 </head>
 
@@ -88,7 +90,7 @@
         </div>
     </header>
 
-    
+
     <main>
         <h2>Trabajadores</h2>
 
@@ -107,13 +109,13 @@
                     <th class="oculto col-informacion">Información</th>
                     <th>
                         <button type="button" id="toggleAllCampos">Ver datos</button>
-                        <button type="button"
-                            onclick="window.location.href='adminTrabajador.html'">Ir a registro</button>
+                        <button type="button" onclick="window.location.href='adminTrabajador.html'">Ir a
+                            registro</button>
                     </th>
                 </tr>
             </thead>
             <tbody id="tbody-trabajadores">
-                
+
                 <tr id="fila-1" class="filaTrabajador">
                     <td><img src="../img/perfil.png" alt="Foto" width="50"></td>
                     <td>Laura</td>
@@ -124,14 +126,15 @@
                     <td>laura.martinez@saluscma.com</td>
                     <td>7821234567</td>
                     <td>Medicina General</td>
-                    <td class="oculto col-informacion">Médico con más de 10 años de experiencia en atención primaria.</td>
+                    <td class="oculto col-informacion">Médico con más de 10 años de experiencia en atención primaria.
+                    </td>
                     <td>
                         <button type="button"
                             onclick="window.location.href='adminTrabajadorEdit.html?id_trabajador=1'">Editar</button>
                         <button type="button" class="borrar-btn" data-id="1">Eliminar</button>
                     </td>
                 </tr>
-                
+
                 <tr id="fila-2" class="filaTrabajador">
                     <td><img src="../img/perfil.png" alt="Foto" width="50"></td>
                     <td>Carlos</td>
@@ -170,22 +173,26 @@
         </script>
     </main>
 
+    <script src="../js/global.js"></script>
     <footer>
         <div class="footer-container">
             <div class="footer-section contact" id="footer-contacto">
                 <h3>Contacto</h3>
-                <p>Email: <a href="mailto:contacto@saluscma.com">contacto@saluscma.com</a></p>
-                <p>Teléfono: <a href="tel:7821234567">782 123 4567</a></p>
-                <p>Dirección: Av. Ejemplo 123, Poza Rica, Ver.</p>
+                <p>Dirección: <span id="info-direccion">Cargando...</span></p>
+                <p>Teléfono: <span id="info-tel">Cargando...</span></p>
+                <p>Email: <span id="info-email">Cargando...</span></p>
             </div>
             <div class="footer-section links" id="footer-redes">
                 <h3>Enlaces</h3>
-                <a href="#"><img src="../img/facebook.png" alt="Facebook" width="30" height="30"></a>
-                <a href="#"><img src="../img/instagram.png" alt="Instagram" width="30" height="30"></a>
+                <a href="" id="link-fb"><img src="" alt="Facebook" width="30" height="30" id="icon-fb"></a>
+                <a href="" id="link-ig"><img src="" alt="Instagram" width="30" height="30" id="icon-ig"></a>
+                <a href="" id="link-x"><img src="" alt="X" width="30" height="30" id="icon-x"></a>
             </div>
-            <div id="footer-mapa-container"></div>
+            <div id="footer-mapa-container">
+            </div>
         </div>
     </footer>
 
 </body>
+
 </html>

@@ -6,27 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/stylePrincipal.css">
     <title>Salus CMA</title>
-    <style>
-        #carrusel { position: relative; width: 100%; overflow: hidden; background: #000; }
-        #carrusel-track { display: flex; transition: transform 0.5s ease; }
-        .carrusel-slide { min-width: 100%; position: relative; }
-        .carrusel-slide img { width: 100%; max-height: 480px; object-fit: cover; display: block; }
-        .carrusel-slide .slide-caption { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.55); color: #fff; padding: 14px 20px; }
-        .carrusel-slide .slide-caption h3 { margin: 0 0 4px; font-size: 1.1rem; }
-        .carrusel-slide .slide-caption p { margin: 0; font-size: 0.9rem; }
-        .carrusel-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.25); border: none; color: #fff; font-size: 2rem; padding: 8px 16px; cursor: pointer; z-index: 10; border-radius: 4px; }
-        #carrusel-prev { left: 10px; }
-        #carrusel-next { right: 10px; }
-        #carrusel-dots { display: flex; justify-content: center; gap: 8px; padding: 10px 0; background: #111; }
-        .carrusel-dot { width: 10px; height: 10px; border-radius: 50%; background: #888; cursor: pointer; border: none; }
-        .carrusel-dot.activo { background: #fff; }
-    </style>
+    <link rel="stylesheet" href="css/styleCarrusel.css">
 </head>
 
 <body>
 
     <header>
-        <img src="img/logo.png" alt="Logotipo principal de la empresa" id="logo" />
+        <img src="" alt="Logotipo principal de la empresa" id="logo" />
         <div class="centro">
             <nav>
                 <h1>Salus CMA</h1>
@@ -41,7 +27,7 @@
         </div>
         <div class="perfil-container" id="perfil-container">
             <a href="html/loginn.html">
-                <img id="perfil" src="img/perfil.png" alt="Perfil">
+                <img id="perfil" src="" alt="Perfil">
                 <p>Iniciar sesión</p>
             </a>
         </div>
@@ -55,25 +41,14 @@
 
             <div id="carrusel-track">
                 <div class="carrusel-slide" data-index="0">
-                    <img src="img/default.png" alt="Nuevos servicios disponibles">
-                    <div class="slide-caption">
-                        <h3>Nuevos servicios disponibles</h3>
-                        <p>Incorporamos consultas de nutrición y psicología a nuestro catálogo.</p>
-                    </div>
+                    <img src="" alt="Nuevos servicios disponibles">
                 </div>
                 <div class="carrusel-slide" data-index="1">
-                    <img src="img/default.png" alt="Horario extendido">
-                    <div class="slide-caption">
-                        <h3>Horario extendido</h3>
-                        <p>A partir de este mes atendemos de lunes a sábado de 7:00 a 20:00 hrs.</p>
-                    </div>
+                    <img src="" alt="Horario extendido">
+
                 </div>
                 <div class="carrusel-slide" data-index="2">
-                    <img src="img/default.png" alt="Campaña de vacunación">
-                    <div class="slide-caption">
-                        <h3>Campaña de vacunación</h3>
-                        <p>Este mes contamos con vacunas de influenza sin costo para adultos mayores.</p>
-                    </div>
+                    <img src="" alt="Campaña de vacunación">
                 </div>
             </div>
 
@@ -84,48 +59,28 @@
             </div>
         </section>
     </main>
-
+    <script src="js/global.js"></script>
     <footer>
         <div class="footer-container">
             <div class="footer-section contact" id="footer-contacto">
                 <h3>Contacto</h3>
-                <p>Email: <a href="mailto:contacto@saluscma.com">contacto@saluscma.com</a></p>
-                <p>Teléfono: <a href="tel:7821234567">782 123 4567</a></p>
-                <p>Dirección: Av. Ejemplo 123, Poza Rica, Ver.</p>
+                <p>Dirección: <span id="info-direccion">Cargando...</span></p>
+                <p>Teléfono: <span id="info-tel">Cargando...</span></p>
+                <p>Email: <span id="info-email">Cargando...</span></p>
             </div>
             <div class="footer-section links" id="footer-redes">
                 <h3>Enlaces</h3>
-                <a href="#"><img src="img/facebook.png" alt="Facebook" width="30" height="30"></a>
-                <a href="#"><img src="img/instagram.png" alt="Instagram" width="30" height="30"></a>
+                <a href="" id="link-fb"><img src="" alt="Facebook" width="30" height="30" id="icon-fb"></a>
+                <a href="" id="link-ig"><img src="" alt="Instagram" width="30" height="30" id="icon-ig"></a>
+                <a href="" id="link-x"><img src="" alt="X" width="30" height="30" id="icon-x"></a>
             </div>
             <div id="footer-mapa-container">
             </div>
         </div>
     </footer>
 
-    <script>
-        function initCarrusel() {
-            const track = document.getElementById('carrusel-track');
-            const dotsContainer = document.getElementById('carrusel-dots');
-            const slides = track.querySelectorAll('.carrusel-slide');
-            let current = 0, timer;
-
-            function goTo(i) {
-                current = (i + slides.length) % slides.length;
-                track.style.transform = `translateX(-${current * 100}%)`;
-                dotsContainer.querySelectorAll('.carrusel-dot').forEach((d, idx) => d.classList.toggle('activo', idx === current));
-            }
-            function autoPlay() { timer = setInterval(() => goTo(current + 1), 4000); }
-
-            document.getElementById('carrusel-prev').addEventListener('click', () => { clearInterval(timer); goTo(current - 1); autoPlay(); });
-            document.getElementById('carrusel-next').addEventListener('click', () => { clearInterval(timer); goTo(current + 1); autoPlay(); });
-            dotsContainer.querySelectorAll('.carrusel-dot').forEach(d => {
-                d.addEventListener('click', () => { clearInterval(timer); goTo(parseInt(d.dataset.dot)); autoPlay(); });
-            });
-            goTo(0); autoPlay();
-        }
-        initCarrusel();
-    </script>
+    <script src="js/carrusel.js"></script>
 
 </body>
+
 </html>

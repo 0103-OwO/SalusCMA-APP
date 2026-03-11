@@ -12,7 +12,7 @@
 <body>
 
     <header>
-        <img src="../img/logo.png" alt="Logotipo principal de la empresa" id="logo" />
+        <img src="" alt="Logotipo principal de la empresa" id="logo" />
         <div class="centro">
             <nav>
                 <h1>Salus CMA</h1>
@@ -27,13 +27,13 @@
         </div>
         <div class="perfil-container" id="perfil-container">
             <a href="loginn.html">
-                <img id="perfil" src="../img/perfil.png" alt="Perfil">
+                <img id="perfil" src="" alt="Perfil">
                 <p>Iniciar sesión</p>
             </a>
         </div>
     </header>
 
-    
+
     <main class="mainDosColumnas">
 
         <div id="lista-personal">
@@ -41,40 +41,40 @@
             <article class="articleTrabajador" data-index="0" data-id="1">
                 <h2>Medicina General</h2><br>
                 <div class="contenido-superior">
-                    <img src="../img/perfil.png" alt="Dra. Laura Martínez Pérez">
+                    <img src="" alt="Dra. Laura Martínez Pérez">
                     <ul>
                         <li>Dra. Laura Martínez Pérez</li>
                         <li>Correo: laura.martinez@saluscma.com</li>
                     </ul>
                 </div>
-                <button class="btnVerMas" data-id="1"
-                    onclick="window.location.href='detalleTrabajador.html?id=1'">Ver más</button>
+                <button class="btnVerMas" data-id="1" onclick="window.location.href='detalleTrabajador.html?id=1'">Ver
+                    más</button>
             </article>
 
             <article class="articleTrabajador" data-index="1" data-id="2">
                 <h2>Pediatría</h2><br>
                 <div class="contenido-superior">
-                    <img src="../img/perfil.png" alt="Dr. Carlos Ramírez Soto">
+                    <img src="" alt="Dr. Carlos Ramírez Soto">
                     <ul>
                         <li>Dr. Carlos Ramírez Soto</li>
                         <li>Correo: carlos.ramirez@saluscma.com</li>
                     </ul>
                 </div>
-                <button class="btnVerMas" data-id="2"
-                    onclick="window.location.href='detalleTrabajador.html?id=2'">Ver más</button>
+                <button class="btnVerMas" data-id="2" onclick="window.location.href='detalleTrabajador.html?id=2'">Ver
+                    más</button>
             </article>
 
             <article class="articleTrabajador" data-index="2" data-id="3">
                 <h2>Nutrición</h2><br>
                 <div class="contenido-superior">
-                    <img src="../img/perfil.png" alt="Dra. Sofía Torres Vega">
+                    <img src="" alt="Dra. Sofía Torres Vega">
                     <ul>
                         <li>Dra. Sofía Torres Vega</li>
                         <li>Correo: sofia.torres@saluscma.com</li>
                     </ul>
                 </div>
-                <button class="btnVerMas" data-id="3"
-                    onclick="window.location.href='detalleTrabajador.html?id=3'">Ver más</button>
+                <button class="btnVerMas" data-id="3" onclick="window.location.href='detalleTrabajador.html?id=3'">Ver
+                    más</button>
             </article>
 
         </div>
@@ -88,25 +88,26 @@
 
     </main>
 
-    
+    <script src="../js/global.js"></script>
     <footer>
         <div class="footer-container">
             <div class="footer-section contact" id="footer-contacto">
                 <h3>Contacto</h3>
-                <p>Email: <a href="mailto:contacto@saluscma.com">contacto@saluscma.com</a></p>
-                <p>Teléfono: <a href="tel:7821234567">782 123 4567</a></p>
-                <p>Dirección: Av. Ejemplo 123, Poza Rica, Ver.</p>
+                <p>Dirección: <span id="info-direccion">Cargando...</span></p>
+                <p>Teléfono: <span id="info-tel">Cargando...</span></p>
+                <p>Email: <span id="info-email">Cargando...</span></p>
             </div>
             <div class="footer-section links" id="footer-redes">
                 <h3>Enlaces</h3>
-                <a href="#"><img src="../img/facebook.png" alt="Facebook" width="30" height="30"></a>
-                <a href="#"><img src="../img/instagram.png" alt="Instagram" width="30" height="30"></a>
+                <a href="" id="link-fb"><img src="" alt="Facebook" width="30" height="30" id="icon-fb"></a>
+                <a href="" id="link-ig"><img src="" alt="Instagram" width="30" height="30" id="icon-ig"></a>
+                <a href="" id="link-x"><img src="" alt="X" width="30" height="30" id="icon-x"></a>
             </div>
             <div id="footer-mapa-container">
-                
             </div>
         </div>
     </footer>
 
 </body>
+
 </html>

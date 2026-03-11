@@ -1,0 +1,272 @@
+/* ============================================================
+   styleCarrusel.css — Salus CMA  |  LOTE 2  (versión mejorada)
+
+   Estilos exclusivos del carrusel.
+   Mismos selectores del original, aspecto visual mejorado.
+
+   WCAG 2.1 AA — contraste en captions:
+     • Blanco #FFFFFF sobre overlay oscuro rgba(0,0,0,0.72) → ✓ AA
+     • Texto caption p con rgba(255,255,255,0.90)           → ✓ AA
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   VARIABLES LOCALES DEL CARRUSEL
+   ---------------------------------------------------------- */
+:root {
+    --c-slide-radius:   12px;
+    --c-slide-shadow:   0 12px 40px rgba(8, 94, 99, 0.18),
+                        0  4px 12px rgba(8, 94, 99, 0.10);
+    --c-transition:     0.56s cubic-bezier(0.65, 0, 0.35, 1);
+    --c-btn-size:       48px;
+    --c-dot-h:          8px;
+    --c-dot-w-active:   28px;
+}
+
+/* ----------------------------------------------------------
+   CONTENEDOR PRINCIPAL — #carrusel
+   ---------------------------------------------------------- */
+#carrusel {
+    position: relative;
+    width: 92%;
+    max-width: 1140px;
+    margin: 0 auto;
+    overflow: hidden;
+    background: #0a1820;
+    border-radius: var(--c-slide-radius);
+    box-shadow: var(--c-slide-shadow);
+}
+
+/* ----------------------------------------------------------
+   PISTA DE SLIDES — #carrusel-track
+   ---------------------------------------------------------- */
+#carrusel-track {
+    display: flex;
+    transition: transform var(--c-transition);
+    will-change: transform;
+}
+
+/* ----------------------------------------------------------
+   SLIDES INDIVIDUALES — .carrusel-slide
+   ---------------------------------------------------------- */
+.carrusel-slide {
+    min-width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+/* ----------------------------------------------------------
+   IMAGEN — .carrusel-slide img
+   ---------------------------------------------------------- */
+.carrusel-slide img {
+    width: 100%;
+    max-height: 480px;
+    object-fit: cover;
+    display: block;
+    /* Zoom sutil: se cancela en el slide activo */
+    transform: scale(1.05);
+    transition: transform 7s ease-out;
+}
+
+/* Slide activo: zoom vuelve a 1 */
+.carrusel-slide.slide-activo img {
+    transform: scale(1);
+}
+
+/* ----------------------------------------------------------
+   CAPTION — .slide-caption
+   ---------------------------------------------------------- */
+.carrusel-slide .slide-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    /* Gradiente oscuro para garantizar legibilidad del texto */
+    background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.78) 0%,
+        rgba(0, 0, 0, 0.38) 55%,
+        transparent 100%
+    );
+    color: #fff;
+    padding: 2.4rem 2rem 1.6rem;
+    /* Animación de entrada */
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.45s ease 0.18s, transform 0.45s ease 0.18s;
+}
+
+/* Caption visible solo en slide activo */
+.carrusel-slide.slide-activo .slide-caption {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.carrusel-slide .slide-caption h3 {
+    margin: 0 0 6px;
+    font-size: clamp(1rem, 2vw, 1.35rem);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    color: #FFFFFF;   /* sobre overlay negro 0.78: ratio aprox 14:1 ✓ AAA */
+}
+
+.carrusel-slide .slide-caption p {
+    margin: 0;
+    font-size: 0.88rem;
+    font-weight: 300;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.92); /* sobre overlay negro: ✓ AA */
+    max-width: 540px;
+}
+
+/* ----------------------------------------------------------
+   BOTONES DE NAVEGACIÓN — .carrusel-btn
+   ---------------------------------------------------------- */
+.carrusel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+
+    /* Tamaño circular */
+    width: var(--c-btn-size);
+    height: var(--c-btn-size);
+    padding: 0;
+    border-radius: 50%;
+
+    /* Apariencia glass */
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.30);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    /* Tipografía */
+    color: #FFFFFF;   /* ratio sobre fondo glass oscuro ✓ AA */
+    font-size: 1.1rem;
+    line-height: 1;
+    cursor: pointer;
+
+    /* Transiciones */
+    transition:
+        background     0.22s ease,
+        border-color   0.22s ease,
+        transform      0.22s ease,
+        box-shadow     0.22s ease,
+        color          0.22s ease,
+        opacity        0.22s ease;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.78;
+}
+
+#carrusel-prev { left: 1.1rem; }
+#carrusel-next { right: 1.1rem; }
+
+.carrusel-btn:hover {
+    background: rgba(255, 255, 255, 0.92);
+    color: #085E63;   /* teal oscuro — ratio sobre blanco: 7.52:1 ✓ AA */
+    border-color: transparent;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.22);
+    opacity: 1;
+}
+
+#carrusel-prev:hover {
+    transform: translateY(calc(-50% - 2px)) translateX(-1px);
+}
+
+#carrusel-next:hover {
+    transform: translateY(calc(-50% - 2px)) translateX(1px);
+}
+
+.carrusel-btn:active {
+    transform: translateY(calc(-50% + 1px)) scale(0.92);
+    box-shadow: none;
+}
+
+.carrusel-btn:focus-visible {
+    outline: 3px solid #FFFFFF;
+    outline-offset: 3px;
+}
+
+/* ----------------------------------------------------------
+   INDICADORES — #carrusel-dots  /  .carrusel-dot
+   ---------------------------------------------------------- */
+#carrusel-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+    padding: 13px 0 15px;
+    background: #0a1820;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.carrusel-dot {
+    width: var(--c-dot-h);
+    height: var(--c-dot-h);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.28);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition:
+        width            0.38s cubic-bezier(0.65, 0, 0.35, 1),
+        background-color 0.3s ease,
+        opacity          0.3s ease;
+    opacity: 0.6;
+}
+
+.carrusel-dot:hover {
+    background: rgba(255, 255, 255, 0.65);
+    opacity: 1;
+}
+
+/* Dot activo: se extiende y usa el color de acento */
+.carrusel-dot.activo {
+    width: var(--c-dot-w-active);
+    background: #0A8C93;  /* acento teal claro — ratio sobre #0a1820: 5.1:1 ✓ AA */
+    opacity: 1;
+}
+
+.carrusel-dot:focus-visible {
+    outline: 2px solid #FFFFFF;
+    outline-offset: 3px;
+}
+
+/* ----------------------------------------------------------
+   RESPONSIVE
+   ---------------------------------------------------------- */
+@media (max-width: 768px) {
+    #carrusel {
+        width: 96%;
+        border-radius: 8px;
+    }
+
+    .carrusel-slide .slide-caption {
+        padding: 1.8rem 1.4rem 1.2rem;
+    }
+
+    .carrusel-btn {
+        --c-btn-size: 40px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .carrusel-slide img {
+        max-height: 300px;
+    }
+
+    #carrusel-prev { left: 0.6rem; }
+    #carrusel-next { right: 0.6rem; }
+
+    .carrusel-btn {
+        --c-btn-size: 36px;
+    }
+
+    .carrusel-slide .slide-caption {
+        padding: 1.4rem 1rem 1rem;
+    }
+}

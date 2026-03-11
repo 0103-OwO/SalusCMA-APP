@@ -1,57 +1,116 @@
 ﻿<!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/stylePrincipal.css">
     <title>Principal - Administrador | Salus CMA</title>
 </head>
+
 <body>
-<header>
-    <a href="adminPrincipal.html"><img src="../img/logo.png" alt="Logo Salus CMA" id="logo" /></a>
-    <div class="centro">
-        <nav>
-            <h1>Salus CMA</h1>
-            <ul>
-                <li><a href="../index.html">Inicio</a></li>
-                <li><a href="vision.html">Visión y Misión</a></li>
-                <li><a href="personal.html">Personal</a></li>
-                <li><a href="contacto.html">Contacto</a></li>
-                <li><a href="mapaPrincipal.html">Mapa de sitio</a></li>
-            </ul>
-            <hr>
-            <ul>
-                <li><a href="adminPrincipal.html">Inicio</a></li>
-                <li><a>Paciente</a><ul class="submenu"><li><a href="adminPaciente.html">Registrar</a></li></ul></li>
-                <li><a href="adminCitas.html">Citas</a></li>
-                <li><a>Historial</a><ul class="submenu"><li><a href="adminHistorial.html">Listado</a></li></ul></li>
-                <li><a>Consultorio</a><ul class="submenu"><li><a href="adminConsultorio.html">Registrar</a></li><li><a href="adminConsultorioList.html">Listado</a></li></ul></li>
-                <li><a>Trabajador</a><ul class="submenu"><li><a href="adminTrabajador.html">Registrar</a></li><li><a href="adminTrabajadorList.html">Listado</a></li></ul></li>
-                <li><a>Especialidades</a><ul class="submenu"><li><a href="adminEspecialidad.html">Registrar</a></li><li><a href="adminEspecialidadList.html">Listado</a></li></ul></li>
-                <li><a>Horarios</a><ul class="submenu"><li><a href="adminHorario.html">Registrar</a></li><li><a href="adminHorarioList.html">Listado</a></li></ul></li>
-                <li><a>Usuarios</a><ul class="submenu"><li><a href="adminUsuario.html">Registrar</a></li><li><a href="adminUsuarioList.html">Listado</a></li></ul></li>
-                <li><a>Informacion</a><ul class="submenu"><li><a href="adminVision.html">Visión</a></li><li><a href="adminMision.html">Misión</a></li><li><a href="adminValores.html">Valores</a></li><li><a href="adminContacto.html">Contacto</a></li><li><a href="adminFooter.html">Footer</a></li><li><a href="adminLogo.html">Logo</a></li><li><a href="adminImagenPrincipal.html">Imagen Principal</a></li></ul></li>
-                <li><a href="adminMapa.html">Mapa de Sitio</a></li>
-            </ul>
-        </nav>
-    </div>
-    <div class="perfil-container" id="perfil-container">
-        <a href="loginn.html"><img id="perfil" src="../img/perfil.png" alt="Perfil"><p>Iniciar sesión</p></a>
-    </div>
-</header>
-<main>
-    <img src="../img/default.png" alt="Imagen Principal" id="principal" />
-    <h1 id="saludo-bienvenida">Bienvenido, Administrador</h1>
-</main>
-<footer>
-    <div class="footer-container">
-        <div class="footer-section contact" id="footer-contacto"><h3>Contacto</h3></div>
-        <div class="footer-section links" id="footer-redes"><h3>Enlaces</h3></div>
-        <div id="footer-mapa-container"></div>
-    </div>
-</footer>
-<script src="../js/auth.js" data-rol="7"></script>
-<script src="../js/header.js"></script>
-<script src="../js/footer.js"></script>
+    <header>
+        <a href="adminPrincipal.html"><img src="../img/logo.png" alt="Logo Salus CMA" id="logo" /></a>
+        <div class="centro">
+            <nav>
+                <h1>Salus CMA</h1>
+                <ul>
+                    <li><a href="../index.html">Inicio</a></li>
+                    <li><a href="vision.html">Visión y Misión</a></li>
+                    <li><a href="personal.html">Personal</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                    <li><a href="mapaPrincipal.html">Mapa de sitio</a></li>
+                </ul>
+                <hr>
+                <ul>
+                    <li><a href="adminPrincipal.html">Inicio</a></li>
+                    <li><a>Paciente</a>
+                        <ul class="submenu">
+                            <li><a href="adminPaciente.html">Registrar</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="adminCitas.html">Citas</a></li>
+                    <li><a>Historial</a>
+                        <ul class="submenu">
+                            <li><a href="adminHistorial.html">Listado</a></li>
+                        </ul>
+                    </li>
+                    <li><a>Consultorio</a>
+                        <ul class="submenu">
+                            <li><a href="adminConsultorio.html">Registrar</a></li>
+                            <li><a href="adminConsultorioList.html">Listado</a></li>
+                        </ul>
+                    </li>
+                    <li><a>Trabajador</a>
+                        <ul class="submenu">
+                            <li><a href="adminTrabajador.html">Registrar</a></li>
+                            <li><a href="adminTrabajadorList.html">Listado</a></li>
+                        </ul>
+                    </li>
+                    <li><a>Especialidades</a>
+                        <ul class="submenu">
+                            <li><a href="adminEspecialidad.html">Registrar</a></li>
+                            <li><a href="adminEspecialidadList.html">Listado</a></li>
+                        </ul>
+                    </li>
+                    <li><a>Horarios</a>
+                        <ul class="submenu">
+                            <li><a href="adminHorario.html">Registrar</a></li>
+                            <li><a href="adminHorarioList.html">Listado</a></li>
+                        </ul>
+                    </li>
+                    <li><a>Usuarios</a>
+                        <ul class="submenu">
+                            <li><a href="adminUsuario.html">Registrar</a></li>
+                            <li><a href="adminUsuarioList.html">Listado</a></li>
+                        </ul>
+                    </li>
+                    <li><a>Informacion</a>
+                        <ul class="submenu">
+                            <li><a href="adminVision.html">Visión</a></li>
+                            <li><a href="adminMision.html">Misión</a></li>
+                            <li><a href="adminValores.html">Valores</a></li>
+                            <li><a href="adminContacto.html">Contacto</a></li>
+                            <li><a href="adminFooter.html">Footer</a></li>
+                            <li><a href="adminLogo.html">Logo</a></li>
+                            <li><a href="adminImagenPrincipal.html">Imagen Principal</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="adminMapa.html">Mapa de Sitio</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="perfil-container" id="perfil-container">
+            <a href="loginn.html"><img id="perfil" src="../img/perfil.png" alt="Perfil">
+                <p>Iniciar sesión</p>
+            </a>
+        </div>
+    </header>
+    <main>
+        <img src="../img/default.png" alt="Imagen Principal" id="principal" />
+        <h1 id="saludo-bienvenida">Bienvenido, Administrador</h1>
+    </main>
+    <script src="../js/global.js"></script>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section contact" id="footer-contacto">
+                <h3>Contacto</h3>
+                <p>Dirección: <span id="info-direccion">Cargando...</span></p>
+                <p>Teléfono: <span id="info-tel">Cargando...</span></p>
+                <p>Email: <span id="info-email">Cargando...</span></p>
+            </div>
+            <div class="footer-section links" id="footer-redes">
+                <h3>Enlaces</h3>
+                <a href="" id="link-fb"><img src="" alt="Facebook" width="30" height="30" id="icon-fb"></a>
+                <a href="" id="link-ig"><img src="" alt="Instagram" width="30" height="30" id="icon-ig"></a>
+                <a href="" id="link-x"><img src="" alt="X" width="30" height="30" id="icon-x"></a>
+            </div>
+            <div id="footer-mapa-container">
+            </div>
+        </div>
+    </footer>
+    <script src="../js/auth.js" data-rol="7"></script>
+    <script src="../js/header.js"></script>
 </body>
+
 </html>

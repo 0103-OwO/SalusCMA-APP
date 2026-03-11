@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,89 +8,88 @@
     <link rel="stylesheet" href="../css/styleForms.css">
     <title>Restablecer Contraseña | Salus CMA</title>
 </head>
+
 <body>
 
-<header>
-    <a href="../index.html">
-        <img src="../img/logo.png" alt="logo" id="logo" />
-    </a>
-    <div class="centro">
-        <nav>
-            <h1>Salus CMA</h1>
-            <ul>
-                <li><a href="../index.html">Inicio</a></li>
-                <li><a href="vision.html">Visión y Misión</a></li>
-                <li><a href="personal.html">Personal</a></li>
-                <li><a href="contacto.html">Contacto</a></li>
-                <li><a href="mapaPrincipal.html">Mapa de sitio</a></li>
-            </ul>
-        </nav>
-    </div>
-    <div class="perfil-container">
-        
-        <a href="loginn.html">
-            <img id="perfil" src="../img/perfil.png" alt="Perfil">
-            <p>Iniciar sesión</p>
+    <header>
+        <a href="../index.html">
+            <img src="../img/logo.png" alt="logo" id="logo" />
         </a>
-    </div>
-</header>
-
-
-<main class="mainUnaColumna">
-    <h2>Cambio de Contraseña</h2>
-    <form id="formRestablecer" method="POST">
-
-        <input type="hidden" name="token" id="token" value="">
-
-        <label>Contraseña Nueva:</label>
-        <input type="password" name="conNueva" id="conNueva" minlength="8"
-            pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&]{8,}$"
-            title="Debe tener al menos 8 caracteres, incluyendo una letra y un número."
-            required><br><br>
-
-        <label>Confirmación de contraseña:</label>
-        <input type="password" name="conConfirmacion" id="conConfirmacion"
-            title="Repite la nueva contraseña."
-            required><br><br>
-
-        <label id="mensajeRestablecer" style="color:red; display:block; margin-bottom:10px;"></label>
-
-        <button type="submit">Confirmar</button>
-
-    </form>
-
-    <script>
-       const params = new URLSearchParams(window.location.search);
-        const token = params.get('token');
-        if (!token) {
-            alert('Token no válido o expirado.');
-            window.location.href = 'recuperarContrasena.html';
-        } else {
-            document.getElementById('token').value = token;
-        }
-    </script>
-</main>
-
-<footer>
-    <div class="footer-container">
-        <div class="footer-section contact" id="footer-contacto">
-            
-            <h3>Contacto</h3>
-            <p>Email: <a href="mailto:contacto@saluscma.com">contacto@saluscma.com</a></p>
-            <p>Teléfono: <a href="tel:7821234567">782 123 4567</a></p>
-            <p>Dirección: Av. Ejemplo 123, Poza Rica, Ver.</p>
+        <div class="centro">
+            <nav>
+                <h1>Salus CMA</h1>
+                <ul>
+                    <li><a href="../index.html">Inicio</a></li>
+                    <li><a href="vision.html">Visión y Misión</a></li>
+                    <li><a href="personal.html">Personal</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                    <li><a href="mapaPrincipal.html">Mapa de sitio</a></li>
+                </ul>
+            </nav>
         </div>
-        <div class="footer-section links" id="footer-redes">
-            
-            <h3>Enlaces</h3>
-            <a href="#"><img src="../img/facebook.png" alt="Facebook" width="30" height="30"></a>
-            <a href="#"><img src="../img/instagram.png" alt="Instagram" width="30" height="30"></a>
+        <div class="perfil-container">
+
+            <a href="loginn.html">
+                <img id="perfil" src="../img/perfil.png" alt="Perfil">
+                <p>Iniciar sesión</p>
+            </a>
         </div>
-        <div id="footer-mapa-container">
-            
+    </header>
+
+
+    <main class="mainUnaColumna">
+        <h2>Cambio de Contraseña</h2>
+        <form id="formRestablecer" method="POST">
+
+            <input type="hidden" name="token" id="token" value="">
+
+            <label>Contraseña Nueva:</label>
+            <input type="password" name="conNueva" id="conNueva" minlength="8"
+                pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&]{8,}$"
+                title="Debe tener al menos 8 caracteres, incluyendo una letra y un número." required><br><br>
+
+            <label>Confirmación de contraseña:</label>
+            <input type="password" name="conConfirmacion" id="conConfirmacion" title="Repite la nueva contraseña."
+                required><br><br>
+
+            <label id="mensajeRestablecer" style="color:red; display:block; margin-bottom:10px;"></label>
+
+            <button type="submit">Confirmar</button>
+
+        </form>
+
+        <script>
+            const params = new URLSearchParams(window.location.search);
+            const token = params.get('token');
+            if (!token) {
+                alert('Token no válido o expirado.');
+                window.location.href = 'recuperarContrasena.html';
+            } else {
+                document.getElementById('token').value = token;
+            }
+        </script>
+    </main>
+
+    <script src="../js/global.js"></script>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section contact" id="footer-contacto">
+                <h3>Contacto</h3>
+                <p>Dirección: <span id="info-direccion">Cargando...</span></p>
+                <p>Teléfono: <span id="info-tel">Cargando...</span></p>
+                <p>Email: <span id="info-email">Cargando...</span></p>
+            </div>
+            <div class="footer-section links" id="footer-redes">
+                <h3>Enlaces</h3>
+                <a href="" id="link-fb"><img src="" alt="Facebook" width="30" height="30" id="icon-fb"></a>
+                <a href="" id="link-ig"><img src="" alt="Instagram" width="30" height="30" id="icon-ig"></a>
+                <a href="" id="link-x"><img src="" alt="X" width="30" height="30" id="icon-x"></a>
+            </div>
+            <div id="footer-mapa-container">
+            </div>
         </div>
-    </div>
-</footer>
+    </footer>
 
 </body>
+
 </html>

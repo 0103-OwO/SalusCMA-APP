@@ -85,50 +85,42 @@
         </div>
     </header>
 
-    
+
     <main>
         <h2>Registrar Trabajador</h2>
 
         <form id="formTrabajador" enctype="multipart/form-data">
 
             <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre"
-                pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,50}$"
+            <input type="text" id="nombre" name="nombre" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,50}$"
                 title="Ingrese solo letras" required><br><br>
 
             <label for="apellido_paterno">Apellido Paterno:</label>
-            <input type="text" id="apellido_paterno" name="apellido_paterno"
-                pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,50}$"
+            <input type="text" id="apellido_paterno" name="apellido_paterno" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,50}$"
                 title="Ingrese solo letras" required><br><br>
 
             <label for="apellido_materno">Apellido Materno:</label>
-            <input type="text" id="apellido_materno" name="apellido_materno"
-                pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,50}$"
+            <input type="text" id="apellido_materno" name="apellido_materno" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,50}$"
                 title="Ingrese solo letras" required><br><br>
 
             <label for="cedula">Cédula profesional:</label>
-            <input type="text" id="cedula" name="cedula" maxlength="8"
-                pattern="^[A-Z]?\d{6,8}$"
-                title="Ingrese una cédula profesional válida (ej: 1234567 o A1234567)"
-                required><br><br>
+            <input type="text" id="cedula" name="cedula" maxlength="8" pattern="^[A-Z]?\d{6,8}$"
+                title="Ingrese una cédula profesional válida (ej: 1234567 o A1234567)" required><br><br>
 
             <label for="rfc">RFC:</label>
             <input type="text" id="rfc" name="rfc" maxlength="13"
                 pattern="^([A-ZÑ&]{3,4})(\d{2})(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])[A-Z0-9]{3}$"
-                title="Ingrese un RFC válido (ej: GODE561231GR8)"
-                required><br><br>
+                title="Ingrese un RFC válido (ej: GODE561231GR8)" required><br><br>
 
             <label for="correo">Correo electrónico:</label>
-            <input type="email" id="correo" name="correo"
-                pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,}$"
+            <input type="email" id="correo" name="correo" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,}$"
                 title="Ingrese un correo válido" required><br><br>
 
             <label for="telefono">Teléfono:</label>
-            <input type="tel" id="telefono" name="telefono"
-                pattern="^(\+52\s?)?(\d{2,3}[\s-]?){2}\d{4}$"
+            <input type="tel" id="telefono" name="telefono" pattern="^(\+52\s?)?(\d{2,3}[\s-]?){2}\d{4}$"
                 title="Ingrese un teléfono válido" required><br><br>
 
-            
+
             <label for="select-especialidad">Especialidad:</label>
             <select id="select-especialidad" name="id_especialidad" required>
                 <option value="" disabled selected>Seleccione una especialidad</option>
@@ -139,13 +131,12 @@
             </select><br><br>
 
             <label for="foto_trabajador">Foto del trabajador (PNG/JPG/JPEG):</label><br>
-            <input type="file" id="foto_trabajador" name="foto_trabajador"
-                accept=".png,.jpg,.jpeg" required><br><br>
+            <input type="file" id="foto_trabajador" name="foto_trabajador" accept=".png,.jpg,.jpeg" required><br><br>
 
             <label for="informacion">Información:</label><br>
             <textarea id="informacion" name="informacion" rows="4" required></textarea><br><br>
 
-            
+
             <label id="mensajeTrabajador" style="color: red; display: block; margin-bottom: 10px;"></label>
 
             <button type="button" onclick="window.location.href='adminTrabajadorList.html'">Cancelar</button>
@@ -155,22 +146,26 @@
         </form>
     </main>
 
+    <script src="../js/global.js"></script>
     <footer>
         <div class="footer-container">
             <div class="footer-section contact" id="footer-contacto">
                 <h3>Contacto</h3>
-                <p>Email: <a href="mailto:contacto@saluscma.com">contacto@saluscma.com</a></p>
-                <p>Teléfono: <a href="tel:7821234567">782 123 4567</a></p>
-                <p>Dirección: Av. Ejemplo 123, Poza Rica, Ver.</p>
+                <p>Dirección: <span id="info-direccion">Cargando...</span></p>
+                <p>Teléfono: <span id="info-tel">Cargando...</span></p>
+                <p>Email: <span id="info-email">Cargando...</span></p>
             </div>
             <div class="footer-section links" id="footer-redes">
                 <h3>Enlaces</h3>
-                <a href="#"><img src="../img/facebook.png" alt="Facebook" width="30" height="30"></a>
-                <a href="#"><img src="../img/instagram.png" alt="Instagram" width="30" height="30"></a>
+                <a href="" id="link-fb"><img src="" alt="Facebook" width="30" height="30" id="icon-fb"></a>
+                <a href="" id="link-ig"><img src="" alt="Instagram" width="30" height="30" id="icon-ig"></a>
+                <a href="" id="link-x"><img src="" alt="X" width="30" height="30" id="icon-x"></a>
             </div>
-            <div id="footer-mapa-container"></div>
+            <div id="footer-mapa-container">
+            </div>
         </div>
     </footer>
 
 </body>
+
 </html>

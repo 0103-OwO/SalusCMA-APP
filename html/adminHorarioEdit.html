@@ -19,7 +19,7 @@
             <nav>
                 <h1>Salus CMA</h1>
 
-                
+
                 <ul>
                     <li><a href="../index.html">Inicio</a></li>
                     <li><a href="vision.html">Visión y Misión</a></li>
@@ -30,7 +30,7 @@
 
                 <hr>
 
-                
+
                 <ul>
                     <li><a href="adminPrincipal.html">Inicio</a></li>
                     <li><a href="adminPaciente.html">Paciente</a></li>
@@ -91,32 +91,28 @@
         </div>
     </header>
 
-    
+
     <main>
         <h2>Modificar Horario</h2>
 
         <form id="formEditHorario">
 
-            
+
             <input type="hidden" id="input-id-horario" name="id_horario" value="1">
 
             <label for="hentrada">Hora de entrada:</label>
-            <input type="time" id="hentrada" name="hentrada"
-                value="08:00" required><br><br>
+            <input type="time" id="hentrada" name="hentrada" value="08:00" required><br><br>
 
             <label for="hsalida">Hora de salida:</label>
-            <input type="time" id="hsalida" name="hsalida"
-                value="14:00" required><br><br>
+            <input type="time" id="hsalida" name="hsalida" value="14:00" required><br><br>
 
             <label for="finicio">Fecha de inicio:</label>
-            <input type="date" id="finicio" name="finicio"
-                value="2025-06-01" required><br><br>
+            <input type="date" id="finicio" name="finicio" value="2025-06-01" required><br><br>
 
             <label for="ffin">Fecha de fin:</label>
-            <input type="date" id="ffin" name="ffin"
-                value="2025-06-30" required><br><br>
+            <input type="date" id="ffin" name="ffin" value="2025-06-30" required><br><br>
 
-            
+
             <label for="select-trabajador">Trabajador:</label>
             <select id="select-trabajador" name="id_trabajador" required>
                 <option value="" disabled>Seleccione un trabajador</option>
@@ -125,7 +121,7 @@
                 <option value="3">Dra. Sofía Torres Vega</option>
             </select><br><br>
 
-            
+
             <label id="mensajeEdit" style="color: red; display: block; margin-bottom: 10px;"></label>
 
             <button type="button" onclick="window.location.href='adminHorarioList.html'">Cancelar</button>
@@ -135,25 +131,27 @@
         </form>
     </main>
 
-    
+
+    <script src="../js/global.js"></script>
     <footer>
         <div class="footer-container">
             <div class="footer-section contact" id="footer-contacto">
                 <h3>Contacto</h3>
-                <p>Email: <a href="mailto:contacto@saluscma.com">contacto@saluscma.com</a></p>
-                <p>Teléfono: <a href="tel:7821234567">782 123 4567</a></p>
-                <p>Dirección: Av. Ejemplo 123, Poza Rica, Ver.</p>
+                <p>Dirección: <span id="info-direccion">Cargando...</span></p>
+                <p>Teléfono: <span id="info-tel">Cargando...</span></p>
+                <p>Email: <span id="info-email">Cargando...</span></p>
             </div>
             <div class="footer-section links" id="footer-redes">
                 <h3>Enlaces</h3>
-                <a href="#"><img src="../img/facebook.png" alt="Facebook" width="30" height="30"></a>
-                <a href="#"><img src="../img/instagram.png" alt="Instagram" width="30" height="30"></a>
+                <a href="" id="link-fb"><img src="" alt="Facebook" width="30" height="30" id="icon-fb"></a>
+                <a href="" id="link-ig"><img src="" alt="Instagram" width="30" height="30" id="icon-ig"></a>
+                <a href="" id="link-x"><img src="" alt="X" width="30" height="30" id="icon-x"></a>
             </div>
             <div id="footer-mapa-container">
-                
             </div>
         </div>
     </footer>
 
 </body>
+
 </html>

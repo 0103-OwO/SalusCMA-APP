@@ -85,7 +85,7 @@
         </div>
     </header>
 
-    
+
     <main>
         <h2>Modificar Trabajador</h2>
 
@@ -94,48 +94,36 @@
             <input type="hidden" id="input-id-trabajador" name="id_trabajador" value="1">
 
             <label for="nombre">Nombre:</label><br>
-            <input type="text" id="nombre" name="nombre"
-                value="Laura"
-                pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,50}$"
+            <input type="text" id="nombre" name="nombre" value="Laura" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,50}$"
                 title="Ingrese solo letras" required><br><br>
 
             <label for="apellido_paterno">Apellido Paterno:</label><br>
-            <input type="text" id="apellido_paterno" name="apellido_paterno"
-                value="Martínez"
-                pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,50}$"
-                title="Ingrese solo letras" required><br><br>
+            <input type="text" id="apellido_paterno" name="apellido_paterno" value="Martínez"
+                pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,50}$" title="Ingrese solo letras" required><br><br>
 
             <label for="apellido_materno">Apellido Materno:</label><br>
-            <input type="text" id="apellido_materno" name="apellido_materno"
-                value="Pérez"
-                pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,50}$"
-                title="Ingrese solo letras" required><br><br>
+            <input type="text" id="apellido_materno" name="apellido_materno" value="Pérez"
+                pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,50}$" title="Ingrese solo letras" required><br><br>
 
             <label for="cedula">Cédula:</label><br>
-            <input type="text" id="cedula" name="cedula" maxlength="8"
-                value="1234567"
-                pattern="^[A-Z]?\d{6,8}$"
+            <input type="text" id="cedula" name="cedula" maxlength="8" value="1234567" pattern="^[A-Z]?\d{6,8}$"
                 title="Ingrese una cédula profesional válida" required><br><br>
 
             <label for="rfc">RFC:</label><br>
-            <input type="text" id="rfc" name="rfc" maxlength="13"
-                value="MALP800101AB3"
+            <input type="text" id="rfc" name="rfc" maxlength="13" value="MALP800101AB3"
                 pattern="^([A-ZÑ&]{3,4})(\d{2})(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])[A-Z0-9]{3}$"
                 title="Ingrese un RFC válido" required><br><br>
 
             <label for="correo">Correo electrónico:</label><br>
-            <input type="email" id="correo" name="correo"
-                value="laura.martinez@saluscma.com"
-                pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,}$"
-                title="Ingrese un correo válido" required><br><br>
+            <input type="email" id="correo" name="correo" value="laura.martinez@saluscma.com"
+                pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,}$" title="Ingrese un correo válido"
+                required><br><br>
 
             <label for="telefono">Teléfono:</label><br>
-            <input type="tel" id="telefono" name="telefono"
-                value="7821234567"
-                pattern="^(\+52\s?)?(\d{2,3}[\s-]?){2}\d{4}$"
-                title="Ingrese un teléfono válido" required><br><br>
+            <input type="tel" id="telefono" name="telefono" value="7821234567"
+                pattern="^(\+52\s?)?(\d{2,3}[\s-]?){2}\d{4}$" title="Ingrese un teléfono válido" required><br><br>
 
-            
+
             <label for="select-especialidad">Especialidad:</label><br>
             <select id="select-especialidad" name="id_especialidad" required>
                 <option value="" disabled>Seleccione una especialidad</option>
@@ -146,16 +134,17 @@
             </select><br><br>
 
             <label>Foto actual:</label><br>
-            
+
             <img id="img-preview-foto" src="../img/perfil.png" alt="Foto trabajador" width="100"><br><br>
 
             <label for="foto">Actualizar foto (PNG/JPG/JPEG):</label><br>
             <input type="file" id="foto" name="foto" accept=".png,.jpg,.jpeg"><br><br>
 
             <label for="informacion">Información:</label><br>
-            <textarea id="informacion" name="informacion" rows="4" cols="50" required>Médico con más de 10 años de experiencia en atención primaria.</textarea><br><br>
+            <textarea id="informacion" name="informacion" rows="4" cols="50"
+                required>Médico con más de 10 años de experiencia en atención primaria.</textarea><br><br>
 
-            
+
             <label id="mensajeEdit" style="color: red; display: block; margin-bottom: 10px;"></label>
 
             <button type="button" onclick="window.location.href='adminTrabajadorList.html'">Cancelar</button>
@@ -165,22 +154,26 @@
         </form>
     </main>
 
+    <script src="../js/global.js"></script>
     <footer>
         <div class="footer-container">
             <div class="footer-section contact" id="footer-contacto">
                 <h3>Contacto</h3>
-                <p>Email: <a href="mailto:contacto@saluscma.com">contacto@saluscma.com</a></p>
-                <p>Teléfono: <a href="tel:7821234567">782 123 4567</a></p>
-                <p>Dirección: Av. Ejemplo 123, Poza Rica, Ver.</p>
+                <p>Dirección: <span id="info-direccion">Cargando...</span></p>
+                <p>Teléfono: <span id="info-tel">Cargando...</span></p>
+                <p>Email: <span id="info-email">Cargando...</span></p>
             </div>
             <div class="footer-section links" id="footer-redes">
                 <h3>Enlaces</h3>
-                <a href="#"><img src="../img/facebook.png" alt="Facebook" width="30" height="30"></a>
-                <a href="#"><img src="../img/instagram.png" alt="Instagram" width="30" height="30"></a>
+                <a href="" id="link-fb"><img src="" alt="Facebook" width="30" height="30" id="icon-fb"></a>
+                <a href="" id="link-ig"><img src="" alt="Instagram" width="30" height="30" id="icon-ig"></a>
+                <a href="" id="link-x"><img src="" alt="X" width="30" height="30" id="icon-x"></a>
             </div>
-            <div id="footer-mapa-container"></div>
+            <div id="footer-mapa-container">
+            </div>
         </div>
     </footer>
 
 </body>
+
 </html>

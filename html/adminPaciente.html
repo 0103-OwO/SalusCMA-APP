@@ -85,7 +85,7 @@
         </div>
     </header>
 
-    
+
     <main>
         <h2>Pacientes</h2>
 
@@ -100,7 +100,7 @@
                 </tr>
             </thead>
             <tbody id="tbody-pacientes">
-                
+
                 <tr id="fila-GONL980310MVEZNNA7" class="filaPaciente">
                     <td>GONL980310MVEZNNA7</td>
                     <td>Laura</td>
@@ -108,7 +108,7 @@
                     <td>Nava</td>
                     <td>1998-03-10</td>
                 </tr>
-                
+
                 <tr id="fila-HERP001205HVERRBA8" class="filaPaciente">
                     <td>HERP001205HVERRBA8</td>
                     <td>Pedro</td>
@@ -116,7 +116,7 @@
                     <td>Reyes</td>
                     <td>2000-12-05</td>
                 </tr>
-                
+
                 <tr id="fila-MARL750820MVERRSA3" class="filaPaciente">
                     <td>MARL750820MVERRSA3</td>
                     <td>Rosa</td>
@@ -135,22 +135,26 @@
 
     </main>
 
+    <script src="../js/global.js"></script>
     <footer>
         <div class="footer-container">
             <div class="footer-section contact" id="footer-contacto">
                 <h3>Contacto</h3>
-                <p>Email: <a href="mailto:contacto@saluscma.com">contacto@saluscma.com</a></p>
-                <p>Teléfono: <a href="tel:7821234567">782 123 4567</a></p>
-                <p>Dirección: Av. Ejemplo 123, Poza Rica, Ver.</p>
+                <p>Dirección: <span id="info-direccion">Cargando...</span></p>
+                <p>Teléfono: <span id="info-tel">Cargando...</span></p>
+                <p>Email: <span id="info-email">Cargando...</span></p>
             </div>
             <div class="footer-section links" id="footer-redes">
                 <h3>Enlaces</h3>
-                <a href="#"><img src="../img/facebook.png" alt="Facebook" width="30" height="30"></a>
-                <a href="#"><img src="../img/instagram.png" alt="Instagram" width="30" height="30"></a>
+                <a href="" id="link-fb"><img src="" alt="Facebook" width="30" height="30" id="icon-fb"></a>
+                <a href="" id="link-ig"><img src="" alt="Instagram" width="30" height="30" id="icon-ig"></a>
+                <a href="" id="link-x"><img src="" alt="X" width="30" height="30" id="icon-x"></a>
             </div>
-            <div id="footer-mapa-container"></div>
+            <div id="footer-mapa-container">
+            </div>
         </div>
     </footer>
 
 </body>
+
 </html>

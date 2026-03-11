@@ -13,7 +13,7 @@
 
     <header>
         <a href="adminPrincipal.html">
-            <img src="../img/logo.png" alt="Logo Salus CMA" id="logo" />
+            <img src="" alt="Logo Salus CMA" id="logo" />
         </a>
         <div class="centro">
             <nav>
@@ -83,7 +83,7 @@
 
         <div class="perfil-container" id="perfil-container">
             <a href="loginn.html">
-                <img id="perfil" src="../img/perfil.png" alt="Perfil">
+                <img id="perfil" src="" alt="Perfil">
                 <p>Iniciar sesión</p>
             </a>
         </div>
@@ -97,17 +97,16 @@
             <input type="hidden" id="input-id-mision-vision" name="id_mision_vision" value="1">
 
             <label>Imagen actual:</label><br>
-            <img id="img-preview-historia" src="../img/perfil.png"
-                alt="Imagen Historia" style="max-width: 300px;"><br><br>
+            <img id="img-preview-historia" src="" alt="Imagen Historia"
+                style="max-width: 300px;"><br><br>
 
             <label for="img_historia">Cambiar imagen (PNG/JPG/JPEG):</label><br>
             <input type="file" id="img_historia" name="img_historia" accept="image/*"><br><br>
 
             <label for="historia">Historia:</label><br>
-            <textarea id="historia" name="historia" rows="10" cols="50"
-                maxlength="8000" title="Ingrese la historia de la empresa"
-                required
-                >Fundado en 2010, Salus CMA nació con la visión de ofrecer servicios médicos de primer nivel en Poza Rica. A lo largo de los años hemos crecido hasta contar con más de 20 especialistas y la confianza de miles de familias en la región.</textarea><br><br>
+            <textarea id="historia" name="historia" rows="10" cols="50" maxlength="8000"
+                title="Ingrese la historia de la empresa"
+                required>Cargando...</textarea><br><br>
 
             <label id="mensajeHistoria" style="display: block; margin-bottom: 10px; color: red;"></label>
 
@@ -118,18 +117,21 @@
         </form>
     </main>
 
+    <script src="../js/global.js"></script>
+    <script src="../js/adminHistoria.js"></script>
     <footer>
         <div class="footer-container">
             <div class="footer-section contact" id="footer-contacto">
                 <h3>Contacto</h3>
-                <p>Email: <a href="mailto:contacto@saluscma.com">contacto@saluscma.com</a></p>
-                <p>Teléfono: <a href="tel:7821234567">782 123 4567</a></p>
-                <p>Dirección: Av. Ejemplo 123, Poza Rica, Ver.</p>
+                <p>Dirección: <span id="info-direccion">Cargando...</span></p>
+                <p>Teléfono: <span id="info-tel">Cargando...</span></p>
+                <p>Email: <span id="info-email">Cargando...</span></p>
             </div>
             <div class="footer-section links" id="footer-redes">
                 <h3>Enlaces</h3>
-                <a href="#"><img src="../img/facebook.png" alt="Facebook" width="30" height="30"></a>
-                <a href="#"><img src="../img/instagram.png" alt="Instagram" width="30" height="30"></a>
+                <a href="" id="link-fb"><img src="" alt="Facebook" width="30" height="30" id="icon-fb"></a>
+                <a href="" id="link-ig"><img src="" alt="Instagram" width="30" height="30" id="icon-ig"></a>
+                <a href="" id="link-x"><img src="" alt="X" width="30" height="30" id="icon-x"></a>
             </div>
             <div id="footer-mapa-container">
             </div>
@@ -137,4 +139,5 @@
     </footer>
 
 </body>
+
 </html>
