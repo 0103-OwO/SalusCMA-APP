@@ -1,0 +1,545 @@
+body {
+    font-family:'Times New Roman', Times, serif;
+    background-color: #F7F7F7;
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #085E63;
+    padding: 30px 30px;
+    font-size: 14px;
+}
+
+#registro {
+    background-color: rgb(170, 204, 230);
+    text-align: center;
+    padding-top: 30px; 
+    padding-bottom: 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+#registro a {
+    text-decoration: none;
+    color: #000000;
+    font-weight: bold;
+    padding: 10px 10px;
+}
+#registro a:hover {
+    background-color: rgb(170, 204, 230); 
+    border-radius: 10px;
+}
+
+#logo {
+    width: 100px;
+    height: auto;
+    margin-left: -10px;
+}
+
+.centro {
+    text-align: center;
+    flex: 1;
+}
+
+.centro h1 {
+    margin: 0;
+    color: white;
+    padding-bottom: 30px;
+
+}
+
+nav ul {
+    list-style: none;
+    margin: 5px 0 0 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #FFFFFF;
+    font-weight: bold;
+    padding: 10px 10px;
+}
+
+nav a:hover {
+    background-color: #064A4E;
+    border-radius: 10px;
+}
+
+nav hr {
+    display: block;
+    width: 60%;
+    max-width: 60%;
+    height: 4px;
+    background-color: #F7F7F7;
+    border: none;
+    border-radius: 4px;
+    margin: 20px auto;
+    align-self: center;
+}
+
+header ul {
+    list-style: none;
+    margin: 5px 0 0 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px; 
+}
+
+header a {
+    text-decoration: none;
+    color: #FFFFFF;
+    font-weight: bold;
+    padding: 10px 10px;
+    
+}
+
+header a:hover {
+    background-color: #064A4E;
+    border-radius: 10px;
+}
+
+.perfil-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.perfil-container a {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#perfil {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.perfil-container p {
+    margin: 5px 0 0 0;
+    font-size: 0.9em;
+    color: #FFFFFF;
+}
+
+main {
+    text-align: center;
+    margin-top: 50px;
+}
+
+#principal {
+    width: 50%;     
+    max-width: 50%;   
+    height: auto;      
+    display: block;    
+    margin: 0 auto;    
+}
+
+
+
+footer {
+    background-color: #E9F2FB;
+    color: black;
+    text-align: center;
+    padding: 15px;
+    margin-top: 20px;
+}
+
+
+.footer-container {
+    display: flex;
+    justify-content: center; 
+    align-items: center;     
+    gap: 60px;               
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+
+.footerho-section {
+    margin: 10px;
+    text-align: center;      
+}
+
+
+
+
+nav ul li {
+    position: relative;
+}
+
+header ul li {
+    position: relative;
+}
+
+.submenu {
+    opacity: 0;
+    visibility: hidden;
+    display: flex;
+    position: absolute;
+    top: 95%;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: all 0.3s ease;
+    background-color: #085E63;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    min-width: 130px;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 10000;
+    flex-direction: column;
+    gap: 0;
+    transition: all 0.4s ease;
+    pointer-events: none;
+}
+
+header ul li:hover > .submenu {
+    opacity: 1;
+    visibility: visible;
+    display: flex;
+    margin-top: 2px;
+    pointer-events: auto;
+    
+}
+
+.submenu li a {
+    display: block;
+    padding: 10px 15px;
+    color: white;
+    text-decoration: none;
+    font-weight: normal;
+    text-align: center;
+}
+
+.submenu li a:hover {
+    background-color: #064A4E;
+    border-radius: 0;
+}
+
+button{
+    background-color: rgb(0, 0, 101);
+    color: white;
+    padding: 8px 10px;
+    border-radius: 10px;
+    font-weight: bold;
+    display:inline;
+    margin:12px;
+}
+button:hover{
+    cursor: pointer;
+    scale: 1.1; 
+    transition: all 0.2s;
+}
+
+iframe {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    iframe {
+        width: 90% !important;
+        height: auto !important;
+        min-height: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    iframe {
+        width: 95% !important;
+        height: auto !important;
+        min-height: 200px;
+    }
+}
+
+@media (max-width: 320px) {
+    iframe {
+        width: 100% !important;
+        height: auto !important;
+        min-height: 180px;
+    }
+}
+
+@media (max-width: 1200px) {
+    header {
+        padding: 25px 20px;
+    }
+
+    nav ul {
+        gap: 15px;
+    }
+
+    nav a,
+    header a {
+        padding: 8px 8px;
+        font-size: 0.95em;
+    }
+
+    .centro h1 {
+        padding-bottom: 20px;
+        font-size: 1.5em;
+    }
+}
+
+@media (max-width: 992px) {
+    header {
+        padding: 20px 15px;
+    }
+
+    #logo {
+        width: 80px;
+    }
+
+    .centro h1 {
+        padding-bottom: 15px;
+        font-size: 1.3em;
+    }
+
+    nav ul,
+    header ul {
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    nav a,
+    header a {
+        padding: 7px 7px;
+        font-size: 0.9em;
+    }
+
+    #perfil {
+        width: 50px;
+        height: 50px;
+    }
+
+    .perfil-container p {
+        font-size: 0.8em;
+    }
+
+    #principal {
+        width: 60%;
+    }
+
+    .footer-container {
+        gap: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+    }
+
+    #logo {
+        width: 70px;
+        margin-left: 0;
+    }
+
+    .centro {
+        width: 100%;
+    }
+
+    .centro h1 {
+        padding-bottom: 10px;
+        font-size: 1.2em;
+    }
+
+    .centro::after {
+        content: "☰ Menú";
+        display: block;
+        color: white;
+        font-size: 0.85em;
+        font-weight: bold;
+        margin: 10px auto 0;
+        width: fit-content;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    header:hover .centro::after {
+        visibility: hidden;
+    }
+
+    nav {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease;
+    }
+
+    header:hover nav,
+    nav:hover {
+        max-height: 1500px;
+        overflow: visible;
+    }
+
+    nav ul,
+    header ul {
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    nav a,
+    header a {
+        padding: 6px 6px;
+        font-size: 0.8em;
+    }
+
+    nav hr {
+        width: 80%;
+        margin: 15px auto;
+    }
+
+    .perfil-container {
+        order: 3;
+    }
+
+    #perfil {
+        width: 45px;
+        height: 45px;
+    }
+
+    .perfil-container p {
+        font-size: 0.75em;
+    }
+
+    main {
+        margin-top: 30px;
+        padding: 0 10px;
+    }
+
+    #principal {
+        width: 80%;
+    }
+
+    .footer-container {
+        gap: 30px;
+        padding: 15px;
+    }
+
+    .footer-section {
+        margin: 8px;
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        gap: 10px;
+        padding: 10px;
+    }
+
+    #logo {
+        width: 60px;
+    }
+
+    .centro h1 {
+        font-size: 1.1em;
+        padding-bottom: 8px;
+    }
+
+    nav ul,
+    header ul {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    nav a,
+    header a {
+        padding: 6px 4px;
+        font-size: 0.75em;
+        display: block;
+    }
+
+    nav hr {
+        width: 90%;
+        height: 2px;
+        margin: 10px auto;
+    }
+
+    #perfil {
+        width: 40px;
+        height: 40px;
+    }
+
+    .perfil-container p {
+        font-size: 0.7em;
+    }
+
+    main {
+        margin-top: 20px;
+        padding: 0 5px;
+    }
+
+    #principal {
+        width: 90%;
+    }
+
+    .footer-container {
+        gap: 15px;
+        padding: 10px;
+        flex-direction: column;
+    }
+
+    .footer-section {
+        margin: 5px 0;
+        font-size: 0.85em;
+    }
+
+    button {
+        padding: 6px 8px;
+        font-size: 0.8em;
+        margin: 8px 4px;
+    }
+}
+
+@media (max-width: 320px) {
+    header {
+        padding: 8px;
+    }
+
+    #logo {
+        width: 50px;
+    }
+
+    .centro h1 {
+        font-size: 1em;
+        padding-bottom: 5px;
+    }
+
+    nav a,
+    header a {
+        padding: 4px 2px;
+        font-size: 0.7em;
+    }
+
+    #perfil {
+        width: 35px;
+        height: 35px;
+    }
+
+    .perfil-container p {
+        font-size: 0.65em;
+    }
+
+    button {
+        padding: 5px 6px;
+        font-size: 0.7em;
+        margin: 6px 2px;
+    }
+}
