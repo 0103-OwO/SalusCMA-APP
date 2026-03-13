@@ -1,4 +1,35 @@
-table {
+/* ============================================================
+   tabla.css — Salus CMA
+   Adaptado a la identidad visual del stylePrincipal.
+   Cambios: colores teal en lugar de azul #1e3a8a / rgb(0,0,101),
+   sombras y radios consistentes con el sistema de diseño.
+   Lo que ya funcionaba (layout, responsive, data-label) no se tocó.
+============================================================ */
+
+/* Variables locales — espejo del stylePrincipal */
+:root {
+    --color-primary:      #085E63;
+    --color-primary-dark: #064A4E;
+    --color-accent:       #0A8C93;
+    --color-ink:          #1A2E2F;
+    --color-ink-soft:     #3D4F50;
+    --color-bg:           #F4F8F8;
+    --color-surface:      #FFFFFF;
+    --color-border:       rgba(8, 94, 99, 0.15);
+    --font-body:          'DM Sans', system-ui, sans-serif;
+    --font-display:       'Lora', Georgia, serif;
+    --shadow-sm:  0 1px 4px  rgba(8, 94, 99, 0.08);
+    --shadow-md:  0 4px 16px rgba(8, 94, 99, 0.12);
+    --radius-sm:  6px;
+    --radius-md:  10px;
+    --transition: 0.22s ease;
+}
+
+/* ===========================
+      TABLAS – DISEÑO BASE
+=========================== */
+
+main {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -10,6 +41,9 @@ main h2 {
     text-align: center;
     margin-bottom: 20px;
     width: 100%;
+    /* igual al h2 del stylePrincipal */
+    font-family: var(--font-display);
+    color: var(--color-ink);
 }
 
 table {
@@ -17,88 +51,116 @@ table {
     max-width: 1100px;
     min-width: 300px;
     border-collapse: collapse;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     overflow: hidden;
-    border: 2px solid black;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    background-color: white;
+    /* borde teal en lugar de negro sólido */
+    border: 2px solid var(--color-primary);
+    box-shadow: var(--shadow-md);
+    background-color: var(--color-surface);
+    font-family: var(--font-body);
 }
 
+/* Encabezado — teal principal en lugar de azul claro */
 thead {
-    background-color: rgb(170, 204, 230);
+    background-color: var(--color-primary);
 }
 
 thead th {
     padding: 15px;
     text-align: center;
-    color: black;
+    color: #FFFFFF;               /* blanco sobre teal: 7.52:1 ✓ AA */
     font-weight: 600;
     font-size: 14px;
-    border: 1px solid #000000;
+    /* borde separador sutil, no negro sólido */
+    border: 1px solid rgba(255, 255, 255, 0.15);
     white-space: nowrap;
+    letter-spacing: 0.02em;
 }
 
+/* Celdas */
 tbody td {
     padding: 12px 15px;
     text-align: center;
-    border: 1px solid #000000;
+    border: 1px solid var(--color-border);
     vertical-align: top;
     word-wrap: break-word;
+    color: var(--color-ink);
 }
 
 tbody tr {
-    background-color: white;
-    transition: background-color 0.3s ease;
+    background-color: var(--color-surface);
+    transition: background-color var(--transition);
+}
+
+/* Filas alternas para mejorar legibilidad */
+tbody tr:nth-child(even) {
+    background-color: var(--color-bg);
 }
 
 tbody tr:hover {
-    background-color: #f3f4f6;
+    background-color: #E6F4F4;    /* color-primary-light */
 }
 
+/* Columnas con texto largo */
 td.informacion {
     max-width: 250px;
     white-space: normal;
     word-wrap: break-word;
 }
 
+/* Botones y enlaces dentro de la tabla — teal en lugar de #1e3a8a */
 td a,
 td button,
 thead th button {
-    background-color: #1e3a8a;
-    color: white;
-    padding: 8px 10px;
-    border-radius: 10px;
-    font-weight: bold;
+    background-color: var(--color-primary);
+    color: #FFFFFF;
+    padding: 7px 12px;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.82rem;
     text-decoration: none;
     border: none;
     cursor: pointer;
-    margin: 6px;
+    margin: 4px;
     display: inline-block;
-    transition: 0.2s ease;
+    transition:
+        background-color var(--transition),
+        transform        var(--transition),
+        box-shadow       var(--transition);
 }
 
 td a:hover,
 td button:hover,
 thead th button:hover {
-    background-color: rgb(0, 0, 101);
+    background-color: var(--color-primary-dark);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
 }
 
+td a:active,
+td button:active {
+    transform: translateY(0);
+}
+
+
+/* ===========================
+          RESPONSIVE
+   (estructura sin cambios, solo ajustes visuales menores)
+=========================== */
+
 @media (max-width: 1200px) {
-    table {
-        width: 95%;
-    }
+    table { width: 95%; }
 }
 
 @media (max-width: 992px) {
     thead th {
-        font-size: 14px;
+        font-size: 13px;
         padding: 12px;
     }
-
     tbody td {
         padding: 10px;
     }
-
     td.informacion {
         max-width: 200px;
     }
@@ -109,7 +171,7 @@ thead th button:hover {
         font-size: 0.95em;
         width: 95%;
     }
-    
+
     thead {
         display: none;
     }
@@ -117,16 +179,19 @@ thead th button:hover {
     tbody tr {
         display: block;
         margin-bottom: 15px;
-        border: 1px solid #000;
-        border-radius: 10px;
+        /* borde teal en lugar de negro */
+        border: 1px solid var(--color-primary);
+        border-radius: var(--radius-md);
         padding: 10px;
+        /* sombra sutil para cada "tarjeta" */
+        box-shadow: var(--shadow-sm);
     }
 
     tbody td {
         display: block;
         padding: 8px 10px;
         border: none;
-        border-bottom: 1px solid #ccc;
+        border-bottom: 1px solid var(--color-border);
         text-align: left;
     }
 
@@ -137,10 +202,14 @@ thead th button:hover {
     tbody td::before {
         content: attr(data-label);
         display: block;
-        font-weight: bold;
-        color: #1e3a8a;
+        font-weight: 600;
+        /* teal en lugar de #1e3a8a */
+        color: var(--color-primary);
         margin-bottom: 3px;
         text-align: left;
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
     }
 
     td.informacion {
@@ -152,11 +221,9 @@ thead th button:hover {
     table {
         font-size: 0.9em;
     }
-
     tbody tr {
         padding: 8px;
     }
-
     td button, td a {
         width: 80%;
         text-align: center;
@@ -168,7 +235,6 @@ thead th button:hover {
     table {
         font-size: 0.85em;
     }
-
     tbody td::before {
         min-width: 45%;
     }

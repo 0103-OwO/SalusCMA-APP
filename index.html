@@ -7,6 +7,14 @@
     <link rel="stylesheet" href="css/stylePrincipal.css">
     <title>Salus CMA</title>
     <link rel="stylesheet" href="css/styleCarrusel.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap"
+        rel="stylesheet">
+
 </head>
 
 <body>
@@ -58,8 +66,45 @@
                 <button class="carrusel-dot" data-dot="2"></button>
             </div>
         </section>
+
+        <div class="seccion-separador">
+            <span class="separador-linea"></span>
+            <span class="separador-texto">Quiénes somos</span>
+            <span class="separador-linea"></span>
+        </div>
+
+
+        <div class="mosaico" id="mosaico-info">
+            <div class="recuadro" id="recuadro-mision">
+                <img src="../img/perfil.png" alt="Misión" class="imagen-gusto" id="img-mision">
+                <h2>Misión</h2>
+                <p id="texto-mision">Cargando misión...</p>
+            </div>
+
+            <div class="recuadro" id="recuadro-vision">
+                <img src="../img/perfil.png" alt="Visión" class="imagen-gusto" id="img-vision">
+                <h2>Visión</h2>
+                <p id="texto-vision">Cargando visión...</p>
+            </div>
+
+            <div class="recuadro" id="recuadro-valores">
+                <img src="../img/perfil.png" alt="Valores" class="imagen-gusto" id="img-valores">
+                <h2>Valores</h2>
+                <div id="texto-valores">Cargando valores...</div>
+            </div>
+
+            <div class="recuadro" id="recuadro-historia">
+                <img src="../img/perfil.png" alt="Historia" class="imagen-gusto" id="img-historia">
+                <h2>Nuestra Historia</h2>
+                <p id="texto-historia">Cargando historia...</p>
+            </div>
+        </div>
+        <p id="msg-sin-info" style="display: none; text-align: center; margin-top: 20px;">
+            No hay información institucional registrada.
+        </p>
     </main>
     <script src="js/global.js"></script>
+    <script src="js/mvvh.js"></script>
     <footer>
         <div class="footer-container">
             <div class="footer-section contact" id="footer-contacto">

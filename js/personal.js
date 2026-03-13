@@ -1,26 +1,28 @@
 document.addEventListener('DOMContentLoaded', async () => {
-    const listaPersonal = document.getElementById('lista-personal');
+    const main = document.getElementById('contenedor-principal');
     const msgSinPersonal = document.getElementById('msg-sin-personal');
     const botonesPaginacion = document.getElementById('contenedor-botones');
 
+    if (!main) return;
+
     try {
-        const res = await fetch(`${API_BASE}/trabajadores`); 
-        if (!res.ok) throw new Error("Error al obtener personal");
+        const res = await fetch(`${API_BASE}/trabajadores`);
+        if (!res.ok) throw new Error(`Error HTTP: ${res.status}`);
 
         const personal = await res.json();
 
-        if (personal.length === 0) {
-            msgSinPersonal.style.display = 'block';
-            botonesPaginacion.style.display = 'none';
+        const articulosExistentes = main.querySelectorAll('.articleTrabajador');
+        articulosExistentes.forEach(art => art.remove());
+
+        if (!personal || personal.length === 0) {
+            if (msgSinPersonal) msgSinPersonal.style.display = 'block';
+            if (botonesPaginacion) botonesPaginacion.style.display = 'none';
             return;
         }
 
-        listaPersonal.innerHTML = ''; 
-        
         personal.forEach(trabajador => {
             const article = document.createElement('article');
             article.className = 'articleTrabajador';
-            article.setAttribute('data-id', trabajador.id_personal);
 
             article.innerHTML = `
                 <h2>${trabajador.especialidad || 'Especialidad'}</h2><br>
@@ -36,16 +38,17 @@ document.addEventListener('DOMContentLoaded', async () => {
                     Ver más
                 </button>
             `;
-            listaPersonal.appendChild(article);
+            main.insertBefore(article, msgSinPersonal);
         });
 
-        if (personal.length > 0) {
-            botonesPaginacion.style.display = 'flex';
-        }
+        if (msgSinPersonal) msgSinPersonal.style.display = 'none';
+        if (botonesPaginacion) botonesPaginacion.style.display = 'flex';
 
     } catch (error) {
-        console.error("Error:", error);
-        msgSinPersonal.innerText = "Error al conectar con el servidor.";
-        msgSinPersonal.style.display = 'block';
+        console.error("Error al cargar personal:", error);
+        if (msgSinPersonal) {
+            msgSinPersonal.innerText = "Error al conectar con el servidor.";
+            msgSinPersonal.style.display = 'block';
+        }
     }
 });

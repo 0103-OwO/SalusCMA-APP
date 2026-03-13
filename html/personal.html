@@ -34,61 +34,20 @@
     </header>
 
 
-    <main class="mainDosColumnas">
+    <main class="mainDosColumnas" id="contenedor-principal">
+        <p id="msg-sin-personal" style="display: none; width: 100%; text-align: center;">
+            No hay trabajadores registrados.
+        </p>
 
-        <div id="lista-personal">
-
-            <article class="articleTrabajador" data-index="0" data-id="1">
-                <h2>Medicina General</h2><br>
-                <div class="contenido-superior">
-                    <img src="" alt="Dra. Laura Martínez Pérez">
-                    <ul>
-                        <li>Dra. Laura Martínez Pérez</li>
-                        <li>Correo: laura.martinez@saluscma.com</li>
-                    </ul>
-                </div>
-                <button class="btnVerMas" data-id="1" onclick="window.location.href='detalleTrabajador.html?id=1'">Ver
-                    más</button>
-            </article>
-
-            <article class="articleTrabajador" data-index="1" data-id="2">
-                <h2>Pediatría</h2><br>
-                <div class="contenido-superior">
-                    <img src="" alt="Dr. Carlos Ramírez Soto">
-                    <ul>
-                        <li>Dr. Carlos Ramírez Soto</li>
-                        <li>Correo: carlos.ramirez@saluscma.com</li>
-                    </ul>
-                </div>
-                <button class="btnVerMas" data-id="2" onclick="window.location.href='detalleTrabajador.html?id=2'">Ver
-                    más</button>
-            </article>
-
-            <article class="articleTrabajador" data-index="2" data-id="3">
-                <h2>Nutrición</h2><br>
-                <div class="contenido-superior">
-                    <img src="" alt="Dra. Sofía Torres Vega">
-                    <ul>
-                        <li>Dra. Sofía Torres Vega</li>
-                        <li>Correo: sofia.torres@saluscma.com</li>
-                    </ul>
-                </div>
-                <button class="btnVerMas" data-id="3" onclick="window.location.href='detalleTrabajador.html?id=3'">Ver
-                    más</button>
-            </article>
-
-        </div>
-
-        <p id="msg-sin-personal" style="display: none;">No hay trabajadores registrados.</p>
-
-        <div class="contenedor-botones" id="contenedor-botones">
+        <div class="contenedor-botones" id="contenedor-botones" style="display: none; width: 100%;">
             <button id="prevBtn">&laquo; Anterior</button>
             <button id="nextBtn">Siguiente &raquo;</button>
         </div>
-
     </main>
 
     <script src="../js/global.js"></script>
+    <script src="../js/personal.js"></script>
+
     <footer>
         <div class="footer-container">
             <div class="footer-section contact" id="footer-contacto">

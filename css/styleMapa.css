@@ -1,14 +1,51 @@
+/* ============================================================
+   styleMapa.css — Salus CMA
+   Adaptado a la identidad visual del stylePrincipal.
+   Cambios: #085E63 ya coincidía bien, se afinaron #333,
+   #E9F2FB y se aplicaron sombras y radios del sistema.
+   Lo que ya funcionaba (grid, responsive, centrado de cards)
+   no se tocó.
+============================================================ */
+
+/* Variables locales — espejo del stylePrincipal */
+:root {
+    --color-primary:       #085E63;
+    --color-primary-dark:  #064A4E;
+    --color-primary-light: #E6F4F4;
+    --color-accent:        #0A8C93;
+    --color-ink:           #1A2E2F;
+    --color-ink-soft:      #3D4F50;
+    --color-bg:            #F4F8F8;
+    --color-surface:       #FFFFFF;
+    --color-border:        rgba(8, 94, 99, 0.12);
+    --font-body:           'DM Sans', system-ui, sans-serif;
+    --font-display:        'Lora', Georgia, serif;
+    --shadow-sm:  0 1px 4px  rgba(8, 94, 99, 0.08);
+    --shadow-md:  0 4px 16px rgba(8, 94, 99, 0.12);
+    --shadow-lg:  0 8px 32px rgba(8, 94, 99, 0.16);
+    --radius-sm:  6px;
+    --radius-md:  10px;
+    --transition: 0.22s ease;
+}
+
+/* ===== ESTILOS PARA MAPA DE SITIO ===== */
+
 .mapa-container {
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 20px 60px 20px;
+    font-family: var(--font-body);
 }
 
 .mapa-titulo {
-    font-size: 2.5em;
-    color: #333;
+    font-family: var(--font-display);
+    font-size: 2.2em;
+    /* teal oscuro en lugar de #333 */
+    color: var(--color-ink);
     display: inline-block;
-    padding-bottom: 5px;
+    padding-bottom: 8px;
+    /* línea de acento bajo el título — consistente con main h2 */
+    border-bottom: 3px solid var(--color-primary);
 }
 
 .sitemap-grid {
@@ -18,28 +55,40 @@
     justify-items: center;
 }
 
+/* ---------------------------------------------------------------- */
+/*  TARJETAS                                                        */
+/* ---------------------------------------------------------------- */
+
 .sitemap-card {
     width: 100%;
     max-width: 400px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: var(--color-surface);
+    border-radius: var(--radius-md);
+    /* borde teal sutil en lugar de nada */
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-md);
     overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition:
+        transform   var(--transition),
+        box-shadow  var(--transition);
 }
 
 .sitemap-card:hover {
+    /* sube en lugar de escalar — coherente con el sistema */
     transform: translateY(-5px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    box-shadow: var(--shadow-lg);
 }
 
+/* Header de cada tarjeta — ya era teal, se afina con tokens */
 .card-header {
-    background-color: #085E63;
-    color: white;
-    padding: 20px;
-    font-size: 1.2em;
-    font-weight: bold;
+    background-color: var(--color-primary);
+    color: #FFFFFF;               /* 7.52:1 ✓ AA */
+    padding: 18px 20px;
+    font-family: var(--font-display);
+    font-size: 1.1em;
+    font-weight: 600;
     text-align: center;
+    letter-spacing: 0.02em;
 }
 
 .card-body {
@@ -53,7 +102,7 @@
 }
 
 .card-body li {
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid var(--color-border);
 }
 
 .card-body li:last-child {
@@ -62,25 +111,41 @@
 
 .card-body a {
     display: block;
-    padding: 15px 20px;
-    color: #333;
+    padding: 13px 20px;
+    /* teal oscuro en lugar de #333 */
+    color: var(--color-ink-soft);
     text-decoration: none;
-    transition: background-color 0.3s ease, padding-left 0.3s ease;
+    font-size: 0.9rem;
     position: relative;
+    transition:
+        background-color var(--transition),
+        padding-left     var(--transition),
+        color            var(--transition);
 }
 
-.card-body a:before {
+/* Viñeta teal — igual que en el original */
+.card-body a::before {
     content: "•";
-    color: #085E63;
+    color: var(--color-accent);   /* acento en lugar de primary — más sutil */
     font-weight: bold;
     margin-right: 10px;
+    transition: color var(--transition);
 }
 
 .card-body a:hover {
-    background-color: #E9F2FB;
-    padding-left: 30px;
-    color: #085E63;
+    /* teal muy claro en lugar de #E9F2FB aislado */
+    background-color: var(--color-primary-light);
+    padding-left: 28px;
+    color: var(--color-primary);
 }
+
+.card-body a:hover::before {
+    color: var(--color-primary);
+}
+
+/* ---------------------------------------------------------------- */
+/*  CENTRADO DE CARDS HUÉRFANAS — sin cambios, ya funcionaba       */
+/* ---------------------------------------------------------------- */
 
 .sitemap-grid .sitemap-card:last-child:nth-child(3n - 1) {
     grid-column: 2 / 3;
@@ -90,15 +155,17 @@
     grid-column: 2 / 3;
 }
 
+/* ---------------------------------------------------------------- */
+/*  RESPONSIVE — sin cambios estructurales                         */
+/* ---------------------------------------------------------------- */
+
 @media (max-width: 1024px) {
     .sitemap-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-    
     .sitemap-grid .sitemap-card:last-child:nth-child(2n - 1) {
         grid-column: span 1;
     }
-    
     .sitemap-grid .sitemap-card:last-child:nth-child(odd) {
         grid-column: 1 / -1;
         max-width: 400px;
@@ -110,11 +177,9 @@
     .sitemap-grid {
         grid-template-columns: 1fr;
     }
-    
     .mapa-titulo {
-        font-size: 2em;
+        font-size: 1.8em;
     }
-    
     .sitemap-grid .sitemap-card:last-child {
         grid-column: 1;
     }
