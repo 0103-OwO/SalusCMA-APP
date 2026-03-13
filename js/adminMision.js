@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const mensaje = document.getElementById('mensajeMision');
     const btn = document.getElementById('btnActualizar');
 
+    const token = localStorage.getItem('token');
+
     try {
         const res = await fetch(`${API_BASE}/mvvh`);
         if (res.ok) {
@@ -50,6 +52,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                 const response = await fetch(`${API_BASE}/mvvh/update`, {
                     method: 'PUT',
+                    headers: {
+                        'Authorization': `Bearer ${token}` 
+                    },
                     body: formData
                 });
 
@@ -57,6 +62,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                     mensaje.style.color = "green";
                     mensaje.innerText = "¡Misión actualizada correctamente!";
                     setTimeout(() => { window.location.reload(); }, 1500);
+                } else if (response.status === 401) {
+                    throw new Error("Sesión expirada. Inicia sesión de nuevo.");
                 } else {
                     const errorData = await response.json();
                     throw new Error(errorData.error || "Error al guardar");
@@ -66,6 +73,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                 mensaje.innerText = "Error: " + error.message;
                 btn.disabled = false;
                 btn.innerText = "Guardar";
+                
+                if (error.message.includes("Sesión expirada")) {
+                    setTimeout(() => { window.location.href = "loginn.html"; }, 2000);
+                }
             }
         });
     }
