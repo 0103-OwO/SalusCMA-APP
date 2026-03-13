@@ -409,10 +409,6 @@ footer h3 {
     text-decoration: none;
 }
 
-.footer-section.links img {
-    filter: brightness(0) invert(1);
-}
-
 .footerho-section {
     margin: 10px;
     text-align: center;

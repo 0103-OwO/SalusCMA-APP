@@ -12,7 +12,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap"
         rel="stylesheet">
-        
+
     <title>Historia - Modificar | Salus CMA</title>
 </head>
 
@@ -88,10 +88,10 @@
             </nav>
         </div>
 
-        <div class="perfil-container" id="perfil-container">
+        <div class="perfil-container" id="perfil-dinamico">
             <a href="loginn.html">
                 <img id="perfil" src="" alt="Perfil">
-                <p>Iniciar sesión</p>
+                <p>Cargando...</p>
             </a>
         </div>
     </header>
@@ -104,16 +104,14 @@
             <input type="hidden" id="input-id-mision-vision" name="id_mision_vision" value="1">
 
             <label>Imagen actual:</label><br>
-            <img id="img-preview-historia" src="" alt="Imagen Historia"
-                style="max-width: 300px;"><br><br>
+            <img id="img-preview-historia" src="" alt="Imagen Historia" style="max-width: 300px;"><br><br>
 
             <label for="img_historia">Cambiar imagen (PNG/JPG/JPEG):</label><br>
             <input type="file" id="img_historia" name="img_historia" accept="image/*"><br><br>
 
             <label for="historia">Historia:</label><br>
             <textarea id="historia" name="historia" rows="10" cols="50" maxlength="8000"
-                title="Ingrese la historia de la empresa"
-                required>Cargando...</textarea><br><br>
+                title="Ingrese la historia de la empresa" required>Cargando...</textarea><br><br>
 
             <label id="mensajeHistoria" style="display: block; margin-bottom: 10px; color: red;"></label>
 
@@ -126,6 +124,8 @@
 
     <script src="../js/global.js"></script>
     <script src="../js/adminHistoria.js"></script>
+    <script src="../js/Check.js"></script>
+
     <footer>
         <div class="footer-container">
             <div class="footer-section contact" id="footer-contacto">
