@@ -17,12 +17,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     const previewIg = document.getElementById('img-preview-instagram');
     const previewX = document.getElementById('img-preview-x');
 
+    const token = localStorage.getItem('token');
+
     try {
-        const res = await fetch(`${API_BASE}/footer`); 
+        const res = await fetch(`${API_BASE}/footer`);
         if (res.ok) {
             const data = await res.json();
             const info = Array.isArray(data) ? data[0] : data;
-            
+
             if (info) {
                 if (info.facebook) fbLink.value = info.facebook;
                 if (info.instagram) igLink.value = info.instagram;
@@ -40,7 +42,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     const setupPreview = (input, img) => {
-        input.addEventListener('change', function() {
+        input.addEventListener('change', function () {
             if (this.files && this.files[0]) {
                 img.src = URL.createObjectURL(this.files[0]);
             }
@@ -54,7 +56,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (form) {
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
+
             const formData = new FormData();
             formData.append('id_footer', inputId.value);
             formData.append('facebook', fbLink.value);
@@ -69,12 +71,13 @@ document.addEventListener('DOMContentLoaded', async () => {
             try {
                 btn.disabled = true;
                 btn.innerText = "Guardando...";
-                
+
                 mensaje.style.color = "blue";
                 mensaje.innerText = "Actualizando información del footer...";
 
                 const response = await fetch(`${API_BASE}/footer/update`, {
                     method: 'PUT',
+                    headers: { 'Authorization': `Bearer ${token}` },
                     body: formData
                 });
 

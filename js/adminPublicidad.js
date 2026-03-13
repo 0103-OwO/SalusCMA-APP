@@ -2,6 +2,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const msg = document.getElementById('mensajePublicidad');
     const form = document.getElementById('formPublicidad');
 
+    const token = localStorage.getItem('token');
+
     try {
         const res = await fetch(`${API_BASE}/publicidad`);
         const data = await res.json();
@@ -51,9 +53,11 @@ document.addEventListener('DOMContentLoaded', async () => {
                 msg.innerText = "Subiendo imágenes...";
                 msg.style.color = "blue";
 
-                // Ajusta la ruta a tu backend de publicidad
                 const response = await fetch(`${API_BASE}/publicidad/update`, {
                     method: 'PUT',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    },  
                     body: formData
                 });
 

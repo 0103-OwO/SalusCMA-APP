@@ -7,7 +7,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const mensaje = document.getElementById('mensajeVision');
     const btn = form.querySelector('button[type="submit"]');
 
-    // 1. CARGAR DATOS ACTUALES
+    const token = localStorage.getItem('token');
+    
     try {
         const res = await fetch(`${API_BASE}/mvvh`);
         if (res.ok) {
@@ -21,14 +22,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     } catch (error) { console.error("Error al cargar visión:", error); }
 
-    // 2. PREVISUALIZACIÓN
     if (fileInput && preview) {
         fileInput.addEventListener('change', function() {
             if (this.files && this.files[0]) preview.src = URL.createObjectURL(this.files[0]);
         });
     }
 
-    // 3. ENVÍO
     if (form) {
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -42,7 +41,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 mensaje.style.color = "blue";
                 mensaje.innerText = "Actualizando visión...";
 
-                const response = await fetch(`${API_BASE}/mvvh/update`, { method: 'PUT', body: formData });
+                const response = await fetch(`${API_BASE}/mvvh/update`, { method: 'PUT', headers: { 'Authorization': `Bearer ${token}` }, body: formData });
                 if (response.ok) {
                     mensaje.style.color = "green";
                     mensaje.innerText = "¡Visión actualizada correctamente!";

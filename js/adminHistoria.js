@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const mensaje = document.getElementById('mensajeHistoria');
     const btn = document.getElementById('btnActualizar');
 
+    const token = localStorage.getItem('token');
+
     try {
         const res = await fetch(`${API_BASE}/mvvh`);
         if (res.ok) {
@@ -40,7 +42,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 mensaje.style.color = "blue";
                 mensaje.innerText = "Actualizando historia...";
 
-                const response = await fetch(`${API_BASE}/mvvh/update`, { method: 'PUT', body: formData });
+                const response = await fetch(`${API_BASE}/mvvh/update`, { method: 'PUT', headers: { 'Authorization': `Bearer ${token}` }, body: formData });
                 if (response.ok) {
                     mensaje.style.color = "green";
                     mensaje.innerText = "¡Historia actualizada correctamente!";

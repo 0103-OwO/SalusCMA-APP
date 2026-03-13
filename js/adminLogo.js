@@ -6,6 +6,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const mensaje = document.getElementById('mensajeLogo');
     const btn = document.getElementById('btnActualizar');
 
+    const token = localStorage.getItem('token');
+
     try {
         const res = await fetch(`${API_BASE}/imagenes`);
         const data = await res.json();
@@ -57,6 +59,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                 const response = await fetch(`${API_BASE}/imagenes/${idImg}`, {
                     method: 'PUT',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    },
                     body: formData
                 });
 
