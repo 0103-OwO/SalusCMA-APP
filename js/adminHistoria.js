@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     } catch (error) { console.error("Error al cargar historia:", error); }
 
     if (fileInput && preview) {
-        fileInput.addEventListener('change', function() {
+        fileInput.addEventListener('change', function () {
             if (this.files && this.files[0]) preview.src = URL.createObjectURL(this.files[0]);
         });
     }
@@ -47,7 +47,12 @@ document.addEventListener('DOMContentLoaded', async () => {
                     mensaje.style.color = "green";
                     mensaje.innerText = "¡Historia actualizada correctamente!";
                     setTimeout(() => location.reload(), 1500);
-                } else { throw new Error("Error al guardar"); }
+                }
+                else if (response.status === 401) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || "Sesión expirada. Inicia sesión de nuevo.");
+                }
+                else { throw new Error("Error al guardar"); }
             } catch (error) {
                 mensaje.style.color = "red";
                 mensaje.innerText = "Error: " + error.message;

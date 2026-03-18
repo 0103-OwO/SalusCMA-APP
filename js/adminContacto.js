@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const mensaje = document.getElementById('mensajeContacto');
     const btn = document.getElementById('btnActualizar');
 
+    const token = localStorage.getItem('token');
+
     try {
         const res = await fetch(`${API_BASE}/contacto`);
         if (res.ok) {
@@ -20,7 +22,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (form) {
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
+
             const data = {
                 id_contacto: 1,
                 direccion: document.getElementById('direccion').value,
@@ -33,14 +35,15 @@ document.addEventListener('DOMContentLoaded', async () => {
                     btn.disabled = true;
                     btn.innerText = "Guardando...";
                 }
-                
+
                 mensaje.style.color = "blue";
                 mensaje.innerText = "Actualizando información de contacto...";
 
                 const response = await fetch(`${API_BASE}/contacto/update`, {
                     method: 'PUT',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
                     },
                     body: JSON.stringify(data)
                 });
@@ -49,7 +52,12 @@ document.addEventListener('DOMContentLoaded', async () => {
                     mensaje.style.color = "green";
                     mensaje.innerText = "¡Contacto actualizado correctamente!";
                     setTimeout(() => { window.location.reload(); }, 1500);
-                } else {
+                }
+                else if (response.status === 401) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || "Sesión expirada. Inicia sesión de nuevo.");
+                }
+                else {
                     throw new Error("Error en el servidor");
                 }
             } catch (error) {

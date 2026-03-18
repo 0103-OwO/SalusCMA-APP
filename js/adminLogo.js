@@ -74,7 +74,12 @@ document.addEventListener('DOMContentLoaded', async () => {
                     }
                     if (result.url && preview) preview.src = result.url;
                     setTimeout(() => { window.location.reload(); }, 1500);
-                } else {
+                }
+                else if (response.status === 401) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || "Sesión expirada. Inicia sesión de nuevo.");
+                }
+                else {
                     throw new Error(result.error || "Error al actualizar");
                 }
             } catch (error) {

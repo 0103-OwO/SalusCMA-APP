@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <ul>
                         <li class="item-con-submenu">
                             <a href="#">
-                                <img id="perfil" src="${aRaiz}img/perfil.png" alt="Perfil">
+                                <img id="perfil" src="${aRaiz}" alt="Perfil">
                                 <p>${nombre}</p>
                             </a>
                             <ul class="submenu">

@@ -80,12 +80,16 @@ document.addEventListener('DOMContentLoaded', async () => {
                     headers: { 'Authorization': `Bearer ${token}` },
                     body: formData
                 });
-
                 if (response.ok) {
                     mensaje.style.color = "green";
                     mensaje.innerText = "¡Footer actualizado correctamente!";
                     setTimeout(() => { window.location.reload(); }, 1500);
-                } else {
+                } 
+                else if(response.status === 401) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || "Sesión expirada. Inicia sesión de nuevo.");
+                }
+                else {
                     const errorData = await response.json();
                     throw new Error(errorData.error || "Error al guardar");
                 }

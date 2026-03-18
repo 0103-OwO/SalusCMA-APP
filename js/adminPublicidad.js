@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const input = document.getElementById(`file-banner-${num}`);
         const img = document.getElementById(`preview-banner-${num}`);
         if (input && img) {
-            input.addEventListener('change', function() {
+            input.addEventListener('change', function () {
                 if (this.files && this.files[0]) {
                     img.src = URL.createObjectURL(this.files[0]);
                 }
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             e.preventDefault();
             const btn = document.getElementById('btnGuardarBanners');
             const formData = new FormData();
-            
+
             const f1 = document.getElementById('file-banner-1').files[0];
             const f2 = document.getElementById('file-banner-2').files[0];
             const f3 = document.getElementById('file-banner-3').files[0];
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     method: 'PUT',
                     headers: {
                         'Authorization': `Bearer ${token}`
-                    },  
+                    },
                     body: formData
                 });
 
@@ -65,7 +65,12 @@ document.addEventListener('DOMContentLoaded', async () => {
                     msg.innerText = "¡Publicidad actualizada!";
                     msg.style.color = "green";
                     setTimeout(() => location.reload(), 1500);
-                } else {
+                }
+                else if (response.status === 401) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || "Sesión expirada. Inicia sesión de nuevo.");
+                }
+                else {
                     throw new Error("Error en el servidor");
                 }
             } catch (error) {
