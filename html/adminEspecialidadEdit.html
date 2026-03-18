@@ -105,8 +105,8 @@
 
             <label for="especialidad">Especialidad:</label><br>
 
-            <input type="text" id="especialidad" name="especialidad" value="Medicina General" maxlength="100"
-                title="Ingrese el nombre de la especialidad" required><br><br>
+            <input type="text" id="especialidad" name="especialidad" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{3,60}$"
+                title="Ingrese solo letras, mínimo 3 y máximo 60 caracteres" required><br><br>
 
             <label id="mensajeEdit" style="display: block; margin-bottom: 10px; color: red;"></label>
 
@@ -119,6 +119,8 @@
 
     <script src="../js/global.js"></script>
     <script src="../js/Check.js"></script>
+    <script src="../js/adminEspecialidadesEdit.js"></script>
+
     <footer>
         <div class="footer-container">
             <div class="footer-section contact" id="footer-contacto">
