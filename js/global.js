@@ -80,6 +80,17 @@ async function cargarContenidoGlobal() {
     } catch (error) {
         console.error("Error en la carga global:", error);
     }
+    const urlImagenPerfil = "https://res.cloudinary.com/dqnncunbj/image/upload/v1773847782/perfil_ylrrpf.png";
+
+    const imgPerfil = document.getElementById("perfil");
+    const textoPerfil = document.querySelector("#perfil-dinamico p");
+
+    if (imgPerfil) {
+        imgPerfil.src = urlImagenPerfil;
+        if (textoPerfil) {
+            textoPerfil.textContent = "Mi Perfil";
+        }
+    }
 }
 
 document.addEventListener('DOMContentLoaded', cargarContenidoGlobal);
