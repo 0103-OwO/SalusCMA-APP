@@ -99,15 +99,13 @@
 
 
     <main>
-        <h2>Trabajadores</h2>
+        <h2>Gestión de Trabajadores</h2>
 
         <table id="tablaTrabajadores">
             <thead>
                 <tr>
                     <th>Foto</th>
-                    <th>Nombre</th>
-                    <th>Apellido Paterno</th>
-                    <th>Apellido Materno</th>
+                    <th>Nombre Completo</th>
                     <th class="oculto col-cedula">Cédula</th>
                     <th class="oculto col-rfc">RFC</th>
                     <th>Correo</th>
@@ -116,49 +114,12 @@
                     <th class="oculto col-informacion">Información</th>
                     <th>
                         <button type="button" id="toggleAllCampos">Ver datos</button>
-                        <button type="button" onclick="window.location.href='adminTrabajador.html'">Ir a
-                            registro</button>
+                        <button type="button" onclick="window.location.href='adminTrabajador.html'">Nuevo
+                            Registro</button>
                     </th>
                 </tr>
             </thead>
             <tbody id="tbody-trabajadores">
-
-                <tr id="fila-1" class="filaTrabajador">
-                    <td><img src="../img/perfil.png" alt="Foto" width="50"></td>
-                    <td>Laura</td>
-                    <td>Martínez</td>
-                    <td>Pérez</td>
-                    <td class="oculto col-cedula">1234567</td>
-                    <td class="oculto col-rfc">MALP800101AB3</td>
-                    <td>laura.martinez@saluscma.com</td>
-                    <td>7821234567</td>
-                    <td>Medicina General</td>
-                    <td class="oculto col-informacion">Médico con más de 10 años de experiencia en atención primaria.
-                    </td>
-                    <td>
-                        <button type="button"
-                            onclick="window.location.href='adminTrabajadorEdit.html?id_trabajador=1'">Editar</button>
-                        <button type="button" class="borrar-btn" data-id="1">Eliminar</button>
-                    </td>
-                </tr>
-
-                <tr id="fila-2" class="filaTrabajador">
-                    <td><img src="../img/perfil.png" alt="Foto" width="50"></td>
-                    <td>Carlos</td>
-                    <td>Ramírez</td>
-                    <td>Soto</td>
-                    <td class="oculto col-cedula">7654321</td>
-                    <td class="oculto col-rfc">RASC750520GH7</td>
-                    <td>carlos.ramirez@saluscma.com</td>
-                    <td>7829876543</td>
-                    <td>Pediatría</td>
-                    <td class="oculto col-informacion">Pediatra especializado en neonatología.</td>
-                    <td>
-                        <button type="button"
-                            onclick="window.location.href='adminTrabajadorEdit.html?id_trabajador=2'">Editar</button>
-                        <button type="button" class="borrar-btn" data-id="2">Eliminar</button>
-                    </td>
-                </tr>
             </tbody>
         </table>
 
@@ -167,21 +128,23 @@
             <span id="pagina-trabajador">Página 1 de 1</span>
             <button id="nextTrabajador">Siguiente &raquo;</button>
         </div>
-
-        <script>
-            let camposVisibles = false;
-            document.getElementById('toggleAllCampos').addEventListener('click', function () {
-                camposVisibles = !camposVisibles;
-                document.querySelectorAll('.col-cedula, .col-rfc, .col-informacion').forEach(el => {
-                    el.classList.toggle('oculto', !camposVisibles);
-                });
-                this.textContent = camposVisibles ? 'Ocultar datos' : 'Ver datos';
-            });
-        </script>
     </main>
+
+    <script>
+        let camposVisibles = false;
+        document.getElementById('toggleAllCampos').addEventListener('click', function () {
+            camposVisibles = !camposVisibles;
+            document.querySelectorAll('.col-cedula, .col-rfc, .col-informacion').forEach(el => {
+                el.classList.toggle('oculto', !camposVisibles);
+            });
+            this.textContent = camposVisibles ? 'Ocultar datos' : 'Ver datos';
+        });
+    </script>
 
     <script src="../js/global.js"></script>
     <script src="../js/Check.js"></script>
+    <script src="../js/adminTrabajadorListD.js"></script>
+
     <footer>
         <div class="footer-container">
             <div class="footer-section contact" id="footer-contacto">

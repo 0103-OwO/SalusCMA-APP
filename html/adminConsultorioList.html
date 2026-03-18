@@ -107,49 +107,12 @@
                     <th>Piso</th>
                     <th>
                         <button type="button" onclick="window.location.href='adminConsultorio.html'">
-                            Ir a registro
+                            Nuevo Consultorio
                         </button>
                     </th>
                 </tr>
             </thead>
-            <tbody id="tbody-consultorios">
-
-                <tr id="fila-1" class="filaConsultorio">
-                    <td>Consultorio 1</td>
-                    <td>Atención de medicina general y consultas de primer nivel</td>
-                    <td>Medicina General</td>
-                    <td>1</td>
-                    <td>
-                        <button type="button"
-                            onclick="window.location.href='adminConsultorioEdit.html?id_consultorio=1'">Editar</button>
-                        <button type="button" class="borrar-btn" data-id="1">Eliminar</button>
-                    </td>
-                </tr>
-
-                <tr id="fila-2" class="filaConsultorio">
-                    <td>Consultorio 2</td>
-                    <td>Atención pediátrica para niños y adolescentes</td>
-                    <td>Pediatría</td>
-                    <td>1</td>
-                    <td>
-                        <button type="button"
-                            onclick="window.location.href='adminConsultorioEdit.html?id_consultorio=2'">Editar</button>
-                        <button type="button" class="borrar-btn" data-id="2">Eliminar</button>
-                    </td>
-                </tr>
-
-                <tr id="fila-3" class="filaConsultorio">
-                    <td>Consultorio 3</td>
-                    <td>Consultas de nutrición y orientación alimentaria</td>
-                    <td>Nutrición</td>
-                    <td>2</td>
-                    <td>
-                        <button type="button"
-                            onclick="window.location.href='adminConsultorioEdit.html?id_consultorio=3'">Editar</button>
-                        <button type="button" class="borrar-btn" data-id="3">Eliminar</button>
-                    </td>
-                </tr>
-            </tbody>
+            <tbody id="tbody-consultorios"></tbody>
         </table>
 
         <div class="contenedor-botones">
@@ -157,11 +120,11 @@
             <span id="pagina-consultorio">Página 1 de 1</span>
             <button id="nextConsultorio">Siguiente &raquo;</button>
         </div>
-
     </main>
 
     <script src="../js/global.js"></script>
     <script src="../js/Check.js"></script>
+    <script src="../js/adminConsultorioListD.js"></script>
 
     <footer>
         <div class="footer-container">

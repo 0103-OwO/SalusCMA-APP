@@ -45,33 +45,34 @@
 
 
     <main>
-        <div class="contenedor-principal">
+        <div class="contenedor-principal" id="perfil-contenido">
+            <h1 id="nombre-trabajador">Cargando información...</h1>
 
-            <h1 id="nombre-trabajador">Dra. Laura Martínez Pérez</h1>
-
-            <img id="foto-trabajador" src="../img/perfil.png" alt="Foto de la trabajadora" class="imagen-final">
+            <img id="foto-trabajador" src="../img/perfil.png" alt="Foto del trabajador" class="imagen-final">
 
             <ul class="info-trabajador">
-                <li><strong>Especialidad:</strong> <span id="especialidad-trabajador">Medicina General</span></li>
+                <li><strong>Especialidad:</strong> <span id="especialidad-trabajador">---</span></li>
                 <li><strong>Correo:</strong>
-                    <a id="correo-trabajador" href="mailto:laura.martinez@saluscma.com">laura.martinez@saluscma.com</a>
+                    <a id="correo-trabajador" href="#">---</a>
                 </li>
                 <li><strong>Teléfono:</strong>
-                    <a id="telefono-trabajador" href="tel:7821234567">782 123 4567</a>
+                    <a id="telefono-trabajador" href="#">---</a>
                 </li>
             </ul>
 
             <div class="info-adicional">
                 <h2>Información adicional</h2>
                 <p id="informacion-trabajador">
-                    Médico general con más de 10 años de experiencia en atención primaria.
-                    Especialista en medicina preventiva y atención integral al paciente.
+                    Espere un momento mientras recuperamos los detalles del profesional...
                 </p>
             </div>
 
+            <div style="margin-top: 40px;">
+                <button type="button" onclick="window.history.back()" class="btn-volver">Regresar al listado</button>
+            </div>
         </div>
     </main>
-
+    <script src="../js/detalleTrabajador.js"></script>
     <script src="../js/global.js"></script>
     <script src="../js/Check.js"></script>
     <footer>

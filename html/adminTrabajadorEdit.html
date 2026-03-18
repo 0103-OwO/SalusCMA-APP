@@ -94,75 +94,48 @@
 
 
     <main>
-        <h2>Modificar Trabajador</h2>
+        <h2>Modificar Datos del Trabajador</h2>
 
         <form id="formEditTrabajador" enctype="multipart/form-data">
+            <input type="hidden" id="input-id-trabajador" name="id_trabajador">
 
-            <input type="hidden" id="input-id-trabajador" name="id_trabajador" value="1">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
 
-            <label for="nombre">Nombre:</label><br>
-            <input type="text" id="nombre" name="nombre" value="Laura" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,50}$"
-                title="Ingrese solo letras" required><br><br>
+            <label for="cedula">Cédula:</label>
+            <input type="text" id="cedula" name="cedula" maxlength="8" required>
 
-            <label for="apellido_paterno">Apellido Paterno:</label><br>
-            <input type="text" id="apellido_paterno" name="apellido_paterno" value="Martínez"
-                pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,50}$" title="Ingrese solo letras" required><br><br>
+            <label for="rfc">RFC:</label>
+            <input type="text" id="rfc" name="rfc" maxlength="13" required>
 
-            <label for="apellido_materno">Apellido Materno:</label><br>
-            <input type="text" id="apellido_materno" name="apellido_materno" value="Pérez"
-                pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,50}$" title="Ingrese solo letras" required><br><br>
+            <label for="correo">Correo:</label>
+            <input type="email" id="correo" name="correo" required>
 
-            <label for="cedula">Cédula:</label><br>
-            <input type="text" id="cedula" name="cedula" maxlength="8" value="1234567" pattern="^[A-Z]?\d{6,8}$"
-                title="Ingrese una cédula profesional válida" required><br><br>
-
-            <label for="rfc">RFC:</label><br>
-            <input type="text" id="rfc" name="rfc" maxlength="13" value="MALP800101AB3"
-                pattern="^([A-ZÑ&]{3,4})(\d{2})(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])[A-Z0-9]{3}$"
-                title="Ingrese un RFC válido" required><br><br>
-
-            <label for="correo">Correo electrónico:</label><br>
-            <input type="email" id="correo" name="correo" value="laura.martinez@saluscma.com"
-                pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,}$" title="Ingrese un correo válido"
-                required><br><br>
-
-            <label for="telefono">Teléfono:</label><br>
-            <input type="tel" id="telefono" name="telefono" value="7821234567"
-                pattern="^(\+52\s?)?(\d{2,3}[\s-]?){2}\d{4}$" title="Ingrese un teléfono válido" required><br><br>
-
-
-            <label for="select-especialidad">Especialidad:</label><br>
+            <label for="select-especialidad">Especialidad:</label>
             <select id="select-especialidad" name="id_especialidad" required>
-                <option value="" disabled>Seleccione una especialidad</option>
-                <option value="1">Cardiología</option>
-                <option value="2" selected>Medicina General</option>
-                <option value="3">Pediatría</option>
-                <option value="4">Nutrición</option>
-            </select><br><br>
+            </select>
 
-            <label>Foto actual:</label><br>
+            <label>Foto Actual:</label><br>
+            <img id="img-preview-foto" src="" alt="Foto actual" width="120"
+                style="border-radius: 8px; border: 1px solid #ccc;"><br>
 
-            <img id="img-preview-foto" src="../img/perfil.png" alt="Foto trabajador" width="100"><br><br>
+            <label for="foto">Cambiar Foto:</label>
+            <input type="file" id="foto" name="foto" accept=".png,.jpg,.jpeg">
 
-            <label for="foto">Actualizar foto (PNG/JPG/JPEG):</label><br>
-            <input type="file" id="foto" name="foto" accept=".png,.jpg,.jpeg"><br><br>
+            <label for="informacion">Resumen Profesional:</label>
+            <textarea id="informacion" name="informacion" rows="4" required></textarea>
 
-            <label for="informacion">Información:</label><br>
-            <textarea id="informacion" name="informacion" rows="4" cols="50"
-                required>Médico con más de 10 años de experiencia en atención primaria.</textarea><br><br>
+            <div id="mensajeEdit" style="color: red; margin: 10px 0;"></div>
 
-
-            <label id="mensajeEdit" style="color: red; display: block; margin-bottom: 10px;"></label>
-
-            <button type="button" onclick="window.location.href='adminTrabajadorList.html'">Cancelar</button>
-            <button type="reset">Limpiar</button>
-            <button type="submit" id="btnActualizar">Guardar</button>
-
+            <button type="button" onclick="window.location.href='adminTrabajadorList.html'">Volver</button>
+            <button type="submit" id="btnActualizar">Actualizar Información</button>
         </form>
     </main>
 
+    <script src="../js/adminTrabajadoresEdit.js"></script>
     <script src="../js/global.js"></script>
     <script src="../js/Check.js"></script>
+
     <footer>
         <div class="footer-container">
             <div class="footer-section contact" id="footer-contacto">

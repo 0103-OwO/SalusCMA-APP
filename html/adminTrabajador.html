@@ -94,67 +94,56 @@
 
 
     <main>
-        <h2>Registrar Trabajador</h2>
+        <h2>Registrar Nuevo Trabajador</h2>
 
         <form id="formTrabajador" enctype="multipart/form-data">
-
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,50}$"
-                title="Ingrese solo letras" required><br><br>
+            <label for="nombre">Nombre(s):</label>
+            <input type="text" id="nombre" name="nombre" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,50}$" required>
 
             <label for="apellido_paterno">Apellido Paterno:</label>
             <input type="text" id="apellido_paterno" name="apellido_paterno" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,50}$"
-                title="Ingrese solo letras" required><br><br>
+                required>
 
             <label for="apellido_materno">Apellido Materno:</label>
             <input type="text" id="apellido_materno" name="apellido_materno" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,50}$"
-                title="Ingrese solo letras" required><br><br>
+                required>
 
-            <label for="cedula">Cédula profesional:</label>
-            <input type="text" id="cedula" name="cedula" maxlength="8" pattern="^[A-Z]?\d{6,8}$"
-                title="Ingrese una cédula profesional válida (ej: 1234567 o A1234567)" required><br><br>
+            <label for="cedula">Cédula Profesional:</label>
+            <input type="text" id="cedula" name="cedula" maxlength="8" pattern="^[A-Z]?\d{6,8}$" required>
 
             <label for="rfc">RFC:</label>
             <input type="text" id="rfc" name="rfc" maxlength="13"
-                pattern="^([A-ZÑ&]{3,4})(\d{2})(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])[A-Z0-9]{3}$"
-                title="Ingrese un RFC válido (ej: GODE561231GR8)" required><br><br>
+                pattern="^([A-ZÑ&]{3,4})(\d{2})(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])[A-Z0-9]{3}$" required>
 
-            <label for="correo">Correo electrónico:</label>
-            <input type="email" id="correo" name="correo" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,}$"
-                title="Ingrese un correo válido" required><br><br>
+            <label for="correo">Correo Electrónico:</label>
+            <input type="email" id="correo" name="correo" required>
 
             <label for="telefono">Teléfono:</label>
-            <input type="tel" id="telefono" name="telefono" pattern="^(\+52\s?)?(\d{2,3}[\s-]?){2}\d{4}$"
-                title="Ingrese un teléfono válido" required><br><br>
+            <input type="tel" id="telefono" name="telefono" pattern="^\d{10}$" maxlength="10" required>
 
+            <label for="id_especialidad">Especialidad:</label>
+            <select id="id_especialidad" name="id_especialidad" required>
+                <option value="" disabled selected>Seleccione una opción</option>
+            </select>
 
-            <label for="select-especialidad">Especialidad:</label>
-            <select id="select-especialidad" name="id_especialidad" required>
-                <option value="" disabled selected>Seleccione una especialidad</option>
-                <option value="1">Cardiología</option>
-                <option value="2">Medicina General</option>
-                <option value="3">Pediatría</option>
-                <option value="4">Nutrición</option>
-            </select><br><br>
+            <label for="foto_trabajador">Foto de Perfil:</label>
+            <input type="file" id="foto" name="foto" accept=".png,.jpg,.jpeg" required>
 
-            <label for="foto_trabajador">Foto del trabajador (PNG/JPG/JPEG):</label><br>
-            <input type="file" id="foto_trabajador" name="foto_trabajador" accept=".png,.jpg,.jpeg" required><br><br>
+            <label for="informacion">Información Adicional:</label>
+            <textarea id="informacion" name="informacion" rows="4" required></textarea>
 
-            <label for="informacion">Información:</label><br>
-            <textarea id="informacion" name="informacion" rows="4" required></textarea><br><br>
-
-
-            <label id="mensajeTrabajador" style="color: red; display: block; margin-bottom: 10px;"></label>
+            <div id="mensajeTrabajador" style="color: red; margin: 10px 0;"></div>
 
             <button type="button" onclick="window.location.href='adminTrabajadorList.html'">Cancelar</button>
             <button type="reset">Limpiar</button>
-            <button type="submit" id="btnGuardar">Guardar</button>
-
+            <button type="submit" id="btnGuardar">Guardar Trabajador</button>
         </form>
     </main>
 
     <script src="../js/global.js"></script>
     <script src="../js/Check.js"></script>
+    <script src="../js/adminTrabajador.js"></script>
+
     <footer>
         <div class="footer-container">
             <div class="footer-section contact" id="footer-contacto">

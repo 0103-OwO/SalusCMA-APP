@@ -100,51 +100,45 @@
         <h2>Modificar Consultorio</h2>
 
         <form id="formEditConsultorio">
-
-            <input type="hidden" id="input-id-consultorio" name="id_consultorio" value="1">
+            <input type="hidden" id="input-id-consultorio" name="id_consultorio">
 
             <label for="nombre">Nombre:</label><br>
-            <input type="text" id="nombre" name="nombre" value="Consultorio 1" title="Ingrese el nombre del consultorio"
-                required><br><br>
+            <input type="text" id="nombre" name="nombre" required><br><br>
 
             <label for="select-area">Área:</label><br>
-            <select id="select-area" name="area" required title="Seleccione el área">
+            <select id="select-area" name="area" required>
                 <option value="" disabled>-- Seleccione --</option>
                 <option value="Urgencias">Urgencias</option>
                 <option value="Pediatría">Pediatría</option>
                 <option value="Ginecología">Ginecología</option>
                 <option value="Cardiología">Cardiología</option>
-                <option value="Medicina General" selected>Medicina General</option>
+                <option value="Medicina General">Medicina General</option>
                 <option value="Dermatología">Dermatología</option>
                 <option value="Odontología">Odontología</option>
                 <option value="Laboratorio">Laboratorio</option>
             </select><br><br>
 
             <label for="select-piso">Piso:</label><br>
-            <select id="select-piso" name="piso" required title="Seleccione el piso">
+            <select id="select-piso" name="piso" required>
                 <option value="" disabled>-- Seleccione --</option>
-                <option value="1" selected>1</option>
+                <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
             </select><br><br>
 
             <label for="descripcion">Descripción:</label><br>
+            <textarea id="descripcion" name="descripcion" rows="4" cols="50" maxlength="500" required
+                oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '')"></textarea><br><br>
 
-            <textarea id="descripcion" name="descripcion" rows="4" cols="50" maxlength="500" title="Ingrese solo letras"
-                required
-                oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '')">Consultorio especializado en atención de medicina general</textarea><br><br>
-
-
-            <label id="mensajeEdit" style="display: block; margin-bottom: 10px; color: red;"></label>
+            <label id="mensajeEdit" style="display: block; margin-bottom: 10px;"></label>
 
             <button type="button" onclick="window.location.href='adminConsultorioList.html'">Cancelar</button>
-            <button type="reset">Limpiar</button>
-            <button type="submit" id="btnActualizar">Guardar</button>
-
+            <button type="submit" id="btnActualizar">Actualizar Cambios</button>
         </form>
     </main>
     <script src="../js/global.js"></script>
     <script src="../js/Check.js"></script>
+    <script src="../js/adminConsultorioEdit.js"></script>
     <footer>
         <div class="footer-container">
             <div class="footer-section contact" id="footer-contacto">

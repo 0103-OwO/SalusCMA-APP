@@ -24,17 +24,19 @@ document.addEventListener('DOMContentLoaded', async () => {
             const article = document.createElement('article');
             article.className = 'articleTrabajador';
 
+            const nombreCompleto = `${trabajador.nombre} ${trabajador.apellido_paterno}`;
+
             article.innerHTML = `
-                <h2>${trabajador.especialidad || 'Especialidad'}</h2><br>
+                <h2>${trabajador.especialidad || 'Médico General'}</h2><br>
                 <div class="contenido-superior">
                     <img src="${trabajador.foto || '../img/perfil-default.png'}" alt="${trabajador.nombre}">
                     <ul>
-                        <li><strong>${trabajador.nombre}</strong></li>
+                        <li><strong>${nombreCompleto}</strong></li>
                         <li>Correo: ${trabajador.correo}</li>
                     </ul>
                 </div>
                 <button class="btnVerMas" 
-                        onclick="window.location.href='detalleTrabajador.html?id=${trabajador.id_personal}'">
+                        onclick="window.location.href='detalleTrabajador.html?id=${trabajador.id_trabajador}'">
                     Ver más
                 </button>
             `;
@@ -42,12 +44,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
 
         if (msgSinPersonal) msgSinPersonal.style.display = 'none';
-        if (botonesPaginacion) botonesPaginacion.style.display = 'flex';
+        if (botonesPaginacion) {
+            botonesPaginacion.style.display = 'flex';
+        }
 
     } catch (error) {
         console.error("Error al cargar personal:", error);
         if (msgSinPersonal) {
-            msgSinPersonal.innerText = "Error al conectar con el servidor.";
+            msgSinPersonal.innerText = "No se pudo cargar el personal en este momento.";
             msgSinPersonal.style.display = 'block';
         }
     }

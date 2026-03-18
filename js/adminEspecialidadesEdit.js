@@ -5,32 +5,45 @@ document.addEventListener('DOMContentLoaded', async () => {
     const mensaje = document.getElementById('mensajeEdit');
     const token = localStorage.getItem('token');
 
-    //Obtiene id
+    //Proceso para obtener el ID de la especialidad desde la URL para cargar los datos correspondientes
     const urlParams = new URLSearchParams(window.location.search);
-    const idEspecialidad = urlParams.get('id');
+    const idEspecialidad = urlParams.get('id_especialidad'); 
 
     if (!idEspecialidad) {
+        console.warn("No se encontró ID en la URL, regresando a la lista...");
         window.location.href = 'adminEspecialidadList.html';
         return;
     }
 
-    //Carga los datos
+    //Obitenemos los datos de la especialidad para llenar el formulario
     try {
         const res = await fetch(`${API_BASE}/especialidades/${idEspecialidad}`);
+        
         if (res.ok) {
             const data = await res.json();
-            inputNombre.value = data.especialidad;
-            inputId.value = data.id_especialidad;
+            
+            // Llenamos los campos del formulario
+            if (inputNombre) inputNombre.value = data.especialidad;
+            if (inputId) inputId.value = data.id_especialidad;
+        } else {
+            throw new Error("No se pudo obtener la información de la especialidad");
         }
     } catch (error) {
         console.error("Error al cargar:", error);
+        alert("Error al cargar los datos. Regresando...");
+        window.location.href = 'adminEspecialidadList.html';
+        return;
     }
 
-    //Proceso de actualizar 
+    //Proceso para actualizar la especialidad
     if (form) {
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             
+            const btn = document.getElementById('btnActualizar');
+            btn.disabled = true;
+            btn.innerText = "Actualizando...";
+
             try {
                 const response = await fetch(`${API_BASE}/especialidades/${idEspecialidad}`, {
                     method: 'PUT',
@@ -38,23 +51,27 @@ document.addEventListener('DOMContentLoaded', async () => {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`
                     },
-                    body: JSON.stringify({ especialidad: inputNombre.value.trim() })
+                    body: JSON.stringify({ 
+                        especialidad: inputNombre.value.trim() 
+                    })
                 });
 
-                const data = await response.json();
+                const resData = await response.json();
 
                 if (response.ok) {
                     mensaje.style.color = "green";
-                    mensaje.innerText = "Actualizado correctamente";
+                    mensaje.innerText = "¡Actualizado con éxito!";
                     setTimeout(() => {
                         window.location.href = 'adminEspecialidadList.html';
                     }, 1500);
                 } else {
-                    throw new Error(data.error || "Error al actualizar");
+                    throw new Error(resData.error || "Error al actualizar");
                 }
             } catch (error) {
                 mensaje.style.color = "red";
-                mensaje.innerText = error.message;
+                mensaje.innerText = "Error: " + error.message;
+                btn.disabled = false;
+                btn.innerText = "Guardar";
             }
         });
     }
