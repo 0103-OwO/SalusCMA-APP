@@ -110,49 +110,17 @@
                 </tr>
             </thead>
             <tbody id="tbody-especialidades">
-
-                <tr id="fila-1" class="filaEspecialidad">
-                    <td>Cardiología</td>
-                    <td>
-                        <button type="button"
-                            onclick="window.location.href='adminEspecialidadEdit.html?id_especialidad=1'">Editar</button>
-                        <button type="button" class="borrar-btn" data-id="1">Eliminar</button>
-                    </td>
-                </tr>
-                <tr id="fila-2" class="filaEspecialidad">
-                    <td>Medicina General</td>
-                    <td>
-                        <button type="button"
-                            onclick="window.location.href='adminEspecialidadEdit.html?id_especialidad=2'">Editar</button>
-                        <button type="button" class="borrar-btn" data-id="2">Eliminar</button>
-                    </td>
-                </tr>
-                <tr id="fila-3" class="filaEspecialidad">
-                    <td>Pediatría</td>
-                    <td>
-                        <button type="button"
-                            onclick="window.location.href='adminEspecialidadEdit.html?id_especialidad=3'">Editar</button>
-                        <button type="button" class="borrar-btn" data-id="3">Eliminar</button>
-                    </td>
-                </tr>
-
-                <tr id="fila-4" class="filaEspecialidad">
-                    <td>Nutrición</td>
-                    <td>
-                        <button type="button"
-                            onclick="window.location.href='adminEspecialidadEdit.html?id_especialidad=4'">Editar</button>
-                        <button type="button" class="borrar-btn" data-id="4">Eliminar</button>
-                    </td>
+                <tr>
+                    <td colspan="2" style="text-align: center;">Cargando especialidades...</td>
                 </tr>
             </tbody>
         </table>
 
         <div class="contenedor-botones">
-            <button id="prevEspecialidad">&laquo; Anterior</button>
+            <button id="prevEspecialidad" disabled>&laquo; Anterior</button>
             <span id="pagina-especialidad">Página 1 de 1</span>
-            <button id="nextEspecialidad">Siguiente &raquo;</button>
+            <button id="nextEspecialidad" disabled>Siguiente &raquo;</button>
         </div>
-
     </main>
 
     <script src="../js/global.js"></script>
