@@ -14,6 +14,7 @@
         rel="stylesheet">
 
     <title>Iniciar Sesión | Salus CMA</title>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 
 <body>
@@ -55,7 +56,15 @@
 
             <label id="mensajeLogin" style="color:red; display:block; margin-bottom:10px;"></label>
 
-            <button type="submit">Entrar</button>
+            <div
+                class="cf-turnstile"
+                data-sitekey="0x4AAAAAACtfQ8igZsBm66Lp"
+                data-callback="turnstileCallback"
+                data-theme="light"
+                data-size="compact"
+            ></div>
+
+            <button type="submit" id="btn-login" disabled>Entrar</button>
 
             <p>¿Aún no estás registrado?</p>
             <a href="registro.html">Registrarse</a>

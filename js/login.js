@@ -1,7 +1,13 @@
+function turnstileCallback() {
+  const btn = document.getElementById('btn-login');
+  if (btn) btn.disabled = false;
+}
+
+
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('formLogin');
     const mensaje = document.getElementById('mensajeLogin');
-    const btn = loginForm.querySelector('button[type="submit"]');
+    const btn = document.getElementById('btn-login');
 
     if (loginForm) {
         loginForm.addEventListener('submit', async (e) => {
@@ -9,10 +15,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const identificador = document.getElementById('input-usuario').value;
             const contrasena = document.getElementById('input-contrasena').value;
+            const token = document.querySelector('[name="cf-turnstile-response"]')?.value;
 
+            if (!token){
+                mensaje.style.color = 'red';
+                mensaje.innerText = 'Por favor completa la verificación de seguridad.';
+                return;
+            }
             try {
                 btn.disabled = true;
-                const textoOriginal = btn.innerText;
                 btn.innerText = "Verificando...";
                 mensaje.style.color = "blue";
                 mensaje.innerText = "Iniciando sesión...";
@@ -22,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ identificador, contrasena })
+                    body: JSON.stringify({ identificador, contrasena, 'cf-turnstile-response': token})
                 });
 
                 const data = await response.json();
@@ -51,7 +62,9 @@ document.addEventListener('DOMContentLoaded', () => {
             } catch (error) {
                 mensaje.style.color = "red";
                 mensaje.innerText = error.message;
-                btn.disabled = false;
+
+                if(typeof turnstile !== 'undefined') turnstile.reset();
+                btn.disabled = true;
                 btn.innerText = "Entrar";
             }
         });
