@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             tr.innerHTML = `
         <td>${c.fecha}</td>
         <td>${c.hora}</td>
-        <td><code class="text-dark">${c.curp_paciente}</code></td>
+        <td>${c.curp_paciente}</td>
         <td>${c.nombre_medico}</td>
         <td>${c.nombre_consultorio || 'No asignado'}</td>
         <td>
