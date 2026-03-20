@@ -20,11 +20,11 @@ document.addEventListener('DOMContentLoaded', async () => {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             const roles = await resRoles.json();
-            
+
             selectRol.innerHTML = '<option value="" disabled>-- Seleccione Rol --</option>';
             // Filtramos del 7 al 9 igual que en el registro
             const rolesFiltrados = roles.filter(rol => rol.id_rol >= 7 && rol.id_rol <= 9);
-            
+
             rolesFiltrados.forEach(rol => {
                 const option = document.createElement('option');
                 option.value = rol.id_rol;
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             const trabajadores = await resTrab.json();
-            
+
             selectTrabajador.innerHTML = '<option value="" disabled>-- Seleccione Trabajador --</option>';
             trabajadores.forEach(t => {
                 const option = document.createElement('option');
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const data = await resUser.json();
                 document.getElementById('input-id-usuario').value = data.id_usuario;
                 document.getElementById('usuario').value = data.usuario;
-                
+
                 // IMPORTANTE: Asignamos los valores después de que los select se hayan llenado
                 selectRol.value = data.id_rol;
                 selectTrabajador.value = data.id_trabajador;
