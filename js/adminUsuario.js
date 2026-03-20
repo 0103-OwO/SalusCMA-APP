@@ -1,10 +1,27 @@
-document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('formUsuario');
     const mensaje = document.getElementById('mensajeUsuario');
+    const selectRol = document.getElementById('select-rol');
     const selectTrabajador = document.getElementById('select-trabajador');
     const token = localStorage.getItem('token');
 
-    // 1. Cargar la lista de trabajadores para el select
+    const cargarRoles = async () => {
+        try {
+            const res = await fetch(`${API_BASE}/roles`);
+            const roles = await res.json();
+            
+            selectRol.innerHTML = '<option value="" disabled selected>-- Seleccione un rol --</option>';
+            roles.forEach(rol => {
+                const option = document.createElement('option');
+                option.value = rol.id_rol;
+                option.textContent = rol.nombre; 
+                selectRol.appendChild(option);
+            });
+        } catch (error) {
+            console.error("Error al cargar roles:", error);
+        }
+    };
+
     const cargarTrabajadores = async () => {
         try {
             const res = await fetch(`${API_BASE}/trabajadores`, {
@@ -12,33 +29,37 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
             const trabajadores = await res.json();
             
-            selectTrabajador.innerHTML = '<option value="" disabled selected>-- Seleccione un trabajador --</option>';
+            selectTrabajador.innerHTML = '<option value="" disabled selected>-- Seleccione trabajador --</option>';
             trabajadores.forEach(t => {
                 const option = document.createElement('option');
                 option.value = t.id_trabajador;
-                option.textContent = t.nombre; 
+                option.textContent = `${t.nombre} ${t.apellido_paterno}`;
                 selectTrabajador.appendChild(option);
             });
         } catch (error) {
             console.error("Error al cargar trabajadores:", error);
-            selectTrabajador.innerHTML = '<option value="" disabled>Error al cargar datos</option>';
+            selectTrabajador.innerHTML = '<option value="" disabled>Error al cargar</option>';
         }
     };
 
-    // Manejar el envío del formulario
+    // Ejecutar cargas
+    cargarRoles();
+    cargarTrabajadores();
+
+    //Lógica para guardar el usuario
     if (form) {
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
             const btn = document.getElementById('btnGuardar');
             btn.disabled = true;
             btn.innerText = "Guardando...";
 
-            const formData = {
-                usuario: document.getElementById('nombre-usuario').value.trim(),
+            // Convertimos los datos del formulario a JSON (no FormData, porque no hay archivos)
+            const data = {
+                usuario: document.getElementById('nombre-usuario').value,
                 contrasena: document.getElementById('password').value,
-                id_rol: document.getElementById('select-rol').value,
-                id_trabajador: document.getElementById('select-trabajador').value
+                id_rol: selectRol.value,
+                id_trabajador: selectTrabajador.value
             };
 
             try {
@@ -48,7 +69,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`
                     },
-                    body: JSON.stringify(formData)
+                    body: JSON.stringify(data)
                 });
 
                 const resData = await response.json();
@@ -57,11 +78,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                     mensaje.style.color = "green";
                     mensaje.innerText = "¡Usuario registrado con éxito!";
                     form.reset();
-                    setTimeout(() => {
-                        window.location.href = 'adminUsuarioList.html';
-                    }, 1500);
+                    setTimeout(() => window.location.href = 'adminUsuarioList.html', 1500);
                 } else {
-                    // Aquí capturamos los errores del TRIGGER (SIGNAL SQLSTATE)
                     throw new Error(resData.error || "Error al registrar");
                 }
             } catch (error) {
@@ -72,6 +90,4 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         });
     }
-
-    cargarTrabajadores();
 });
