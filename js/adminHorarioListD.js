@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const res = await fetch(`${API_BASE}/horarios`, {
                 method: 'GET',
                 headers: {
-                    'Authorization': `Bearer ${token}`, 
+                    'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
                 }
             });
@@ -41,19 +41,18 @@ document.addEventListener('DOMContentLoaded', async () => {
             const tr = document.createElement('tr');
             tr.className = 'filaHorario';
             tr.innerHTML = `
-                <td>${h.hora_entrada}</td>
-                <td>${h.hora_salida}</td>
-                <td>${h.fecha_inicio}</td>
-                <td>${h.fecha_fin}</td>
-                <td>${h.id_trabajador}</td>
-                <td>
-                    <button type="button" 
-                        onclick="window.location.href='adminHorarioEdit.html?id_horario=${h.id_horario}'">
-                        Editar
-                    </button>
-                    <button type="button" class="borrar-btn" data-id="${h.id_horario}">Eliminar</button>
-                </td>
-            `;
+        <td>${h.hora_entrada}</td>
+        <td>${h.hora_salida}</td>
+        <td>${h.fecha_inicio}</td>
+        <td>${h.fecha_fin}</td>
+        <td>${h.nombre_trabajador}</td> <td>
+            <button type="button" 
+                onclick="window.location.href='adminHorarioEdit.html?id_horario=${h.id_horario}'">
+                Editar
+            </button>
+            <button type="button" class="borrar-btn" data-id="${h.id_horario}">Eliminar</button>
+        </td>
+    `;
             tbody.appendChild(tr);
         });
 

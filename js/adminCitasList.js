@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const res = await fetch(`${API_BASE}/citas`, {
                 method: 'GET',
                 headers: {
-                    'Authorization': `Bearer ${token}`, 
+                    'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
                 }
             });
@@ -40,19 +40,19 @@ document.addEventListener('DOMContentLoaded', async () => {
             const tr = document.createElement('tr');
             tr.className = 'filaCita';
             tr.innerHTML = `
-                <td>${c.fecha}</td>
-                <td>${c.hora}</td>
-                <td>${c.id_paciente}</td>
-                <td>${c.id_medico}</td>
-                <td>${c.id_consultorio || 'Sin asignar'}</td>
-                <td>
-                    <button type="button" 
-                        onclick="window.location.href='adminCitasEdit.html?id_cita=${c.id_cita}'">
-                        Editar
-                    </button>
-                    <button type="button" class="borrar-btn" data-id="${c.id_cita}">Eliminar</button>
-                </td>
-            `;
+        <td>${c.fecha}</td>
+        <td>${c.hora}</td>
+        <td><code class="text-dark">${c.curp_paciente}</code></td>
+        <td>${c.nombre_medico}</td>
+        <td>${c.nombre_consultorio || 'No asignado'}</td>
+        <td>
+            <button type="button" 
+                onclick="window.location.href='adminCitasEdit.html?id_cita=${c.id_cita}'">
+                Editar
+            </button>
+            <button type="button" class="borrar-btn" data-id="${c.id_cita}">Eliminar</button>
+        </td>
+    `;
             tbody.appendChild(tr);
         });
 
