@@ -51,12 +51,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <td>${h.talla}cm</td>
                 <td>${h.temperatura}°C</td>
                 <td>${h.descripcion}</td>
-                <td>
-                    <button type="button" 
-                        onclick="window.location.href='adminHistorialEdit.html?id_historial=${h.id_historial}'">
-                        Editar
-                    </button>
-                </td>
             `;
             tbody.appendChild(tr);
         });

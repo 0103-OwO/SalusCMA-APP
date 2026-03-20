@@ -45,13 +45,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         <td>${c.curp_paciente}</td>
         <td>${c.nombre_medico}</td>
         <td>${c.nombre_consultorio || 'No asignado'}</td>
-        <td>
-            <button type="button" 
-                onclick="window.location.href='adminCitasEdit.html?id_cita=${c.id_cita}'">
-                Editar
-            </button>
-            <button type="button" class="borrar-btn" data-id="${c.id_cita}">Eliminar</button>
-        </td>
     `;
             tbody.appendChild(tr);
         });
