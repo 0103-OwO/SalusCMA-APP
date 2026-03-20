@@ -7,16 +7,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const cargarRoles = async () => {
         try {
-            const res = await fetch(`${API_BASE}/roles`,{
+            const token = localStorage.getItem('token');
+            console.log("Enviando token:", token);
+            const res = await fetch(`${API_BASE}/roles`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             const roles = await res.json();
-            
+
             selectRol.innerHTML = '<option value="" disabled selected>-- Seleccione un rol --</option>';
             roles.forEach(rol => {
                 const option = document.createElement('option');
                 option.value = rol.id_rol;
-                option.textContent = rol.nombre; 
+                option.textContent = rol.nombre;
                 selectRol.appendChild(option);
             });
         } catch (error) {
@@ -30,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             const trabajadores = await res.json();
-            
+
             selectTrabajador.innerHTML = '<option value="" disabled selected>-- Seleccione trabajador --</option>';
             trabajadores.forEach(t => {
                 const option = document.createElement('option');
