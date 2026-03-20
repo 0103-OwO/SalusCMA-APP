@@ -7,7 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const cargarRoles = async () => {
         try {
-            const res = await fetch(`${API_BASE}/roles`);
+            const res = await fetch(`${API_BASE}/roles`,{
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
             const roles = await res.json();
             
             selectRol.innerHTML = '<option value="" disabled selected>-- Seleccione un rol --</option>';
