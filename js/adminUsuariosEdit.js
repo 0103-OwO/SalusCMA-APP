@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
 
             // 3. Cargar DATOS ACTUALES del usuario para rellenar el formulario
-            const resUser = await fetch(`${API_BASE}/usuario/${idUsuario}`, {
+            const resUser = await fetch(`${API_BASE}/usuarios/${idUsuario}`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
 
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             };
 
             try {
-                const response = await fetch(`${API_BASE}/usuario/${idUsuario}`, {
+                const response = await fetch(`${API_BASE}/usuarios/${idUsuario}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
