@@ -118,59 +118,23 @@
                 </tr>
             </thead>
             <tbody id="tbody-horarios">
-
-                <tr id="fila-1" class="filaHorario">
-                    <td>08:00</td>
-                    <td>14:00</td>
-                    <td>2025-06-01</td>
-                    <td>2025-06-30</td>
-                    <td>Dra. Laura Martínez Pérez</td>
-                    <td>
-                        <button type="button"
-                            onclick="window.location.href='adminHorarioEdit.html?id_horario=1'">Editar</button>
-                        <button type="button" class="borrar-btn" data-id="1">Eliminar</button>
-                    </td>
-                </tr>
-
-                <tr id="fila-2" class="filaHorario">
-                    <td>14:00</td>
-                    <td>20:00</td>
-                    <td>2025-06-01</td>
-                    <td>2025-06-30</td>
-                    <td>Dr. Carlos Ramírez Soto</td>
-                    <td>
-                        <button type="button"
-                            onclick="window.location.href='adminHorarioEdit.html?id_horario=2'">Editar</button>
-                        <button type="button" class="borrar-btn" data-id="2">Eliminar</button>
-                    </td>
-                </tr>
-
-                <tr id="fila-3" class="filaHorario">
-                    <td>09:00</td>
-                    <td>15:00</td>
-                    <td>2025-07-01</td>
-                    <td>2025-07-31</td>
-                    <td>Dra. Sofía Torres Vega</td>
-                    <td>
-                        <button type="button"
-                            onclick="window.location.href='adminHorarioEdit.html?id_horario=3'">Editar</button>
-                        <button type="button" class="borrar-btn" data-id="3">Eliminar</button>
-                    </td>
+                <tr>
+                    <td colspan="6" style="text-align: center;">Cargando horarios...</td>
                 </tr>
             </tbody>
         </table>
 
         <div class="contenedor-botones">
-            <button id="prevHorario">&laquo; Anterior</button>
+            <button id="prevHorario" disabled>&laquo; Anterior</button>
             <span id="pagina-horario">Página 1 de 1</span>
-            <button id="nextHorario">Siguiente &raquo;</button>
+            <button id="nextHorario" disabled>Siguiente &raquo;</button>
         </div>
-
     </main>
 
 
     <script src="../js/global.js"></script>
     <script src="../js/Check.js"></script>
+    <script src="../js/adminHorarioListD.js"></script>
 
     <footer>
         <div class="footer-container">

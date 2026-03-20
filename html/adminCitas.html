@@ -106,43 +106,31 @@
                     <th>CURP del Paciente</th>
                     <th>Médico</th>
                     <th>Consultorio</th>
+                    <th>
+                        <button type="button" onclick="window.location.href='adminCitasRegistro.html'">
+                            Ir a registro
+                        </button>
+                    </th>
                 </tr>
             </thead>
             <tbody id="tbody-citas">
-                <tr id="fila-1" class="filaCita">
-                    <td>2025-06-10</td>
-                    <td>09:00</td>
-                    <td>GONL980310MVEZNNA7</td>
-                    <td>Dra. Laura Martínez Pérez</td>
-                    <td>Consultorio 1 - Medicina General</td>
-                </tr>
-                <tr id="fila-2" class="filaCita">
-                    <td>2025-06-11</td>
-                    <td>10:30</td>
-                    <td>HERP001205HVERRBA8</td>
-                    <td>Dr. Carlos Ramírez Soto</td>
-                    <td>Consultorio 2 - Pediatría</td>
-                </tr>
-                <tr id="fila-3" class="filaCita">
-                    <td>2025-06-12</td>
-                    <td>11:00</td>
-                    <td>SANR950820MVEZNNA5</td>
-                    <td>Dra. Laura Martínez Pérez</td>
-                    <td>Consultorio 3 - Nutrición</td>
+                <tr>
+                    <td colspan="6" style="text-align: center;">Cargando citas...</td>
                 </tr>
             </tbody>
         </table>
 
         <div class="contenedor-botones">
-            <button id="prevCita">&laquo; Anterior</button>
+            <button id="prevCita" disabled>&laquo; Anterior</button>
             <span id="pagina-cita">Página 1 de 1</span>
-            <button id="nextCita">Siguiente &raquo;</button>
+            <button id="nextCita" disabled>Siguiente &raquo;</button>
         </div>
-
     </main>
 
     <script src="../js/global.js"></script>
     <script src="../js/Check.js"></script>
+    <script src="../js/adminCitasList.js"></script>
+
     <footer>
         <div class="footer-container">
             <div class="footer-section contact" id="footer-contacto">
