@@ -14,6 +14,7 @@
         rel="stylesheet">
 
     <title>Iniciar Sesión | Salus CMA</title>
+    <!-- Agrega el script de Cloudflare Turnstile para el captcha en el login -->
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 
@@ -56,6 +57,7 @@
 
             <label id="mensajeLogin" style="color:red; display:block; margin-bottom:10px;"></label>
 
+            <!-- Aquí va el captcha de Cloudflare -->
             <div
                 class="cf-turnstile"
                 data-sitekey="0x4AAAAAACtfQ8igZsBm66Lp"

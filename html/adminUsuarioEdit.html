@@ -97,42 +97,32 @@
         <h2>Modificar Usuario</h2>
 
         <form id="formEditUsuario">
+            <input type="hidden" id="input-id-usuario" name="id_usuario">
 
+            <label for="usuario">Usuario:</label><br>
+            <input type="text" id="usuario" name="usuario" pattern="^[A-Za-z0-9ÁÉÍÓÚáéíóúÑñ._-]{4,30}$" minlength="4"
+                maxlength="30" title="4-30 caracteres, letras, números, . _ -" required><br><br>
 
-            <input type="hidden" id="input-id-usuario" name="id_usuario" value="1">
-
-            <label for="usuario">Usuario:</label>
-            <input type="text" id="usuario" name="usuario" value="admin_salus" pattern="^[A-Za-z0-9_]{3,20}$"
-                title="3-20 caracteres: letras, números y guión bajo" required><br><br>
-
-
-
-
-            <label for="select-rol">Rol:</label>
+            <label for="select-rol">Rol:</label><br>
             <select id="select-rol" name="id_rol" required>
-                <option value="7" selected>Administrador</option>
+                <option value="" disabled>-- Seleccione --</option>
+                <option value="7">Administrador</option>
                 <option value="8">Médico</option>
                 <option value="9">Recepcionista</option>
             </select><br><br>
 
-
-            <label for="select-trabajador">Trabajador:</label>
+            <label for="select-trabajador">Trabajador:</label><br>
             <select id="select-trabajador" name="id_trabajador" required>
-                <option value="1" selected>Dra. Laura Martínez Pérez</option>
-                <option value="2">Dr. Carlos Ramírez Soto</option>
-                <option value="3">Dra. Sofía Torres Vega</option>
+                <option value="" disabled>Cargando trabajadores...</option>
             </select><br><br>
 
-
-            <label id="mensajeEdit" style="color: red; display: block; margin-bottom: 10px;"></label>
+            <label id="mensajeEdit" style="display: block; margin-bottom: 10px;"></label>
 
             <button type="button" onclick="window.location.href='adminUsuarioList.html'">Cancelar</button>
-            <button type="reset">Limpiar</button>
-            <button type="submit" id="btnGuardar">Guardar</button>
-
+            <button type="submit" id="btnActualizar">Actualizar Cambios</button>
         </form>
     </main>
-
+    <script src="../js/adminUsuariosEdit.js"></script>
     <script src="../js/global.js"></script>
     <script src="../js/Check.js"></script>
     <footer>

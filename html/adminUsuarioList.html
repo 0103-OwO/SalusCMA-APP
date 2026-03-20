@@ -103,43 +103,13 @@
                     <th>Rol</th>
                     <th>Trabajador</th>
                     <th>
-                        <button type="button" onclick="window.location.href='adminUsuario.html'">Ir a registro</button>
+                        <button type="button" onclick="window.location.href='adminUsuario.html'">
+                            Nuevo Usuario
+                        </button>
                     </th>
                 </tr>
             </thead>
-            <tbody id="tbody-usuarios">
-
-                <tr id="fila-1" class="filaUsuario">
-                    <td>admin_salus</td>
-                    <td>Administrador</td>
-                    <td>Laura Martínez Pérez</td>
-                    <td>
-                        <button type="button"
-                            onclick="window.location.href='adminUsuarioEdit.html?id_usuario=1'">Editar</button>
-                        <button type="button" class="borrar-btn" data-id="1">Eliminar</button>
-                    </td>
-                </tr>
-                <tr id="fila-2" class="filaUsuario">
-                    <td>medico_carlos</td>
-                    <td>Médico</td>
-                    <td>Carlos Ramírez Soto</td>
-                    <td>
-                        <button type="button"
-                            onclick="window.location.href='adminUsuarioEdit.html?id_usuario=2'">Editar</button>
-                        <button type="button" class="borrar-btn" data-id="2">Eliminar</button>
-                    </td>
-                </tr>
-                <tr id="fila-3" class="filaUsuario">
-                    <td>recep_sofia</td>
-                    <td>Recepcionista</td>
-                    <td>Sofía Torres Vega</td>
-                    <td>
-                        <button type="button"
-                            onclick="window.location.href='adminUsuarioEdit.html?id_usuario=3'">Editar</button>
-                        <button type="button" class="borrar-btn" data-id="3">Eliminar</button>
-                    </td>
-                </tr>
-            </tbody>
+            <tbody id="tbody-usuarios"></tbody>
         </table>
 
         <div class="contenedor-botones">
@@ -147,35 +117,9 @@
             <span id="pagina-usuario">Página 1 de 1</span>
             <button id="nextUsuario">Siguiente &raquo;</button>
         </div>
-
-        <script>
-            const filasUsuario = document.querySelectorAll('.filaUsuario');
-            const filasPorPaginaUsuario = 10;
-            let paginaActualUsuario = 0;
-            const totalPaginasUsuario = Math.ceil(filasUsuario.length / filasPorPaginaUsuario);
-            const spanPagina = document.getElementById('pagina-usuario');
-
-            function mostrarPaginaUsuario(pagina) {
-                filasUsuario.forEach((fila, index) => {
-                    fila.style.display = (index >= pagina * filasPorPaginaUsuario && index < (pagina + 1) * filasPorPaginaUsuario) ? '' : 'none';
-                });
-                spanPagina.textContent = `Página ${pagina + 1} de ${totalPaginasUsuario}`;
-            }
-
-            document.getElementById('prevUsuario').addEventListener('click', () => {
-                paginaActualUsuario = (paginaActualUsuario - 1 + totalPaginasUsuario) % totalPaginasUsuario;
-                mostrarPaginaUsuario(paginaActualUsuario);
-            });
-
-            document.getElementById('nextUsuario').addEventListener('click', () => {
-                paginaActualUsuario = (paginaActualUsuario + 1) % totalPaginasUsuario;
-                mostrarPaginaUsuario(paginaActualUsuario);
-            });
-
-            mostrarPaginaUsuario(paginaActualUsuario);
-        </script>
     </main>
 
+    <script src="../js/adminUsuariosList.js"></script>
     <script src="../js/global.js"></script>
     <script src="../js/Check.js"></script>
     <footer>

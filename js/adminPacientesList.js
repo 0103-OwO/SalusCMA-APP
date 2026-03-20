@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const fecha = p.fecha_nacimiento ? p.fecha_nacimiento.split('T')[0] : 'N/A';
 
             tr.innerHTML = `
-        <td><strong>${p.curp}</strong></td>
+        <td>${p.curp}</td>
         <td>${p.nombre}</td>
         <td>${p.apellido_paterno}</td>
         <td>${p.apellido_materno}</td>
