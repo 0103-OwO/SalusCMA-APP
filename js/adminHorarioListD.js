@@ -8,7 +8,20 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const cargarHorarios = async () => {
         try {
-            const res = await fetch(`${API_BASE}/horarios`);
+            const res = await fetch(`${API_BASE}/horarios`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`, 
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (res.status === 401 || res.status === 403) {
+                alert("Sesión expirada o no autorizada");
+                window.location.href = 'login.html';
+                return;
+            }
+
             todosLosHorarios = await res.json();
             renderizarTabla();
         } catch (error) {

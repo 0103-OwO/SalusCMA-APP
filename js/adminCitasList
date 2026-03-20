@@ -8,7 +8,19 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const cargarCitas = async () => {
         try {
-            const res = await fetch(`${API_BASE}/citas`);
+            const res = await fetch(`${API_BASE}/citas`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`, 
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (res.status === 401) {
+                window.location.href = 'login.html';
+                return;
+            }
+
             todasLasCitas = await res.json();
             renderizarTabla();
         } catch (error) {
