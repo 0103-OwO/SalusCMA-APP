@@ -15,7 +15,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const roles = await res.json();
 
             selectRol.innerHTML = '<option value="" disabled selected>-- Seleccione un rol --</option>';
-            roles.forEach(rol => {
+
+            const rolesFiltrados = roles.filter(rol => rol.id_rol >= 7 && rol.id_rol <= 9);
+
+            rolesFiltrados.forEach(rol => {
                 const option = document.createElement('option');
                 option.value = rol.id_rol;
                 option.textContent = rol.nombre;

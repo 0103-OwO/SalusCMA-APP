@@ -17,7 +17,7 @@ form.addEventListener('submit', async (e) => {
 
   try {
     // Hacemos la petición POST a nuestro endpoint de Express
-    const response = await fetch('http://localhost:3000/api/contacto/enviar', {
+    const response = await fetch(`${API_BASE}/contacto/enviar`, {
       method: 'POST',
 
       // Le decimos al servidor que le mandamos JSON
