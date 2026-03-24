@@ -103,42 +103,51 @@
         <h2>Modificar Horario</h2>
 
         <form id="formEditHorario">
-
-
-            <input type="hidden" id="input-id-horario" name="id_horario" value="1">
-
-            <label for="hentrada">Hora de entrada:</label>
-            <input type="time" id="hentrada" name="hentrada" value="08:00" required><br><br>
-
-            <label for="hsalida">Hora de salida:</label>
-            <input type="time" id="hsalida" name="hsalida" value="14:00" required><br><br>
+            <input type="hidden" id="input-id-horario" name="id_horario">
 
             <label for="finicio">Fecha de inicio:</label>
-            <input type="date" id="finicio" name="finicio" value="2025-06-01" required><br><br>
+            <input type="date" id="finicio" name="fecha_inicio" required><br><br>
 
             <label for="ffin">Fecha de fin:</label>
-            <input type="date" id="ffin" name="ffin" value="2025-06-30" required><br><br>
-
+            <input type="date" id="ffin" name="fecha_fin" required><br><br>
 
             <label for="select-trabajador">Trabajador:</label>
             <select id="select-trabajador" name="id_trabajador" required>
-                <option value="" disabled>Seleccione un trabajador</option>
-                <option value="1" selected>Dra. Laura Martínez Pérez</option>
-                <option value="2">Dr. Carlos Ramírez Soto</option>
-                <option value="3">Dra. Sofía Torres Vega</option>
-            </select><br><br>
+                <option value="" disabled selected>Cargando trabajador...</option>
+            </select><br>
+            <hr><br>
 
+            <h3>Ajustar Horarios Semanales</h3>
+
+            <label><b>Lunes:</b></label>
+            <input type="time" id="lunes_ent" name="lunes_ent"> a
+            <input type="time" id="lunes_sal" name="lunes_sal"><br><br>
+
+            <label><b>Martes:</b></label>
+            <input type="time" id="martes_ent" name="martes_ent"> a
+            <input type="time" id="martes_sal" name="martes_sal"><br><br>
+
+            <label><b>Miércoles:</b></label>
+            <input type="time" id="miercoles_ent" name="miercoles_ent"> a
+            <input type="time" id="miercoles_sal" name="miercoles_sal"><br><br>
+
+            <label><b>Jueves:</b></label>
+            <input type="time" id="jueves_ent" name="jueves_ent"> a
+            <input type="time" id="jueves_sal" name="jueves_sal"><br><br>
+
+            <label><b>Viernes:</b></label>
+            <input type="time" id="viernes_ent" name="viernes_ent"> a
+            <input type="time" id="viernes_sal" name="viernes_sal"><br><br>
 
             <label id="mensajeEdit" style="color: red; display: block; margin-bottom: 10px;"></label>
 
             <button type="button" onclick="window.location.href='adminHorarioList.html'">Cancelar</button>
             <button type="reset">Limpiar</button>
-            <button type="submit" id="btnActualizar">Guardar</button>
-
+            <button type="submit" id="btnActualizar">Guardar Cambios</button>
         </form>
     </main>
 
-
+    <script src="../js/adminHorariosEdit.js"></script>
     <script src="../js/global.js"></script>
     <script src="../js/Check.js"></script>
 
