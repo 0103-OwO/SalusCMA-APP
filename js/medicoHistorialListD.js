@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         try {
-            const response = await fetch(`${API_BASE}/historiales/mis-historiales`, {
+            const response = await fetch(`${API_BASE}/historial/mis-historiales`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,
