@@ -1,7 +1,8 @@
-document.addEventListener('DOMContentLoaded', async () => { 
+document.addEventListener('DOMContentLoaded', async () => {
     const formHorario = document.getElementById('formHorario');
-    const mensajeHorario = document.getElementById('mensajeHorario');
-    const selectMedico = document.getElementById('select-medico'); 
+    const mensaje = document.getElementById('mensajeHorario'); // Usamos el ID de tu HTML
+    const selectMedico = document.getElementById('select-medico');
+    const btnGuardar = document.getElementById('btnGuardar');
     const token = localStorage.getItem('token');
 
     const cargarMedicos = async () => {
@@ -10,53 +11,65 @@ document.addEventListener('DOMContentLoaded', async () => {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
 
-            if (!res.ok) throw new Error("Error al obtener trabajadores");
+            if (!res.ok) throw new Error("No se pudieron cargar los médicos");
 
             const medicos = await res.json();
-
             selectMedico.innerHTML = '<option value="" disabled selected>Seleccione un médico</option>';
 
             medicos.forEach(m => {
                 const opt = document.createElement('option');
-                opt.value = m.id_trabajador; 
+                opt.value = m.id_trabajador;
                 opt.textContent = `${m.nombre} ${m.apellido_paterno} ${m.apellido_materno}`;
                 selectMedico.appendChild(opt);
             });
         } catch (error) {
-            console.error("Error cargando médicos:", error);
-            selectMedico.innerHTML = '<option value="" disabled>Error al cargar médicos</option>';
+            console.error(error);
+            mensaje.style.color = "red";
+            mensaje.innerText = "Error al conectar con la lista de médicos.";
         }
     };
 
     await cargarMedicos();
-    
-    formHorario.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const formData = new FormData(formHorario);
-        const datos = Object.fromEntries(formData.entries());
 
-        try {
-            const response = await fetch(`${API_BASE}/horarios`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
-                body: JSON.stringify(datos)
-            });
+    if (formHorario) {
+        formHorario.addEventListener('submit', async (e) => {
+            e.preventDefault();
 
-            const resultado = await response.json();
+            btnGuardar.disabled = true;
+            mensaje.style.color = "blue";
+            mensaje.innerText = "Procesando horario...";
 
-            if (response.ok) {
-                alert("Horario registrado exitosamente.");
-                window.location.href = 'adminHorarioList.html';
-            } else {
-                mensajeHorario.innerText = resultado.error || "Error al guardar el horario";
+            const formData = new FormData(formHorario);
+            const datos = Object.fromEntries(formData.entries());
+
+            try {
+                const response = await fetch(`${API_BASE}/horarios`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify(datos)
+                });
+
+                const resultado = await response.json();
+
+                if (response.ok) {
+                    mensaje.style.color = "green";
+                    mensaje.innerText = "¡Horario registrado con éxito!";
+
+                    setTimeout(() => {
+                        window.location.href = 'adminHorarioList.html';
+                    }, 1500);
+                } else {
+                    throw new Error(resultado.error || "Error al guardar el horario");
+                }
+
+            } catch (error) {
+                mensaje.style.color = "red";
+                mensaje.innerText = error.message;
+                btnGuardar.disabled = false; 
             }
-
-        } catch (error) {
-            console.error("Error en la petición:", error);
-            mensajeHorario.innerText = "No se pudo conectar con el servidor.";
-        }
-    });
+        });
+    }
 });
