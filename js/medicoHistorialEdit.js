@@ -29,10 +29,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             document.getElementById('input-talla').value = h.talla;
             document.getElementById('input-temperatura').value = h.temperatura;
             document.getElementById('textarea-descripcion').value = h.descripcion;
-
-            const selectCita = document.getElementById('select-cita');
-            selectCita.innerHTML = `<option value="${h.id_paciente}" selected>${h.fecha} ${h.hora} - ${h.curp_paciente}</option>`;
-
         } catch (error) {
             mensaje.style.color = "red";
             mensaje.innerText = "Error al cargar los datos del registro";
