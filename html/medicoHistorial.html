@@ -57,19 +57,14 @@
 
 
     <main>
-        <h2>Registrar historial</h2>
+        <h2>Actualizar Historial Médico</h2>
 
-        <form id="formHistorial">
+        <form id="formActualizarHistorial">
+            <label>Número de cita asociada:</label>
+            <input type="text" id="input-numero-cita" readonly style="background-color: #f0f0f0;"><br><br>
 
-            <label>Cita:</label>
-            <select name="id_cita" id="select-cita" required>
-                <option value="" disabled selected>Seleccione una cita</option>
-
-
-                <option value="1">2025-06-10 09:00 - Laura González Nava</option>
-                <option value="2">2025-06-10 10:30 - Pedro Hernández Reyes</option>
-                <option value="3">2025-06-11 11:00 - Rosa Martínez López</option>
-            </select><br><br>
+            <label>CURP Paciente:</label>
+            <input type="text" id="input-curp" readonly style="background-color: #f0f0f0;"><br><br>
 
             <label>Tensión arterial:</label>
             <input type="text" name="tension_arterial" id="input-tension" pattern="^\d{2,3}\/\d{2,3}$"
@@ -89,17 +84,17 @@
 
             <label>Descripción:</label>
             <textarea name="descripcion" id="textarea-descripcion" rows="3" maxlength="300"
-                title="Describa brevemente la situación del paciente" required></textarea><br><br>
+                title="Describa la situación revisada" required></textarea><br><br>
 
-            <label id="mensajeHistorial" style="color:red; display:block; margin-bottom:10px;"></label>
+            <label id="mensajeActualizar" style="color:red; display:block; margin-bottom:10px;"></label>
 
-            <button type="button" onclick="window.location.href='medicoHistorialList.html'">Cancelar</button>
-            <button type="reset">Limpiar</button>
-            <button type="submit">Guardar</button>
-
+            <div class="contenedor-botones">
+                <button type="button" onclick="window.location.href='medicoHistorialList.html'">Cancelar</button>
+                <button type="submit">Actualizar Cambios</button>
+            </div>
         </form>
     </main>
-
+    <script src="../js/medicoHistorial.js"></script>
     <script src="../js/global.js"></script>
     <script src="../js/Check.js"></script>
     <footer>

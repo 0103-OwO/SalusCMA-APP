@@ -80,42 +80,8 @@
                 </tr>
             </thead>
             <tbody id="tbody-historiales">
-
-                <tr id="fila-1" class="filaHistorial">
-                    <td>1</td>
-                    <td>GONA980310MVZNVR01</td>
-                    <td>Dr. Carlos Ramírez Soto</td>
-                    <td>Consultorio 1</td>
-                    <td>2025-06-10</td>
-                    <td>09:00</td>
-                    <td>120/80</td>
-                    <td>65.5</td>
-                    <td>162</td>
-                    <td>36.8</td>
-                    <td>Paciente con gripe leve, se receta reposo.</td>
-                    <td>
-                        <button type="button"
-                            onclick="window.location.href='medicoHistorialActualizar.html?id_historial=1'">Editar</button>
-                        <button type="button" class="borrar-btn" data-id="1">Eliminar</button>
-                    </td>
-                </tr>
-                <tr id="fila-2" class="filaHistorial">
-                    <td>2</td>
-                    <td>HERY000205HVZRYS02</td>
-                    <td>Dr. Carlos Ramírez Soto</td>
-                    <td>Consultorio 1</td>
-                    <td>2025-06-10</td>
-                    <td>10:30</td>
-                    <td>110/70</td>
-                    <td>80.0</td>
-                    <td>175</td>
-                    <td>37.0</td>
-                    <td>Control rutinario, sin novedades.</td>
-                    <td>
-                        <button type="button"
-                            onclick="window.location.href='medicoHistorialActualizar.html?id_historial=2'">Editar</button>
-                        <button type="button" class="borrar-btn" data-id="2">Eliminar</button>
-                    </td>
+                <tr>
+                    <td colspan="12" style="text-align:center;">Cargando historiales...</td>
                 </tr>
             </tbody>
         </table>
@@ -125,34 +91,8 @@
             <span id="pagina-historial">Página 1 de 1</span>
             <button id="nextHistorial">Siguiente &raquo;</button>
         </div>
-
-        <script>
-            const filasHistorial = document.querySelectorAll('.filaHistorial');
-            const filasPorPaginaHistorial = 10;
-            let paginaActualHistorial = 0;
-            const totalPaginasHistorial = Math.ceil(filasHistorial.length / filasPorPaginaHistorial);
-            const spanPaginaHistorial = document.getElementById('pagina-historial');
-
-            function mostrarPaginaHistorial(pagina) {
-                filasHistorial.forEach((fila, index) => {
-                    fila.style.display = (index >= pagina * filasPorPaginaHistorial && index < (pagina + 1) * filasPorPaginaHistorial) ? '' : 'none';
-                });
-                spanPaginaHistorial.textContent = `Página ${pagina + 1} de ${totalPaginasHistorial}`;
-            }
-
-            document.getElementById('prevHistorial').addEventListener('click', () => {
-                paginaActualHistorial = (paginaActualHistorial - 1 + totalPaginasHistorial) % totalPaginasHistorial;
-                mostrarPaginaHistorial(paginaActualHistorial);
-            });
-
-            document.getElementById('nextHistorial').addEventListener('click', () => {
-                paginaActualHistorial = (paginaActualHistorial + 1) % totalPaginasHistorial;
-                mostrarPaginaHistorial(paginaActualHistorial);
-            });
-
-            mostrarPaginaHistorial(paginaActualHistorial);
-        </script>
     </main>
+    <script src="../js/medicoHistorialListD.js"></script>
     <script src="../js/global.js"></script>
     <script src="../js/Check.js"></script>
     <footer>
