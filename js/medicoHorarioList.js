@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const cargarHorarios = async () => {
         try {
-            const res = await fetch(`${API_BASE}/horarios/mi-horario`, {
+            const res = await fetch(`${API_BASE}/horarios/mis-horarios`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
 
