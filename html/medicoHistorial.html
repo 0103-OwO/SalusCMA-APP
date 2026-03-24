@@ -57,41 +57,38 @@
 
 
     <main>
-        <h2>Actualizar Historial Médico</h2>
+        <h2>Registrar historial</h2>
 
         <form id="formActualizarHistorial">
-            <label>Número de cita asociada:</label>
-            <input type="text" id="input-numero-cita" readonly style="background-color: #f0f0f0;"><br><br>
+            <input type="hidden" name="id_historial" id="input-id-historial">
 
-            <label>CURP Paciente:</label>
-            <input type="text" id="input-curp" readonly style="background-color: #f0f0f0;"><br><br>
+            <label>Cita:</label>
+            <select name="id_cita" id="select-cita" required disabled style="background-color: #f0f0f0;">
+                <option value="" disabled selected>Cargando cita...</option>
+            </select><br><br>
 
             <label>Tensión arterial:</label>
             <input type="text" name="tension_arterial" id="input-tension" pattern="^\d{2,3}\/\d{2,3}$"
                 title="Ejemplo: 120/80" placeholder="120/80" required><br><br>
 
             <label>Peso (kg):</label>
-            <input type="number" name="peso" id="input-peso" step="0.1" min="1" max="500"
-                title="Ingrese un peso válido en kg" required><br><br>
+            <input type="number" name="peso" id="input-peso" step="0.1" min="1" max="500" required><br><br>
 
             <label>Talla (cm):</label>
-            <input type="number" name="talla" id="input-talla" min="30" max="250"
-                title="Ingrese la talla en centímetros" required><br><br>
+            <input type="number" name="talla" id="input-talla" min="30" max="250" required><br><br>
 
             <label>Temperatura (°C):</label>
             <input type="number" name="temperatura" id="input-temperatura" step="0.1" min="30" max="45"
-                title="Ingrese la temperatura corporal" required><br><br>
+                required><br><br>
 
             <label>Descripción:</label>
-            <textarea name="descripcion" id="textarea-descripcion" rows="3" maxlength="300"
-                title="Describa la situación revisada" required></textarea><br><br>
+            <textarea name="descripcion" id="textarea-descripcion" rows="3" maxlength="300" required></textarea><br><br>
 
-            <label id="mensajeActualizar" style="color:red; display:block; margin-bottom:10px;"></label>
+            <label id="mensajeEdit" style="display:block; margin-bottom:10px; font-weight: bold;"></label>
 
-            <div class="contenedor-botones">
-                <button type="button" onclick="window.location.href='medicoHistorialList.html'">Cancelar</button>
-                <button type="submit">Actualizar Cambios</button>
-            </div>
+            <button type="button" onclick="window.location.href='medicoHistorialList.html'">Cancelar</button>
+            <button type="reset">Limpiar</button>
+            <button type="submit" id="btnActualizar">Actualizar</button>
         </form>
     </main>
     <script src="../js/medicoHistorial.js"></script>
