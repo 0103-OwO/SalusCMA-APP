@@ -59,9 +59,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <td>${h.fecha_fin}</td>
                 <td>
                     <button class="btn-edit" onclick="window.location.href='adminHorarioEdit.html?id=${h.id_horario}'">Editar</button>
-                </td>
-                <td>
-                    <button class="btn-delete" onclick="eliminarHorario(${h.id_horario})" style="background-color: #ff4d4d; color: white; border: none; padding: 5px 10px; cursor: pointer;">Borrar</button>
+            
+                    <button class="btn-delete" onclick="eliminarHorario(${h.id_horario})">Borrar</button>
                 </td>
             `;
             tbody.appendChild(tr);
