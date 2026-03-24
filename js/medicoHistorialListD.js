@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!confirm('¿Estás seguro de eliminar este historial?')) return;
 
         try {
-            const response = await fetch(`${API_BASE}/historiales/${id}`, {
+            const response = await fetch(`${API_BASE}/historial/${id}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('token')}`

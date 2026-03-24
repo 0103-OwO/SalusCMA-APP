@@ -62,14 +62,6 @@
         <form id="formActualizarHistorial">
             <input type="hidden" name="id_historial" id="input-id-historial">
 
-            <label>Cita original (Solo lectura):</label>
-            <select id="select-cita" required disabled style="background-color: #f0f0f0; cursor: not-allowed;">
-                <option value="" disabled selected>Cargando datos de la cita...</option>
-            </select>
-            <p style="font-size: 0.85em; color: #666; margin-top: -10px; margin-bottom: 20px;">
-                * Los datos de la cita no se pueden modificar después de generarse el historial.
-            </p>
-
             <label>Tensión arterial:</label>
             <input type="text" name="tension_arterial" id="input-tension" pattern="^\d{2,3}\/\d{2,3}$"
                 title="Formato requerido: 120/80" placeholder="120/80" required><br><br>
