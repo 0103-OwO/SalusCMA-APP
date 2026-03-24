@@ -1,8 +1,8 @@
+//esta parte hace que el boton de login se habilite solo cuando se complete el captcha, y luego hace la logica para iniciar sesion
 function turnstileCallback() {
   const btn = document.getElementById('btn-login');
   if (btn) btn.disabled = false;
 }
-
 
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('formLogin');

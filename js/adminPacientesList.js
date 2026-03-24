@@ -47,6 +47,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         <td>${p.nombre}</td>
         <td>${p.apellido_paterno}</td>
         <td>${p.apellido_materno}</td>
+        <td>${p.sexo}</td>
         <td>${fecha}</td>
         
     `;
