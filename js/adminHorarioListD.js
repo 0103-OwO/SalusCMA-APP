@@ -18,7 +18,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             renderizarTabla();
         } catch (error) {
             console.error(error);
-            if (tbody) tbody.innerHTML = `<tr><td colspan="5">Error al cargar datos</td></tr>`;
+            // CORRECCIÓN: Colspan a 6 para cubrir toda la tabla
+            if (tbody) tbody.innerHTML = `<tr><td colspan="6">Error al cargar datos</td></tr>`;
         }
     };
 
@@ -34,35 +35,49 @@ document.addEventListener('DOMContentLoaded', async () => {
         paginados.forEach(h => {
             const tr = document.createElement('tr');
 
+            // Formateo del resumen semanal
             const resumen = [];
-            if (h.lunes_ent) resumen.push(`Lun: ${h.lunes_ent.slice(0, 5)}-${h.lunes_sal.slice(0, 5)}`);
-            if (h.martes_ent) resumen.push(`Mar: ${h.martes_ent.slice(0, 5)}-${h.martes_sal.slice(0, 5)}`);
-            if (h.miercoles_ent) resumen.push(`Mie: ${h.miercoles_ent.slice(0, 5)}-${h.miercoles_sal.slice(0, 5)}`);
-            if (h.jueves_ent) resumen.push(`Jue: ${h.jueves_ent.slice(0, 5)}-${h.jueves_sal.slice(0, 5)}`);
-            if (h.viernes_ent) resumen.push(`Vie: ${h.viernes_ent.slice(0, 5)}-${h.viernes_sal.slice(0, 5)}`);
+            // Usamos una función auxiliar para no repetir código y manejar nulos
+            const formatDay = (dia, ent, sal) => {
+                return ent ? `${dia}: ${ent.slice(0, 5)}-${sal.slice(0, 5)}` : null;
+            };
+
+            const dias = [
+                formatDay('Lun', h.lunes_ent, h.lunes_sal),
+                formatDay('Mar', h.martes_ent, h.martes_sal),
+                formatDay('Mie', h.miercoles_ent, h.miercoles_sal),
+                formatDay('Jue', h.jueves_ent, h.jueves_sal),
+                formatDay('Vie', h.viernes_ent, h.viernes_sal)
+            ].filter(d => d !== null); // Quitamos los días que el médico no trabaja
 
             tr.innerHTML = `
-                <td>${h.nombre_trabajador}</td>
-                <td style="font-size: 0.85em;">${resumen.join('<br>') || 'Sin horario'}</td>
+                <td>${h.nombre_trabajador || 'Sin nombre'}</td>
+                <td style="font-size: 0.85em; line-height: 1.2;">
+                    ${dias.join('<br>') || '<span style="color:gray">No asignado</span>'}
+                </td>
                 <td>${h.fecha_inicio}</td>
                 <td>${h.fecha_fin}</td>
                 <td>
                     <button class="btn-edit" onclick="window.location.href='adminHorarioEdit.html?id=${h.id_horario}'">Editar</button>
                 </td>
                 <td>
-                    <button class="btn-delete" onclick="eliminarHorario(${h.id_horario})">Borrar</button>
+                    <button class="btn-delete" onclick="eliminarHorario(${h.id_horario})" style="background-color: #ff4d4d; color: white; border: none; padding: 5px 10px; cursor: pointer;">Borrar</button>
                 </td>
             `;
             tbody.appendChild(tr);
         });
 
-        document.getElementById('pagina-horario').innerText = `Página ${paginaActual} de ${totalPaginas}`;
+        // Actualización de paginación
+        const pTexto = document.getElementById('pagina-horario');
+        if (pTexto) pTexto.innerText = `Página ${paginaActual} de ${totalPaginas}`;
+
         document.getElementById('prevHorario').disabled = paginaActual === 1;
         document.getElementById('nextHorario').disabled = paginaActual === totalPaginas;
     };
 
+    // Función de eliminación
     window.eliminarHorario = async (id) => {
-        if (!confirm("¿Estás seguro de eliminar este horario?")) return;
+        if (!confirm("¿Estás seguro de que deseas eliminar este horario?")) return;
 
         try {
             const res = await fetch(`${API_BASE}/horarios/${id}`, {
@@ -72,18 +87,32 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             if (res.ok) {
                 todosLosHorarios = todosLosHorarios.filter(h => h.id_horario !== id);
+                // Si la página se queda vacía al borrar, retrocedemos una
+                if ((paginaActual - 1) * filasPorPagina >= todosLosHorarios.length && paginaActual > 1) {
+                    paginaActual--;
+                }
                 renderizarTabla();
             } else {
-                alert("No se pudo eliminar el horario");
+                alert("Error: No se pudo eliminar el registro.");
             }
         } catch (error) {
-            console.error(error);
+            console.error("Error al borrar:", error);
         }
     };
 
-    document.getElementById('prevHorario').onclick = () => { if (paginaActual > 1) { paginaActual--; renderizarTabla(); } };
+    // Eventos de botones
+    document.getElementById('prevHorario').onclick = () => {
+        if (paginaActual > 1) {
+            paginaActual--;
+            renderizarTabla();
+        }
+    };
+
     document.getElementById('nextHorario').onclick = () => {
-        if (paginaActual < Math.ceil(todosLosHorarios.length / filasPorPagina)) { paginaActual++; renderizarTabla(); }
+        if (paginaActual < Math.ceil(todosLosHorarios.length / filasPorPagina)) {
+            paginaActual++;
+            renderizarTabla();
+        }
     };
 
     cargarHorarios();
