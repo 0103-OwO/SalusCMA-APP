@@ -54,7 +54,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch(`${API_BASE}/pacientes`, {
                 method: 'POST',
                 headers: { 
-                    'Content-Type': 'application/json' 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify(datosPaciente)
             });

@@ -10,7 +10,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const cargarPacientes = async () => {
         try {
-            const res = await fetch(`${API_BASE}/pacientes`);
+            const res = await fetch(`${API_BASE}/pacientes`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            });
             if (!res.ok) throw new Error("Error al obtener datos del servidor");
             todosLosPacientes = await res.json();
             renderizarTabla();

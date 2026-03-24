@@ -14,7 +14,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     try {
-        const response = await fetch(`${API_BASE}/pacientes/${idPaciente}`);
+        const response = await fetch(`${API_BASE}/pacientes/${idPaciente}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
         if (!response.ok) throw new Error("No se pudo obtener el paciente");
         
         const pac = await response.json();
