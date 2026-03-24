@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const tbody = document.getElementById('tbody-citas');
     const spanPagina = document.getElementById('pagina-cita');
-    const mensaje = document.getElementById('mensajeCita');
     const token = localStorage.getItem('token');
 
     let todasLasCitas = [];
@@ -19,8 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
             todasLasCitas = await response.json();
             renderizarTabla(0);
         } catch (error) {
-            mensaje.style.color = "red";
-            mensaje.innerText = error.message;
+            console.error("Error:", error.message);
+            tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; color:red;">Error al cargar los datos.</td></tr>';
         }
     };
 
@@ -28,8 +27,13 @@ document.addEventListener('DOMContentLoaded', () => {
         tbody.innerHTML = '';
         paginaActual = pagina;
 
+        // Si no hay citas, mostramos la fila informativa dentro de la tabla
         if (todasLasCitas.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="7">No hay citas registradas.</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="7" style="text-align: center;">No hay citas registradas.</td></tr>';
+            // Desactivamos botones de paginación si está vacío
+            document.getElementById('prevCita').disabled = true;
+            document.getElementById('nextCita').disabled = true;
+            spanPagina.textContent = `Página 1 de 1`;
             return;
         }
 
@@ -42,8 +46,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const tr = document.createElement('tr');
             
             let colorEstado = "#555";
-            if (c.estado === 'No asistió') colorEstado = "#e74c3c"; // Rojo
-            if (c.estado === 'Pendiente') colorEstado = "#f39c12";  // Naranja
+            if (c.estado === 'No asistió') colorEstado = "#e74c3c"; 
+            if (c.estado === 'Pendiente') colorEstado = "#f39c12";  
 
             tr.innerHTML = `
                 <td>${c.fecha}</td>
@@ -61,6 +65,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         spanPagina.textContent = `Página ${pagina + 1} de ${totalPaginas}`;
+        
+        // Control de botones de paginación
+        document.getElementById('prevCita').disabled = (paginaActual === 0);
+        document.getElementById('nextCita').disabled = (paginaActual >= totalPaginas - 1);
+        
         vincularBotonesEliminar();
     };
 
@@ -68,6 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.btn-borrar').forEach(btn => {
             btn.onclick = async () => {
                 const id = btn.getAttribute('data-id');
+                // Usamos confirm() y alert() para ser consistentes con Especialidades
                 if (!confirm("¿Seguro que deseas eliminar esta cita?")) return;
 
                 try {
@@ -77,15 +87,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
 
                     if (response.ok) {
-                        mensaje.style.color = "green";
-                        mensaje.innerText = "Cita eliminada correctamente";
+                        alert("Cita eliminada correctamente");
                         cargarCitas(); 
                     } else {
-                        throw new Error("No se pudo eliminar");
+                        const errorData = await response.json();
+                        alert("Error: " + (errorData.error || "No se pudo eliminar"));
                     }
                 } catch (error) {
-                    mensaje.style.color = "red";
-                    mensaje.innerText = error.message;
+                    alert("Ocurrió un error al intentar eliminar.");
                 }
             };
         });
