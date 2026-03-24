@@ -62,29 +62,28 @@
 
 
     <main>
-        <h2>Consulta Global de Horarios</h2>
+        <h2>Gestión de Horarios</h2>
 
         <table id="tablaHorarios">
             <thead>
                 <tr>
                     <th>Trabajador</th>
-                    <th>Hora Entrada</th>
-                    <th>Hora Salida</th>
+                    <th>Horario Semanal</th>
                     <th>Fecha Inicio</th>
                     <th>Fecha Fin</th>
-                    <th>Estado</th>
                 </tr>
             </thead>
             <tbody id="tbody-horarios">
+                <tr>
+                    <td colspan="6" style="text-align: center;">Cargando horarios...</td>
+                </tr>
             </tbody>
         </table>
 
-        <div id="mensajeHorario" style="text-align:center; margin-top:10px; font-weight:bold;"></div>
-
         <div class="contenedor-botones">
-            <button id="prevHorario">&laquo; Anterior</button>
-            <span id="paginaHorario">Página 1 de 1</span>
-            <button id="nextHorario">Siguiente &raquo;</button>
+            <button id="prevHorario" disabled>&laquo; Anterior</button>
+            <span id="pagina-horario">Página 1 de 1</span>
+            <button id="nextHorario" disabled>Siguiente &raquo;</button>
         </div>
     </main>
 
