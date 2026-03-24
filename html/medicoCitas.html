@@ -70,65 +70,20 @@
                 </tr>
             </thead>
             <tbody id="tbody-citas">
-
-                <tr id="fila-1" class="filaCita">
-                    <td>2025-06-10</td>
-                    <td>09:00</td>
-                    <td>GONA980310MVZNVR01</td>
-                    <td>Dr. Carlos Ramírez Soto</td>
-                    <td>Consultorio 1</td>
-                </tr>
-                <tr id="fila-2" class="filaCita">
-                    <td>2025-06-10</td>
-                    <td>10:30</td>
-                    <td>HERY000205HVZRYS02</td>
-                    <td>Dr. Carlos Ramírez Soto</td>
-                    <td>Consultorio 1</td>
-                </tr>
-                <tr id="fila-3" class="filaCita">
-                    <td>2025-06-11</td>
-                    <td>11:00</td>
-                    <td>MALR750820MVZRPS03</td>
-                    <td>Dr. Carlos Ramírez Soto</td>
-                    <td>Consultorio 2</td>
+                <tr>
+                    <td colspan="5" style="text-align: center;">Cargando citas...</td>
                 </tr>
             </tbody>
         </table>
 
         <div class="contenedor-botones">
-            <button id="prevCita">&laquo; Anterior</button>
+            <button id="prevCita" disabled>&laquo; Anterior</button>
             <span id="pagina-cita">Página 1 de 1</span>
-            <button id="nextCita">Siguiente &raquo;</button>
+            <button id="nextCita" disabled>Siguiente &raquo;</button>
         </div>
-
-        <script>
-            const filasCita = document.querySelectorAll('.filaCita');
-            const filasPorPaginaCita = 10;
-            let paginaActualCita = 0;
-            const totalPaginasCita = Math.ceil(filasCita.length / filasPorPaginaCita);
-            const spanPaginaCita = document.getElementById('pagina-cita');
-
-            function mostrarPaginaCita(pagina) {
-                filasCita.forEach((fila, index) => {
-                    fila.style.display = (index >= pagina * filasPorPaginaCita && index < (pagina + 1) * filasPorPaginaCita) ? '' : 'none';
-                });
-                spanPaginaCita.textContent = `Página ${pagina + 1} de ${totalPaginasCita}`;
-            }
-
-            document.getElementById('prevCita').addEventListener('click', () => {
-                paginaActualCita = (paginaActualCita - 1 + totalPaginasCita) % totalPaginasCita;
-                mostrarPaginaCita(paginaActualCita);
-            });
-
-            document.getElementById('nextCita').addEventListener('click', () => {
-                paginaActualCita = (paginaActualCita + 1) % totalPaginasCita;
-                mostrarPaginaCita(paginaActualCita);
-            });
-
-            mostrarPaginaCita(paginaActualCita);
-        </script>
     </main>
 
+    <script src="../js/medicoCitasList.js"></script>
     <script src="../js/global.js"></script>
     <script src="../js/Check.js"></script>
     <footer>
