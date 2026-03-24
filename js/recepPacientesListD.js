@@ -52,9 +52,16 @@ document.addEventListener('DOMContentLoaded', async () => {
                     ${pac.sexo}
                 </td>
                 <td>${fecha}</td>
-                <td>${pac.correo || 'N/A'}</td>
-                <td>${pac.usuario || 'N/A'}</td>
-                <td>${pac.sexo}</td>
+                <td>
+                    <button class="editar-btn" 
+                        onclick="window.location.href='recepcionistaPacienteEdit.html?id_pacientes=${pac.id_pacientes}'">
+                        Editar
+                    </button>
+
+                    <button class="borrar-btn" data-id="${pac.id_pacientes}">
+                        Eliminar
+                    </button>
+                </td>
             `;
             tbody.appendChild(tr);
         });
