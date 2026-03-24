@@ -57,14 +57,12 @@
 
 
     <main>
-        <h2>Registrar historial</h2>
+        <h2>Registrar historial clínico</h2>
 
-        <form id="formActualizarHistorial">
-            <input type="hidden" name="id_historial" id="input-id-historial">
-
-            <label>Cita:</label>
-            <select name="id_cita" id="select-cita" required disabled style="background-color: #f0f0f0;">
-                <option value="" disabled selected>Cargando cita...</option>
+        <form id="formHistorial">
+            <label>Seleccionar Cita:</label>
+            <select name="id_cita" id="select-cita" required>
+                <option value="" disabled selected>Cargando citas pendientes...</option>
             </select><br><br>
 
             <label>Tensión arterial:</label>
@@ -82,13 +80,14 @@
                 required><br><br>
 
             <label>Descripción:</label>
-            <textarea name="descripcion" id="textarea-descripcion" rows="3" maxlength="300" required></textarea><br><br>
+            <textarea name="descripcion" id="textarea-descripcion" rows="3" maxlength="300"
+                placeholder="Diagnóstico y observaciones..." required></textarea><br><br>
 
-            <label id="mensajeEdit" style="display:block; margin-bottom:10px; font-weight: bold;"></label>
+            <label id="mensajeHistorial" style="display:block; margin-bottom:10px; font-weight: bold;"></label>
 
             <button type="button" onclick="window.location.href='medicoHistorialList.html'">Cancelar</button>
             <button type="reset">Limpiar</button>
-            <button type="submit" id="btnActualizar">Actualizar</button>
+            <button type="submit" id="btnGuardar">Guardar Registro</button>
         </form>
     </main>
     <script src="../js/medicoHistorial.js"></script>

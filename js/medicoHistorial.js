@@ -2,17 +2,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('formHistorial');
     const mensaje = document.getElementById('mensajeHistorial');
     const selectCita = document.getElementById('select-cita');
+    const btnGuardar = document.getElementById('btnGuardar');
     const token = localStorage.getItem('token');
-    const btnGuardar = form.querySelector('button[type="submit"]');
 
     const cargarCitasPendientes = async () => {
         try {
             const response = await fetch(`${API_BASE}/citas/mis-citas`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
+
             const citas = await response.json();
 
             selectCita.innerHTML = '<option value="" disabled selected>Seleccione una cita</option>';
+
+            if (citas.length === 0) {
+                mensaje.style.color = "orange";
+                mensaje.innerText = "No tienes citas pendientes hoy.";
+                return;
+            }
+
             citas.forEach(cita => {
                 const option = document.createElement('option');
                 option.value = cita.id_cita;
@@ -21,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         } catch (error) {
             mensaje.style.color = "red";
-            mensaje.innerText = "Error al cargar citas pendientes";
+            mensaje.innerText = "Error al cargar citas del servidor";
         }
     };
 
@@ -45,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
             };
 
             try {
-                const response = await fetch(`${API_BASE}/historiales/registrar`, {
+                const response = await fetch(`${API_BASE}/historial/registrar`, {
                     method: 'POST',
                     headers: {
                         'Authorization': `Bearer ${token}`,
@@ -58,19 +66,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (response.ok) {
                     mensaje.style.color = "green";
-                    mensaje.innerText = "¡Historial registrado y cita finalizada!";
+                    mensaje.innerText = "¡Historial registrado con éxito!";
                     form.reset();
                     setTimeout(() => {
                         window.location.href = 'medicoHistorialList.html';
                     }, 1500);
                 } else {
-                    throw new Error(resData.error || "Error al registrar");
+                    throw new Error(resData.error || "Error al registrar historial");
                 }
             } catch (error) {
                 mensaje.style.color = "red";
                 mensaje.innerText = error.message;
                 btnGuardar.disabled = false;
-                btnGuardar.innerText = "Guardar";
+                btnGuardar.innerText = "Guardar Registro";
             }
         });
     }

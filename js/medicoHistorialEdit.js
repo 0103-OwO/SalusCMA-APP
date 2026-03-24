@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const h = await response.json();
 
             document.getElementById('input-id-historial').value = h.id_historial;
+
             document.getElementById('input-tension').value = h.tension_arterial;
             document.getElementById('input-peso').value = h.peso;
             document.getElementById('input-talla').value = h.talla;
@@ -30,7 +31,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             document.getElementById('textarea-descripcion').value = h.descripcion;
 
             const selectCita = document.getElementById('select-cita');
-            selectCita.innerHTML = `<option value="${h.numero_cita}" selected>${h.fecha} ${h.hora} - ${h.curp_paciente}</option>`;
+            selectCita.innerHTML = `<option value="${h.id_paciente}" selected>${h.fecha} ${h.hora} - ${h.curp_paciente}</option>`;
 
         } catch (error) {
             mensaje.style.color = "red";
@@ -57,7 +58,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             };
 
             try {
-                const response = await fetch(`${API_BASE}/historiales/${idHistorial}`, {
+                const response = await fetch(`${API_BASE}/historial/${idHistorial}`, {
                     method: 'PUT',
                     headers: {
                         'Authorization': `Bearer ${token}`,

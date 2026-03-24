@@ -57,19 +57,22 @@
 
 
     <main>
-        <h2>Actualizar historial</h2>
+        <h2>Actualizar historial clínico</h2>
 
         <form id="formActualizarHistorial">
             <input type="hidden" name="id_historial" id="input-id-historial">
 
-            <label>Cita:</label>
-            <select name="id_cita" id="select-cita" required disabled style="background-color: #f0f0f0;">
-                <option value="" disabled selected>Cargando cita...</option>
-            </select><br><br>
+            <label>Cita original (Solo lectura):</label>
+            <select id="select-cita" required disabled style="background-color: #f0f0f0; cursor: not-allowed;">
+                <option value="" disabled selected>Cargando datos de la cita...</option>
+            </select>
+            <p style="font-size: 0.85em; color: #666; margin-top: -10px; margin-bottom: 20px;">
+                * Los datos de la cita no se pueden modificar después de generarse el historial.
+            </p>
 
             <label>Tensión arterial:</label>
             <input type="text" name="tension_arterial" id="input-tension" pattern="^\d{2,3}\/\d{2,3}$"
-                title="Ejemplo: 120/80" placeholder="120/80" required><br><br>
+                title="Formato requerido: 120/80" placeholder="120/80" required><br><br>
 
             <label>Peso (kg):</label>
             <input type="number" name="peso" id="input-peso" step="0.1" min="1" max="500" required><br><br>
@@ -81,14 +84,18 @@
             <input type="number" name="temperatura" id="input-temperatura" step="0.1" min="30" max="45"
                 required><br><br>
 
-            <label>Descripción:</label>
-            <textarea name="descripcion" id="textarea-descripcion" rows="3" maxlength="300" required></textarea><br><br>
+            <label>Descripción / Diagnóstico:</label>
+            <textarea name="descripcion" id="textarea-descripcion" rows="4" maxlength="300"
+                placeholder="Actualice las observaciones médicas..." required></textarea><br><br>
 
-            <label id="mensajeEdit" style="display:block; margin-bottom:10px; font-weight: bold;"></label>
+            <label id="mensajeEdit"
+                style="display:block; margin-bottom:15px; font-weight: bold; min-height: 1.2em;"></label>
 
-            <button type="button" onclick="window.location.href='medicoHistorialList.html'">Cancelar</button>
-            <button type="reset">Limpiar</button>
-            <button type="submit" id="btnActualizar">Actualizar</button>
+            <div class="botones-container">
+                <button type="button" onclick="window.location.href='medicoHistorialList.html'">Cancelar</button>
+                <button type="reset">Restablecer valores</button>
+                <button type="submit" id="btnActualizar">Actualizar Cambios</button>
+            </div>
         </form>
     </main>
 
