@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             renderizarTabla();
         } catch (error) {
             console.error("Error al obtener pacientes:", error);
-            if (tbody) tbody.innerHTML = `<tr><td colspan="4">Error al cargar datos</td></tr>`;
+            if (tbody) tbody.innerHTML = `<tr><td colspan="6">Error al cargar datos</td></tr>`;
         }
     };
 
@@ -43,12 +43,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             const fecha = p.fecha_nacimiento ? p.fecha_nacimiento.split('T')[0] : 'N/A';
 
             tr.innerHTML = `
-        <td>${p.curp}</td>
-        <td>${p.nombre}</td>
-        <td>${p.apellido_paterno}</td>
-        <td>${p.apellido_materno}</td>
-        <td>${p.sexo}</td>
-        <td>${fecha}</td>
+    <td>${p.curp}</td>
+    <td>${p.nombre}</td>
+    <td>${p.apellido_paterno}</td>
+    <td>${p.apellido_materno}</td>
+    <td>${p.sexo || 'N/A'}</td>  
+    <td>${fecha}</td>
         
     `;
             tbody.appendChild(tr);
