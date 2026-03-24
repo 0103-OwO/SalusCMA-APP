@@ -57,63 +57,23 @@
 
 
     <main>
-        <h2>Listado de Horarios</h2>
+        <h2>Mi Horario Laboral</h2>
 
         <table id="tablaHorarios">
             <thead>
                 <tr>
-                    <th>Hora Entrada</th>
-                    <th>Hora Salida</th>
-                    <th>Fecha Inicio</th>
-                    <th>Fecha Fin</th>
-                    <th>Trabajador</th>
+                    <th>Día</th>
+                    <th>Horario (Entrada - Salida)</th>
+                    <th>Vigencia Inicio</th>
+                    <th>Vigencia Fin</th>
                 </tr>
             </thead>
             <tbody id="tbody-horarios">
-
-                <tr id="fila-1" class="filaHorario">
-                    <td>08:00</td>
-                    <td>14:00</td>
-                    <td>2025-06-01</td>
-                    <td>2025-06-30</td>
-                    <td>Carlos Ramírez Soto</td>
-                </tr>
             </tbody>
         </table>
-
-        <div class="contenedor-botones">
-            <button id="prevHorario">&laquo; Anterior</button>
-            <span id="paginaHorario">Página 1 de 1</span>
-            <button id="nextHorario">Siguiente &raquo;</button>
-        </div>
-
-        <script>
-            const filasHorario = document.querySelectorAll('.filaHorario');
-            const filasPorPaginaHorario = 10;
-            let paginaActualHorario = 0;
-            const totalPaginasHorario = Math.ceil(filasHorario.length / filasPorPaginaHorario);
-            const spanPaginaHorario = document.getElementById('paginaHorario');
-
-            function mostrarPaginaHorario(pagina) {
-                filasHorario.forEach((fila, index) => {
-                    fila.style.display = (index >= pagina * filasPorPaginaHorario && index < (pagina + 1) * filasPorPaginaHorario) ? '' : 'none';
-                });
-                spanPaginaHorario.textContent = `Página ${pagina + 1} de ${totalPaginasHorario}`;
-            }
-
-            document.getElementById('prevHorario').addEventListener('click', () => {
-                paginaActualHorario = (paginaActualHorario - 1 + totalPaginasHorario) % totalPaginasHorario;
-                mostrarPaginaHorario(paginaActualHorario);
-            });
-
-            document.getElementById('nextHorario').addEventListener('click', () => {
-                paginaActualHorario = (paginaActualHorario + 1) % totalPaginasHorario;
-                mostrarPaginaHorario(paginaActualHorario);
-            });
-
-            mostrarPaginaHorario(paginaActualHorario);
-        </script>
     </main>
+
+    <script src="../js/medicoHorarioList.js"></script>
     <script src="../js/global.js"></script>
     <script src="../js/Check.js"></script>
     <footer>
