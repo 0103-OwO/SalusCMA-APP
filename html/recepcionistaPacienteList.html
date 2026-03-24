@@ -60,7 +60,6 @@
         </div>
     </header>
 
-
     <main>
         <h2>Pacientes</h2>
 
@@ -71,6 +70,7 @@
                     <th>Nombre</th>
                     <th>Apellido Paterno</th>
                     <th>Apellido Materno</th>
+                    <th>Sexo</th>
                     <th>Fecha de Nacimiento</th>
                     <th>Correo</th>
                     <th>Usuario</th>
@@ -82,61 +82,16 @@
                 </tr>
             </thead>
             <tbody id="tbody-pacientes">
-
-                <tr id="fila-1" class="filaPaciente">
-                    <td>GOMC900101HVZRZR01</td>
-                    <td>Carlos</td>
-                    <td>González</td>
-                    <td>Morales</td>
-                    <td>1990-01-01</td>
-                    <td>carlos@email.com</td>
-                    <td>carlosgm</td>
-                    <td>
-                        <button type="button"
-                            onclick="window.location.href='recepcionistaPacienteEdit.html?id_pacientes=1'">
-                            Editar
-                        </button>
-                    </td>
-                </tr>
             </tbody>
         </table>
-
-        <script src="eliminarPacientes.js"></script>
 
         <div class="contenedor-botones">
             <button id="prevPaciente">&laquo; Anterior</button>
             <span id="paginaPaciente">Página 1 de 1</span>
             <button id="nextPaciente">Siguiente &raquo;</button>
         </div>
-
-        <script>
-            const filasPaciente = document.querySelectorAll('.filaPaciente');
-            const filasPorPaginaPaciente = 10;
-            let paginaActualPaciente = 0;
-            const totalPaginasPaciente = Math.ceil(filasPaciente.length / filasPorPaginaPaciente);
-            const spanPaginaPaciente = document.getElementById('paginaPaciente');
-
-            function mostrarPaginaPaciente(pagina) {
-                filasPaciente.forEach((fila, index) => {
-                    fila.style.display = (index >= pagina * filasPorPaginaPaciente && index < (pagina + 1) * filasPorPaginaPaciente) ? '' : 'none';
-                });
-                spanPaginaPaciente.textContent = `Página ${pagina + 1} de ${totalPaginasPaciente}`;
-            }
-
-            document.getElementById('prevPaciente').addEventListener('click', () => {
-                paginaActualPaciente = (paginaActualPaciente - 1 + totalPaginasPaciente) % totalPaginasPaciente;
-                mostrarPaginaPaciente(paginaActualPaciente);
-            });
-
-            document.getElementById('nextPaciente').addEventListener('click', () => {
-                paginaActualPaciente = (paginaActualPaciente + 1) % totalPaginasPaciente;
-                mostrarPaginaPaciente(paginaActualPaciente);
-            });
-
-            mostrarPaginaPaciente(paginaActualPaciente);
-        </script>
     </main>
-
+    <script src="../js/recepPacientesListD.js"></script>
     <script src="../js/global.js"></script>
     <script src="../js/Check.js"></script>
     <footer>

@@ -61,55 +61,50 @@
     </header>
 
 
-    <main>
-        <h2>Modificar Paciente</h2>
-        <form id="formPacienteEdit" method="POST">
+    Perfecto, vamos a separar la lógica. Como solo vas a modificar los datos personales de la tabla pacientes, el código
+    es mucho más directo. He limpiado el HTML (moviendo el script al archivo externo) y he ajustado el JS para que
+    primero "cargue" los datos actuales y luego permita guardarlos.
 
-            <input type="hidden" name="id_pacientes" id="id_pacientes" value="">
+    1. HTML Limpio (recepcionistaPacienteEdit.html)
+    He añadido el campo de Sexo con los checkboxes que usamos anteriormente para mantener la consistencia en tu diseño.
+
+    HTML
+    <main>
+        <h2>Modificar Datos del Paciente</h2>
+        <form id="formPacienteEdit">
+            <input type="hidden" name="id_pacientes" id="id_pacientes">
 
             <label>CURP:</label>
-            <input type="text" name="curp" id="curp" pattern="^[A-Z]{4}\d{6}[HM][A-Z]{5}[A-Z0-9]\d$" maxlength="18"
+            <input type="text" id="curp" name="curp" maxlength="18" pattern="^[A-Z]{4}\d{6}[HM][A-Z]{5}[A-Z0-9]\d$"
                 required><br><br>
 
             <label>Nombre:</label>
-            <input type="text" name="nombre" id="nombre" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,50}$" required><br><br>
+            <input type="text" id="nombre" name="nombre" required><br><br>
 
             <label>Apellido Paterno:</label>
-            <input type="text" name="app" id="app" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,50}$" required><br><br>
+            <input type="text" id="apellido_paterno" name="apellido_paterno" required><br><br>
 
             <label>Apellido Materno:</label>
-            <input type="text" name="apm" id="apm" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,50}$" required><br><br>
+            <input type="text" id="apellido_materno" name="apellido_materno" required><br><br>
+
+            <label>Sexo:</label>
+            <div id="contenedor-sexo">
+                <label><input type="checkbox" id="sexoH" value="H"> H</label>
+                <label style="margin-left: 15px;"><input type="checkbox" id="sexoM" value="M"> M</label>
+            </div><br>
 
             <label>Fecha de Nacimiento:</label>
-            <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" required><br><br>
+            <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required><br><br>
 
-            <label>Correo electrónico:</label>
-            <input type="email" name="correo" id="correo" pattern="^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-z]{2,}$"
-                required><br><br>
+            <p id="mensajePacienteEdit" style="color:red; display:none; font-weight: bold;"></p>
 
-            <label>Usuario:</label>
-            <input type="text" name="usuario" id="usuario" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9\s]{2,50}$" required><br><br>
-
-            <label id="mensajePacienteEdit" style="color:red; display:block; margin-bottom:10px;"></label>
-
-            <button type="button" onclick="window.location.href='recepcionistaPacienteList.html'">Cancelar</button>
-            <button type="reset">Limpiar</button>
-            <button type="submit" name="btnActualizar">Guardar</button>
-
+            <div class="botones">
+                <button type="button" id="btnCancelar">Cancelar</button>
+                <button type="submit">Actualizar Datos</button>
+            </div>
         </form>
-
-        <script>
-            const params = new URLSearchParams(window.location.search);
-            const idPaciente = params.get('id_pacientes');
-            if (!idPaciente) {
-                alert('No se recibió un ID válido');
-                window.location.href = 'recepcionistaPacienteList.html';
-            } else {
-                document.getElementById('id_pacientes').value = idPaciente;
-            }
-        </script>
     </main>
-
+    <script src="../js/recepPacienteEdit.js"></script>
     <script src="../js/global.js"></script>
     <script src="../js/Check.js"></script>
     <footer>

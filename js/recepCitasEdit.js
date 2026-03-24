@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const inputHora = document.getElementById('hora');
     const mensaje = document.getElementById('mensajeEdit');
     const btnActualizar = document.getElementById('btnActualizar');
-    const txtEstado = document.getElementById('txt-estado'); // Referencia al estado
+    const txtEstado = document.getElementById('txt-estado');
 
     const selPaciente = document.getElementById('select-paciente');
     const selMedico = document.getElementById('select-medico');
@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     const idCita = urlParams.get('id_cita');
 
-    // Validación: Si no hay ID en la URL, regresar
     if (!idCita) {
         alert("ID de cita no proporcionado.");
         window.location.href = 'recepcionistaCitaList.html';
@@ -31,7 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 fetch(`${API_BASE}/citas/${idCita}`, { headers: { 'Authorization': `Bearer ${token}` } })
             ]);
 
-            // Verificar si todas las respuestas son correctas
             if (!resCita.ok) throw new Error("No se pudo obtener los datos de la cita.");
 
             const pacientes = await resP.json();
@@ -39,31 +37,26 @@ document.addEventListener('DOMContentLoaded', () => {
             const consultorios = await resC.json();
             const cita = await resCita.json();
 
-            // Llenar Pacientes
             selPaciente.innerHTML = '<option value="" disabled>Seleccione un Paciente</option>';
             pacientes.forEach(p => {
                 const isSelected = p.id_pacientes == cita.id_paciente ? 'selected' : '';
                 selPaciente.innerHTML += `<option value="${p.id_pacientes}" ${isSelected}>${p.curp} - ${p.nombre}</option>`;
             });
 
-            // Llenar Médicos
             selMedico.innerHTML = '<option value="" disabled>Seleccione un Médico</option>';
             medicos.forEach(m => {
                 const isSelected = m.id_trabajador == cita.id_medico ? 'selected' : '';
                 selMedico.innerHTML += `<option value="${m.id_trabajador}" ${isSelected}>Dr. ${m.nombre} ${m.apellido_paterno}</option>`;
             });
 
-            // Llenar Consultorios
             selConsultorio.innerHTML = '<option value="" disabled>Seleccione un Consultorio</option>';
             consultorios.forEach(c => {
                 const isSelected = c.id_consultorio == cita.id_consultorio ? 'selected' : '';
                 selConsultorio.innerHTML += `<option value="${c.id_consultorio}" ${isSelected}>${c.nombre}</option>`;
             });
 
-            // Llenar campos básicos
             inputId.value = cita.id_cita;
-            
-            // Ajuste de fecha: Cortar solo YYYY-MM-DD
+
             if (cita.fecha) {
                 inputFecha.value = cita.fecha.split('T')[0];
             }
@@ -74,7 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error(error);
             mensaje.style.color = "red";
             mensaje.innerText = "Error al cargar datos. Verifique su conexión o sesión.";
-            // Limpiar los "Cargando..." si falla
             selPaciente.innerHTML = '<option>Error al cargar</option>';
             selMedico.innerHTML = '<option>Error al cargar</option>';
             selConsultorio.innerHTML = '<option>Error al cargar</option>';

@@ -63,54 +63,55 @@
 
     <main>
         <h2>Registrar Paciente</h2>
-        <form id="formPaciente" method="POST">
+        <form id="formPaciente">
 
             <label>CURP:</label>
-            <input type="text" name="curp" maxlength="18" pattern="^[A-Z]{4}\d{6}[HM][A-Z]{5}[A-Z0-9]\d$"
-                title="Ingrese una CURP válida" required><br><br>
+            <input type="text" id="curp" name="curp" maxlength="18" pattern="^[A-Z]{4}\d{6}[HM][A-Z]{5}[A-Z0-9]\d$"
+                title="Ingrese una CURP válida (18 caracteres)" required><br><br>
 
             <label>Nombre:</label>
-            <input type="text" name="nombre" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,50}$" title="Ingrese solo letras"
-                required><br><br>
+            <input type="text" id="nombre" name="nombre" required><br><br>
 
             <label>Apellido Paterno:</label>
-            <input type="text" name="app" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,50}$" title="Ingrese solo letras"
-                required><br><br>
+            <input type="text" id="apellido_paterno" name="apellido_paterno" required><br><br>
 
             <label>Apellido Materno:</label>
-            <input type="text" name="apm" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,50}$" title="Ingrese solo letras"
-                required><br><br>
+            <input type="text" id="apellido_materno" name="apellido_materno" required><br><br>
+
+            <label>Sexo:</label>
+            <div id="contenedor-sexo">
+                <label>
+                    <input type="checkbox" id="sexoH" value="H"> H (Hombre)
+                </label>
+                <label style="margin-left: 15px;">
+                    <input type="checkbox" id="sexoM" value="M"> M (Mujer)
+                </label>
+            </div><br>
 
             <label>Fecha de Nacimiento:</label>
-            <input type="date" name="fecha_nac" id="fecha_nac" title="La fecha no puede ser posterior a hoy"
-                required><br><br>
+            <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required><br><br>
 
             <label>Correo electrónico:</label>
-            <input type="email" name="correo" pattern="^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-z]{2,}$"
-                title="Ingrese un correo válido" required><br><br>
+            <input type="email" id="correo" name="correo" required><br><br>
 
             <label>Usuario:</label>
-            <input type="text" name="usuario" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,50}$" title="Ingrese solo letras"
-                required><br><br>
+            <input type="text" id="usuario" name="usuario" required><br><br>
 
             <label>Contraseña:</label>
-            <input type="password" name="contrasena" minlength="8"
-                pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&]{8,}$"
-                title="Debe tener al menos 8 caracteres, incluyendo una letra y un número." required><br><br>
+            <input type="password" id="contrasena" name="contrasena" minlength="8" required><br><br>
 
-            <label id="mensajePaciente" style="color:red; display:block; margin-bottom:10px;"></label>
+            <p id="mensajeError" style="color:red; display:none; font-weight: bold;"></p>
 
-            <button type="button" onclick="window.location.href='recepcionistaPacienteList.html'">Cancelar</button>
-            <button type="reset">Limpiar</button>
-            <button type="submit" name="btnGuardar">Guardar</button>
+            <div class="botones">
+                <button type="button" id="btnCancelar">Cancelar</button>
+                <button type="reset" id="btnLimpiar">Limpiar</button>
+                <button type="submit">Guardar</button>
+            </div>
 
         </form>
-        <script>
-            document.getElementById('fecha_nac').max = new Date().toISOString().split('T')[0];
-        </script>
-        <script src="agregarPacientes.js"></script>
-    </main>
 
+    </main>
+    <script src="../js/recepPaciente.js"></script>
     <script src="../js/global.js"></script>
     <script src="../js/Check.js"></script>
     <footer>
