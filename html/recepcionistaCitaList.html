@@ -62,7 +62,9 @@
 
 
     <main>
-        <h2>Citas</h2>
+        <h2>Gestión de Citas</h2>
+
+        <div id="mensajeCita" style="text-align:center; margin-bottom:10px; font-weight:bold;"></div>
 
         <table id="tablaCitas">
             <thead>
@@ -72,6 +74,7 @@
                     <th>Paciente (CURP)</th>
                     <th>Médico</th>
                     <th>Consultorio</th>
+                    <th>Estado</th>
                     <th>
                         <button type="button" onclick="window.location.href='recepcionistaCita.html'">
                             Ir a registro
@@ -80,42 +83,6 @@
                 </tr>
             </thead>
             <tbody id="tbody-citas">
-                <tr id="fila-1" class="filaCita">
-                    <td>2025-06-10</td>
-                    <td>09:00</td>
-                    <td>GONL980310MVEZNNA7</td>
-                    <td>Dra. Laura Martínez Pérez</td>
-                    <td>Consultorio 1 - Medicina General</td>
-                    <td>
-                        <button type="button"
-                            onclick="window.location.href='recepcionistaCitaEdit.html?id_cita=1'">Editar</button>
-                        <button type="button" class="borrar-btn" data-id="1">Eliminar</button>
-                    </td>
-                </tr>
-                <tr id="fila-2" class="filaCita">
-                    <td>2025-06-11</td>
-                    <td>10:30</td>
-                    <td>HERP001205HVERRBA8</td>
-                    <td>Dr. Carlos Ramírez Soto</td>
-                    <td>Consultorio 2 - Pediatría</td>
-                    <td>
-                        <button type="button"
-                            onclick="window.location.href='recepcionistaCitaEdit.html?id_cita=2'">Editar</button>
-                        <button type="button" class="borrar-btn" data-id="2">Eliminar</button>
-                    </td>
-                </tr>
-                <tr id="fila-3" class="filaCita">
-                    <td>2025-06-12</td>
-                    <td>11:00</td>
-                    <td>SANR950820MVEZNNA5</td>
-                    <td>Dra. Laura Martínez Pérez</td>
-                    <td>Consultorio 3 - Nutrición</td>
-                    <td>
-                        <button type="button"
-                            onclick="window.location.href='recepcionistaCitaEdit.html?id_cita=3'">Editar</button>
-                        <button type="button" class="borrar-btn" data-id="3">Eliminar</button>
-                    </td>
-                </tr>
             </tbody>
         </table>
 
@@ -124,10 +91,9 @@
             <span id="pagina-cita">Página 1 de 1</span>
             <button id="nextCita">Siguiente &raquo;</button>
         </div>
-
     </main>
 
-
+    <script src="../js/recepCitasListD.js"></script>
     <script src="../js/global.js"></script>
     <script src="../js/Check.js"></script>
     <footer>

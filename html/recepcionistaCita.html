@@ -65,49 +65,36 @@
         <h2>Registrar Cita</h2>
 
         <form id="formCita">
+            <label for="fecha">Fecha:</label>
+            <input type="date" id="fecha" name="fecha" title="Establezca la fecha de la cita" required><br><br>
 
             <label for="hora">Hora:</label>
             <input type="time" id="hora" name="hora" title="Establezca la hora de la cita" required><br><br>
 
-            <label for="fecha">Fecha:</label>
-            <input type="date" id="fecha" name="fecha" title="Establezca la fecha de la cita" required><br><br>
-
-
             <label for="select-paciente">Paciente:</label>
             <select id="select-paciente" name="id_paciente" required>
                 <option value="" disabled selected>Seleccione un Paciente</option>
-                <option value="1">Ana González López</option>
-                <option value="2">Roberto Hernández Pérez</option>
-                <option value="3">María Sánchez Ruiz</option>
             </select><br><br>
-
 
             <label for="select-medico">Médico:</label>
             <select id="select-medico" name="id_medico" required>
                 <option value="" disabled selected>Seleccione un Médico</option>
-                <option value="1">Dra. Laura Martínez Pérez</option>
-                <option value="2">Dr. Carlos Ramírez Soto</option>
             </select><br><br>
-
 
             <label for="select-consultorio">Consultorio:</label>
             <select id="select-consultorio" name="id_consultorio" required>
                 <option value="" disabled selected>Seleccione un Consultorio</option>
-                <option value="1">Consultorio 1 - Medicina General</option>
-                <option value="2">Consultorio 2 - Pediatría</option>
-                <option value="3">Consultorio 3 - Nutrición</option>
             </select><br><br>
 
-            <label id="mensajeCita" style="color: red; display: block; margin-bottom: 10px;"></label>
+            <label id="mensajeCita" style="display: block; margin-bottom: 10px; font-weight: bold;"></label>
 
             <button type="button" onclick="window.location.href='recepcionistaCitaList.html'">Cancelar</button>
             <button type="reset">Limpiar</button>
             <button type="submit" id="btnGuardar">Guardar</button>
-
         </form>
     </main>
 
-
+    <script src="../js/recepCitas.js"></script>
     <script src="../js/global.js"></script>
     <script src="../js/Check.js"></script>
     <footer>
