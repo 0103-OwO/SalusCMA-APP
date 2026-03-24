@@ -3,9 +3,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     const mensajeError = document.getElementById('mensajePacienteEdit');
     const checkH = document.getElementById('sexoH');
     const checkM = document.getElementById('sexoM');
+    const btnGuardar = form.querySelector('button[type="submit"]');
 
     const token = localStorage.getItem('token');
-
     const params = new URLSearchParams(window.location.search);
     const idPaciente = params.get('id_pacientes');
 
@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 'Content-Type': 'application/json'
             }
         });
+
         if (!response.ok) throw new Error("No se pudo obtener el paciente");
 
         const pac = await response.json();
@@ -32,14 +33,19 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.getElementById('nombre').value = pac.nombre;
         document.getElementById('apellido_paterno').value = pac.apellido_paterno;
         document.getElementById('apellido_materno').value = pac.apellido_materno;
-        document.getElementById('fecha_nacimiento').value = pac.fecha_nacimiento.split('T')[0];
+
+        if (pac.fecha_nacimiento) {
+            document.getElementById('fecha_nacimiento').value = pac.fecha_nacimiento.split('T')[0];
+        }
 
         if (pac.sexo === 'H') checkH.checked = true;
         if (pac.sexo === 'M') checkM.checked = true;
 
     } catch (error) {
         console.error(error);
-        alert("Error al cargar datos del paciente");
+        mensajeError.style.color = "red";
+        mensajeError.innerText = "Error al cargar datos del paciente.";
+        mensajeError.style.display = 'block';
     }
 
     checkH.addEventListener('change', () => { if (checkH.checked) checkM.checked = false; });
@@ -47,24 +53,30 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
+
         mensajeError.style.display = 'none';
+        mensajeError.innerText = '';
 
         if (!checkH.checked && !checkM.checked) {
+            mensajeError.style.color = "red";
             mensajeError.innerText = "Seleccione el sexo.";
             mensajeError.style.display = 'block';
             return;
         }
 
         const datosActualizados = {
-            curp: document.getElementById('curp').value.toUpperCase(),
-            nombre: document.getElementById('nombre').value,
-            apellido_paterno: document.getElementById('apellido_paterno').value,
-            apellido_materno: document.getElementById('apellido_materno').value,
+            curp: document.getElementById('curp').value.toUpperCase().trim(),
+            nombre: document.getElementById('nombre').value.trim(),
+            apellido_paterno: document.getElementById('apellido_paterno').value.trim(),
+            apellido_materno: document.getElementById('apellido_materno').value.trim(),
             sexo: checkH.checked ? 'H' : 'M',
             fecha_nacimiento: document.getElementById('fecha_nacimiento').value
         };
 
         try {
+            btnGuardar.disabled = true;
+            btnGuardar.innerText = "Guardando...";
+
             const response = await fetch(`${API_BASE}/pacientes/${idPaciente}`, {
                 method: 'PUT',
                 headers: {
@@ -74,20 +86,38 @@ document.addEventListener('DOMContentLoaded', async () => {
                 body: JSON.stringify(datosActualizados)
             });
 
+            const resData = await response.json();
+
             if (response.ok) {
-                alert("Datos personales actualizados con éxito");
-                window.location.href = 'recepcionistaPacienteList.html';
-            } else {
-                const res = await response.json();
-                mensajeError.innerText = res.msg || "Error al actualizar";
+                mensajeError.style.color = "green";
+                mensajeError.innerText = "Datos personales actualizados con éxito.";
                 mensajeError.style.display = 'block';
+
+                setTimeout(() => {
+                    window.location.href = 'recepcionistaPacienteList.html';
+                }, 1500);
+
+            } else {
+                mensajeError.style.color = "red";
+                mensajeError.innerText = resData.msg || "Error al actualizar";
+                mensajeError.style.display = 'block';
+
+                btnGuardar.disabled = false;
+                btnGuardar.innerText = "Guardar Cambios";
             }
         } catch (error) {
-            alert("Error de conexión");
+            console.error("Error en la conexión:", error);
+            mensajeError.style.color = "red";
+            mensajeError.innerText = "Error de conexión con el servidor.";
+            mensajeError.style.display = 'block';
+
+            btnGuardar.disabled = false;
+            btnGuardar.innerText = "Guardar Cambios";
         }
     });
 
-    document.getElementById('btnCancelar').onclick = () => {
+    document.getElementById('btnCancelar').onclick = (e) => {
+        e.preventDefault();
         window.location.href = 'recepcionistaPacienteList.html';
     };
 });

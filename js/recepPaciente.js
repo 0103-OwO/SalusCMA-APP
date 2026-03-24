@@ -20,7 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (checkM.checked) checkH.checked = false;
     });
 
-    btnCancelar.addEventListener('click', () => {
+    btnCancelar.addEventListener('click', (e) => {
+        e.preventDefault();
         window.location.href = 'recepcionistaPacienteList.html';
     });
 
@@ -29,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         mensajeError.style.display = 'none';
         mensajeError.innerText = '';
+        mensajeError.style.color = 'red'; 
 
         if (!checkH.checked && !checkM.checked) {
             mensajeError.innerText = "Por favor, seleccione el sexo (H o M).";
@@ -48,8 +50,9 @@ document.addEventListener('DOMContentLoaded', () => {
             contrasena: document.getElementById('contrasena').value
         };
 
+        const submitBtn = form.querySelector('button[type="submit"]');
+
         try {
-            const submitBtn = form.querySelector('button[type="submit"]');
             submitBtn.disabled = true;
             submitBtn.innerText = "Registrando...";
 
@@ -65,8 +68,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const resData = await response.json();
 
             if (response.ok) {
-                alert("¡Paciente y cuenta de usuario registrados con éxito!");
-                window.location.href = 'recepcionistaPacienteList.html';
+                mensajeError.style.color = "green";
+                mensajeError.innerText = "¡Paciente y cuenta de usuario registrados con éxito!";
+                mensajeError.style.display = 'block';
+
+                setTimeout(() => {
+                    window.location.href = 'recepcionistaPacienteList.html';
+                }, 1500);
+
             } else {
                 mensajeError.innerText = resData.msg || "Ocurrió un error al procesar el registro.";
                 mensajeError.style.display = 'block';
@@ -76,9 +85,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } catch (error) {
             console.error("Error en la conexión:", error);
-            alert("No se pudo conectar con el servidor. Verifique que la API esté corriendo.");
+            mensajeError.innerText = "No se pudo conectar con el servidor. Intente más tarde.";
+            mensajeError.style.display = 'block';
             
-            const submitBtn = form.querySelector('button[type="submit"]');
             submitBtn.disabled = false;
             submitBtn.innerText = "Guardar";
         }
