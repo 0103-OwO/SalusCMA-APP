@@ -6,6 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnCancelar = document.getElementById('btnCancelar');
     const mensajeError = document.getElementById('mensajeError');
 
+    const token = localStorage.getItem('token');
+
     if (inputFecha) {
         inputFecha.max = new Date().toISOString().split('T')[0];
     }

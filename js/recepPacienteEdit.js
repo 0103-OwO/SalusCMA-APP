@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const checkH = document.getElementById('sexoH');
     const checkM = document.getElementById('sexoM');
 
+    const token = localStorage.getItem('token');
+
     const params = new URLSearchParams(window.location.search);
     const idPaciente = params.get('id_pacientes');
 
@@ -22,7 +24,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         });
         if (!response.ok) throw new Error("No se pudo obtener el paciente");
-        
+
         const pac = await response.json();
 
         document.getElementById('id_pacientes').value = pac.id_pacientes;
@@ -65,7 +67,10 @@ document.addEventListener('DOMContentLoaded', async () => {
         try {
             const response = await fetch(`${API_BASE}/pacientes/${idPaciente}`, {
                 method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
                 body: JSON.stringify(datosActualizados)
             });
 

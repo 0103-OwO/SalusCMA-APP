@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const btnPrev = document.getElementById('prevPaciente');
     const btnNext = document.getElementById('nextPaciente');
 
+    const token = localStorage.getItem('token');
+
     let paginaActual = 1;
     const filasPorPagina = 10;
     let todosLosPacientes = [];
@@ -47,12 +49,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <td>${pac.apellido_paterno}</td>
                 <td>${pac.apellido_materno}</td>
                 <td>
-                    <label style="margin-right: 5px;">
-                        <input type="checkbox" disabled ${pac.sexo === 'H' ? 'checked' : ''}> H
-                    </label>
-                    <label>
-                        <input type="checkbox" disabled ${pac.sexo === 'M' ? 'checked' : ''}> M
-                    </label>
+                    ${pac.sexo}
                 </td>
                 <td>${fecha}</td>
                 <td>${pac.correo || 'N/A'}</td>
@@ -87,7 +84,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const id = e.target.getAttribute('data-id');
             if (confirm("¿Está seguro de que desea eliminar permanentemente este registro?")) {
                 try {
-                    const res = await fetch(`${API_BASE}/pacientes/${id}`, { method: 'DELETE' });
+                    const res = await fetch(`${API_BASE}/pacientes/${id}`, { method: 'DELETE', headers: { 'Authorization': `Bearer ${token}` } });
                     if (res.ok) {
                         alert("Paciente eliminado con éxito.");
 
