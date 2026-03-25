@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             apellido_materno: document.getElementById('apm').value.trim(),
             sexo: checkH.checked ? 'H' : 'M',
             fecha_nacimiento: document.getElementById('fecha_nac').value,
-            correo: document.getElementById('correo').value.trim(),
+            email: document.getElementById('correo').value.trim(),
             usuario: document.getElementById('usuario').value.trim()
         };
 
