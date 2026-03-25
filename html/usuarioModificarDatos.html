@@ -69,12 +69,14 @@
             <label for="apm">Apellido Materno:</label>
             <input type="text" name="apm" id="apm" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,50}$" required><br><br>
 
-            <label for="sexo">Sexo:</label>
-            <select name="sexo" id="sexo" required>
-                <option value="">Seleccione...</option>
-                <option value="H">Hombre</option>
-                <option value="M">Mujer</option>
-            </select><br><br>
+            <label>Sexo:</label>
+            <div class="contenedor-sexo">
+                <input type="radio" name="sexo" id="sexoH" value="H" required>
+                <label for="sexoH">Hombre</label>
+
+                <input type="radio" name="sexo" id="sexoM" value="M" required>
+                <label for="sexoM">Mujer</label>
+            </div><br>
 
             <label for="fecha_nac">Fecha de Nacimiento:</label>
             <input type="date" name="fecha_nac" id="fecha_nac" required><br><br>
