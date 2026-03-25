@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.getElementById('nombre').value = pac.nombre;
         document.getElementById('app').value = pac.apellido_paterno;
         document.getElementById('apm').value = pac.apellido_materno;
-        document.getElementById('correo').value = pac.correo;
+        document.getElementById('correo').value = pac.email;
         document.getElementById('usuario').value = pac.usuario;
 
         if (pac.fecha_nacimiento) {
