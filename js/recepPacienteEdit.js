@@ -1,18 +1,22 @@
 document.addEventListener('DOMContentLoaded', async () => {
-    const form = document.getElementById('formModificarDatos');
-    const mensajeError = document.getElementById('mensajeModificar');
+    const form = document.getElementById('formPacienteEdit');
+    const mensajeError = document.getElementById('mensajePacienteEdit');
     const checkH = document.getElementById('sexoH');
     const checkM = document.getElementById('sexoM');
     const btnGuardar = form.querySelector('button[type="submit"]');
-    const fechaInput = document.getElementById('fecha_nac');
 
     const token = localStorage.getItem('token');
+    const params = new URLSearchParams(window.location.search);
+    const idPaciente = params.get('id_pacientes');
 
-    if (fechaInput) {
-        fechaInput.max = new Date().toISOString().split('T')[0];
+    if (!idPaciente) {
+        alert("ID no válido");
+        window.location.href = 'recepcionistaPacienteList.html';
+        return;
     }
+
     try {
-        const response = await fetch(`${API_BASE}/pacientes/perfil`, {
+        const response = await fetch(`${API_BASE}/pacientes/${idPaciente}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -20,21 +24,18 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         });
 
-        if (!response.ok) throw new Error("No se pudo obtener el perfil");
+        if (!response.ok) throw new Error("No se pudo obtener el paciente");
 
         const pac = await response.json();
 
-        // Llenar los campos del formulario
         document.getElementById('id_pacientes').value = pac.id_pacientes;
         document.getElementById('curp').value = pac.curp;
         document.getElementById('nombre').value = pac.nombre;
-        document.getElementById('app').value = pac.apellido_paterno;
-        document.getElementById('apm').value = pac.apellido_materno;
-        document.getElementById('correo').value = pac.correo;
-        document.getElementById('usuario').value = pac.usuario;
+        document.getElementById('apellido_paterno').value = pac.apellido_paterno;
+        document.getElementById('apellido_materno').value = pac.apellido_materno;
 
         if (pac.fecha_nacimiento) {
-            document.getElementById('fecha_nac').value = pac.fecha_nacimiento.split('T')[0];
+            document.getElementById('fecha_nacimiento').value = pac.fecha_nacimiento.split('T')[0];
         }
 
         if (pac.sexo === 'H') checkH.checked = true;
@@ -43,15 +44,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     } catch (error) {
         console.error(error);
         mensajeError.style.color = "red";
-        mensajeError.innerText = "Error al cargar su información personal.";
+        mensajeError.innerText = "Error al cargar datos del paciente.";
         mensajeError.style.display = 'block';
     }
 
-    // Lógica de checks para Sexo (comportamiento de Radio)
     checkH.addEventListener('change', () => { if (checkH.checked) checkM.checked = false; });
     checkM.addEventListener('change', () => { if (checkM.checked) checkH.checked = false; });
 
-    // 3. Evento Submit para Guardar Cambios
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
@@ -60,22 +59,18 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         if (!checkH.checked && !checkM.checked) {
             mensajeError.style.color = "red";
-            mensajeError.innerText = "Por favor, seleccione su sexo.";
+            mensajeError.innerText = "Seleccione el sexo.";
             mensajeError.style.display = 'block';
             return;
         }
 
-        const idPaciente = document.getElementById('id_pacientes').value;
-
         const datosActualizados = {
             curp: document.getElementById('curp').value.toUpperCase().trim(),
             nombre: document.getElementById('nombre').value.trim(),
-            apellido_paterno: document.getElementById('app').value.trim(),
-            apellido_materno: document.getElementById('apm').value.trim(),
+            apellido_paterno: document.getElementById('apellido_paterno').value.trim(),
+            apellido_materno: document.getElementById('apellido_materno').value.trim(),
             sexo: checkH.checked ? 'H' : 'M',
-            fecha_nacimiento: document.getElementById('fecha_nac').value,
-            correo: document.getElementById('correo').value.trim(),
-            usuario: document.getElementById('usuario').value.trim()
+            fecha_nacimiento: document.getElementById('fecha_nacimiento').value
         };
 
         try {
@@ -95,16 +90,16 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             if (response.ok) {
                 mensajeError.style.color = "green";
-                mensajeError.innerText = "Información actualizada con éxito.";
+                mensajeError.innerText = "Datos personales actualizados con éxito.";
                 mensajeError.style.display = 'block';
 
                 setTimeout(() => {
-                    window.location.href = 'usuarioPrincipal.html';
+                    window.location.href = 'recepcionistaPacienteList.html';
                 }, 1500);
 
             } else {
                 mensajeError.style.color = "red";
-                mensajeError.innerText = resData.msg || "Error al actualizar la información.";
+                mensajeError.innerText = resData.msg || "Error al actualizar";
                 mensajeError.style.display = 'block';
 
                 btnGuardar.disabled = false;
@@ -120,4 +115,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             btnGuardar.innerText = "Guardar Cambios";
         }
     });
+
+    document.getElementById('btnCancelar').onclick = (e) => {
+        e.preventDefault();
+        window.location.href = 'recepcionistaPacienteList.html';
+    };
 });
