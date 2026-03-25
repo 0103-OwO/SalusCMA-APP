@@ -5,15 +5,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     const checkM = document.getElementById('sexoM');
     const btnGuardar = form.querySelector('button[type="submit"]');
     const fechaInput = document.getElementById('fecha_nac');
-
     const token = localStorage.getItem('token');
 
-    // 1. Restricción de fecha máxima
     if (fechaInput) {
         fechaInput.max = new Date().toISOString().split('T')[0];
     }
 
-    // 2. Cargar los datos actuales del perfil del paciente
     try {
         const response = await fetch(`${API_BASE}/pacientes/perfil`, {
             method: 'GET',
@@ -27,7 +24,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         const pac = await response.json();
 
-        // Llenar los campos del formulario
         document.getElementById('id_pacientes').value = pac.id_pacientes;
         document.getElementById('curp').value = pac.curp;
         document.getElementById('nombre').value = pac.nombre;
@@ -50,16 +46,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         mensajeError.style.display = 'block';
     }
 
-    // Lógica de checks para Sexo (comportamiento de Radio)
     checkH.addEventListener('change', () => { if (checkH.checked) checkM.checked = false; });
     checkM.addEventListener('change', () => { if (checkM.checked) checkH.checked = false; });
 
-    // 3. Evento Submit para Guardar Cambios
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
-
         mensajeError.style.display = 'none';
-        mensajeError.innerText = '';
 
         if (!checkH.checked && !checkM.checked) {
             mensajeError.style.color = "red";
@@ -98,7 +90,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             if (response.ok) {
                 mensajeError.style.color = "green";
-                mensajeError.innerText = "Información actualizada con éxito.";
+                mensajeError.innerText = resData.msg || "Información actualizada con éxito.";
                 mensajeError.style.display = 'block';
 
                 setTimeout(() => {
@@ -107,18 +99,16 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             } else {
                 mensajeError.style.color = "red";
-                mensajeError.innerText = resData.msg || "Error al actualizar la información.";
+                mensajeError.innerText = resData.msg || "Error al actualizar.";
                 mensajeError.style.display = 'block';
-
                 btnGuardar.disabled = false;
                 btnGuardar.innerText = "Guardar Cambios";
             }
         } catch (error) {
-            console.error("Error en la conexión:", error);
+            console.error(error);
             mensajeError.style.color = "red";
             mensajeError.innerText = "Error de conexión con el servidor.";
             mensajeError.style.display = 'block';
-
             btnGuardar.disabled = false;
             btnGuardar.innerText = "Guardar Cambios";
         }
