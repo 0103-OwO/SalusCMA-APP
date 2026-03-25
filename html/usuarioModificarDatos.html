@@ -51,46 +51,55 @@
 
 
     <main>
-        <h2>Modificar datos</h2>
-        <form id="formModificarDatos" method="POST">
+        <h2>Modificar mis datos personales</h2>
+        <form id="formModificarDatos">
 
-            <input type="hidden" name="id_pacientes" id="id_pacientes" value="">
+            <input type="hidden" name="id_pacientes" id="id_pacientes">
 
-            <label>CURP:</label>
+            <label for="curp">CURP:</label>
             <input type="text" name="curp" id="curp" pattern="^[A-Z]{4}\d{6}[HM][A-Z]{5}[A-Z0-9]\d$" maxlength="18"
                 required><br><br>
 
-            <label>Nombre:</label>
+            <label for="nombre">Nombre(s):</label>
             <input type="text" name="nombre" id="nombre" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,50}$" required><br><br>
 
-            <label>Apellido Paterno:</label>
+            <label for="app">Apellido Paterno:</label>
             <input type="text" name="app" id="app" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,50}$" required><br><br>
 
-            <label>Apellido Materno:</label>
+            <label for="apm">Apellido Materno:</label>
             <input type="text" name="apm" id="apm" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,50}$" required><br><br>
 
-            <label>Fecha de Nacimiento:</label>
+            <label for="sexo">Sexo:</label>
+            <select name="sexo" id="sexo" required>
+                <option value="">Seleccione...</option>
+                <option value="H">Hombre</option>
+                <option value="M">Mujer</option>
+            </select><br><br>
+
+            <label for="fecha_nac">Fecha de Nacimiento:</label>
             <input type="date" name="fecha_nac" id="fecha_nac" required><br><br>
 
-            <label>Correo electrónico:</label>
+            <label for="correo">Correo electrónico:</label>
             <input type="email" name="correo" id="correo" pattern="^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-z]{2,}$"
                 required><br><br>
 
-            <label>Usuario:</label>
-            <input type="text" name="usuario" id="usuario" readonly required><br><br>
+            <label for="usuario">Nombre de Usuario:</label>
+            <input type="text" name="usuario" id="usuario" readonly
+                title="El nombre de usuario no puede ser modificado por seguridad." required>
+            <small style="display:block; color: gray; margin-bottom: 10px;">(No editable)</small>
 
             <label id="mensajeModificar" style="color:red; display:block; margin-bottom:10px;"></label>
 
-            <button type="button" onclick="window.location.href='usuarioPrincipal.html'">Cancelar</button>
-            <button type="reset">Limpiar</button>
-            <button type="submit" name="btnActualizar">Guardar</button>
+            <div class="contenedor-acciones">
+                <button type="button" onclick="window.location.href='usuarioPrincipal.html'">Cancelar</button>
+                <button type="reset">Limpiar formulario</button>
+                <button type="submit" id="btnActualizar">Guardar Cambios</button>
+            </div>
 
         </form>
-
-        <script>
-            document.getElementById('fecha_nac').max = new Date().toISOString().split('T')[0];
-        </script>
     </main>
+
+    <script src="../js/usuarioDatosEdit.js"></script>
     <script src="../js/global.js"></script>
     <script src="../js/Check.js"></script>
     <footer>
