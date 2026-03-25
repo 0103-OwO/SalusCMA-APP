@@ -62,38 +62,50 @@
 
     <main>
         <h2>Modificar Datos del Paciente</h2>
-        <form id="formPacienteEdit">
-            <input type="hidden" name="id_pacientes" id="id_pacientes">
-
-            <label>CURP:</label>
-            <input type="text" id="curp" name="curp" maxlength="18" pattern="^[A-Z]{4}\d{6}[HM][A-Z]{5}[A-Z0-9]\d$"
-                required><br><br>
-
-            <label>Nombre:</label>
-            <input type="text" id="nombre" name="nombre" required><br><br>
-
-            <label>Apellido Paterno:</label>
-            <input type="text" id="apellido_paterno" name="apellido_paterno" required><br><br>
-
-            <label>Apellido Materno:</label>
-            <input type="text" id="apellido_materno" name="apellido_materno" required><br><br>
-
-            <label>Sexo:</label>
-            <div id="contenedor-sexo">
-                <label><input type="checkbox" id="sexoH" value="H"> H</label>
-                <label style="margin-left: 15px;"><input type="checkbox" id="sexoM" value="M"> M</label>
-            </div><br>
-
-            <label>Fecha de Nacimiento:</label>
-            <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required><br><br>
-
-            <p id="mensajePacienteEdit" style="color:red; display:none; font-weight: bold;"></p>
-
-            <div class="botones">
-                <button type="button" id="btnCancelar">Cancelar</button>
-                <button type="submit">Actualizar Datos</button>
-            </div>
-        </form>
+    <form id="formPacienteEdit">
+        <input type="hidden" name="id_pacientes" id="id_pacientes">
+    
+        <label>CURP:</label>
+        <input type="text" id="curp" name="curp" pattern="^[A-Z]{4}\d{6}[HM][A-Z]{5}[A-Z0-9]\d$" minlength="18"
+            maxlength="18" title="CURP de 18 caracteres en mayúsculas. Ej. LOMP850101HDFPRS09"
+            placeholder="Ej. LOMP850101HDFPRS09" autocomplete="off" inputmode="text" required><br><br>
+    
+        <label>Nombre:</label>
+        <input type="text" id="nombre" name="nombre" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ]+(\s[A-Za-zÁÉÍÓÚáéíóúÑñ]+)*$"
+            minlength="2" maxlength="50"
+            title="Solo letras y espacios simples entre palabras, sin espacios al inicio o al final." placeholder="Ej. Juan"
+            autocomplete="given-name" inputmode="text" required><br><br>
+    
+        <label>Apellido Paterno:</label>
+        <input type="text" id="apellido_paterno" name="apellido_paterno"
+            pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ]+(\s[A-Za-zÁÉÍÓÚáéíóúÑñ]+)*$" minlength="2" maxlength="50"
+            title="Solo letras y espacios simples entre palabras, sin espacios al inicio o al final."
+            placeholder="Ej. Pérez" autocomplete="family-name" inputmode="text" required><br><br>
+    
+        <label>Apellido Materno:</label>
+        <input type="text" id="apellido_materno" name="apellido_materno"
+            pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ]+(\s[A-Za-zÁÉÍÓÚáéíóúÑñ]+)*$" minlength="2" maxlength="50"
+            title="Solo letras y espacios simples entre palabras, sin espacios al inicio o al final."
+            placeholder="Ej. García" autocomplete="additional-name" inputmode="text" required><br><br>
+    
+        <label>Sexo:</label>
+        <div id="contenedor-sexo">
+            <label><input type="checkbox" id="sexoH" value="H"> H</label>
+            <label style="margin-left: 15px;"><input type="checkbox" id="sexoM" value="M"> M</label>
+        </div><br>
+    
+        <label>Fecha de Nacimiento:</label>
+        <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" min="1900-01-01" max="2025-03-24"
+            title="La fecha debe estar entre 1900 y hoy. No puede ser una fecha futura." autocomplete="bday"
+            required><br><br>
+    
+        <p id="mensajePacienteEdit" style="color:red; display:none; font-weight: bold;"></p>
+    
+        <div class="botones">
+            <button type="button" id="btnCancelar">Cancelar</button>
+            <button type="submit">Actualizar Datos</button>
+        </div>
+    </form>
     </main>
     <script src="../js/recepPacienteEdit.js"></script>
     <script src="../js/global.js"></script>

@@ -97,42 +97,45 @@
     <main>
         <h2>Registrar Consultorio</h2>
 
-        <form id="formConsultorio">
-            <label for="nombre">Nombre:</label><br>
-            <input type="text" id="nombre" name="nombre" placeholder="Ej. Consultorio A-101" required><br><br>
-
-            <label for="select-area">Área:</label><br>
-            <select id="select-area" name="area" required>
-                <option value="" disabled selected>-- Seleccione --</option>
-                <option value="Urgencias">Urgencias</option>
-                <option value="Pediatría">Pediatría</option>
-                <option value="Ginecología">Ginecología</option>
-                <option value="Cardiología">Cardiología</option>
-                <option value="Medicina General">Medicina General</option>
-                <option value="Dermatología">Dermatología</option>
-                <option value="Odontología">Odontología</option>
-                <option value="Laboratorio">Laboratorio</option>
-            </select><br><br>
-
-            <label for="select-piso">Piso:</label><br>
-            <select id="select-piso" name="piso" required>
-                <option value="" disabled selected>-- Seleccione --</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-            </select><br><br>
-
-            <label for="descripcion">Descripción:</label><br>
-            <textarea id="descripcion" name="descripcion" rows="4" cols="50" maxlength="500" required
-                oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '')"
-                placeholder="Ingrese una breve descripción..."></textarea><br><br>
-
-            <label id="mensajeConsultorio" style="display: block; margin-bottom: 10px;"></label>
-
-            <button type="button" onclick="window.location.href='adminConsultorioList.html'">Cancelar</button>
-            <button type="reset">Limpiar</button>
-            <button type="submit" id="btnGuardar">Guardar</button>
-        </form>
+    <form id="formConsultorio">
+        <label for="nombre">Nombre:</label><br>
+        <input type="text" id="nombre" name="nombre" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9\s\-\.]{2,80}$" minlength="2"
+            maxlength="80" title="Entre 2 y 80 caracteres. Letras, números, guiones y puntos permitidos."
+            placeholder="Ej. Consultorio A-101" autocomplete="off" inputmode="text" required><br><br>
+    
+        <label for="select-area">Área:</label><br>
+        <select id="select-area" name="area" required>
+            <option value="" disabled selected>-- Seleccione --</option>
+            <option value="Urgencias">Urgencias</option>
+            <option value="Pediatría">Pediatría</option>
+            <option value="Ginecología">Ginecología</option>
+            <option value="Cardiología">Cardiología</option>
+            <option value="Medicina General">Medicina General</option>
+            <option value="Dermatología">Dermatología</option>
+            <option value="Odontología">Odontología</option>
+            <option value="Laboratorio">Laboratorio</option>
+        </select><br><br>
+    
+        <label for="select-piso">Piso:</label><br>
+        <select id="select-piso" name="piso" required>
+            <option value="" disabled selected>-- Seleccione --</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select><br><br>
+    
+        <label for="descripcion">Descripción:</label><br>
+        <textarea id="descripcion" name="descripcion" rows="4" cols="50" minlength="10" maxlength="500"
+            title="Descripción entre 10 y 500 caracteres. Solo letras y espacios."
+            placeholder="Ingrese una breve descripción..." required
+            oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '')"></textarea><br><br>
+    
+        <label id="mensajeConsultorio" style="display: block; margin-bottom: 10px;"></label>
+    
+        <button type="button" onclick="window.location.href='adminConsultorioList.html'">Cancelar</button>
+        <button type="reset">Limpiar</button>
+        <button type="submit" id="btnGuardar">Guardar</button>
+    </form>
     </main>
     <script src="../js/global.js"></script>
     <script src="../js/Check.js"></script>

@@ -54,24 +54,27 @@
         <h2>Cambio de Contraseña</h2>
 
         <form id="formCambiarContrasena">
-
+        
             <label>Contraseña Actual:</label>
-            <input type="password" name="conActual" id="input-con-actual" required
-                title="Introduce tu contraseña actual."><br><br>
-
+            <input type="password" name="conActual" id="input-con-actual" minlength="8" maxlength="72"
+                title="Introduce tu contraseña actual." autocomplete="current-password" required><br><br>
+        
             <label>Contraseña Nueva:</label>
-            <input type="password" name="conNueva" id="input-con-nueva" required minlength="8"
-                pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[^A-Za-z\d]).{8,}$"
-                title="Debe tener al menos 8 caracteres, incluyendo una letra, un número y un carácter especial."><br><br>
-
+            <input type="password" name="conNueva" id="input-con-nueva"
+                pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&]{8,72}$" minlength="8" maxlength="72"
+                title="Mínimo 8 caracteres, máximo 72. Debe incluir al menos una letra y un número. Caracteres especiales permitidos: @$!%*#?&"
+                autocomplete="new-password" required><br><br>
+        
             <label>Confirmación de contraseña:</label>
-            <input type="password" name="conConfirmacion" id="input-con-confirmacion" required
-                title="Repite la nueva contraseña."><br><br>
-
+            <input type="password" name="conConfirmacion" id="input-con-confirmacion"
+                pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&]{8,72}$" minlength="8" maxlength="72"
+                title="Repite la nueva contraseña con los mismos requisitos: mínimo 8 caracteres, al menos una letra y un número."
+                autocomplete="new-password" required><br><br>
+        
             <label id="mensajeCambio" style="display:block; margin-bottom:10px;"></label>
-
+        
             <button type="submit">Confirmar</button>
-
+        
         </form>
     </main>
 

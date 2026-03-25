@@ -44,31 +44,36 @@
     <main class="mainUnaColumna">
         <h2>Contáctanos</h2>
 
-        <form id="formContacto">
-
-            <label for="nombre">Nombre completo:</label>
-            <input type="text" id="nombre" name="nombre" maxlength="100" required title="Ingrese su nombre completo"
-                placeholder="Ej. Juan Pérez García"><br><br>
-
-            <label for="telefono">Teléfono:</label>
-            <input type="tel" id="telefono" name="telefono" pattern="^(\+52\s?)?\d{10}$"
-                title="Ingrese un teléfono válido, 10 dígitos, con opción a +52" placeholder="Ej. 7821234567" required>
-
-            <label for="correo">Correo electrónico:</label>
-            <input type="email" id="correo" name="correo" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,}$"
-                title="Ingrese un correo válido" placeholder="Ej. juan@correo.com" required><br><br>
-
-            <label for="mensaje">Mensaje:</label>
-            <textarea id="mensaje" name="mensaje" rows="8" maxlength="1000" required
-                placeholder="Escriba su mensaje o preguntas"></textarea><br><br>
-
-            <label id="mensajeContacto" style="color: black; display: block; margin-bottom: 10px;"></label>
-
-            <button type="button" onclick="window.location.href='index.html'">Cancelar</button>
-            <button type="reset">Limpiar</button>
-            <button type="submit">Enviar</button>
-
-        </form>
+    <form id="formContacto">
+    
+        <label for="nombre">Nombre completo:</label>
+        <input type="text" id="nombre" name="nombre" pattern="^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+(\s[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ]+)*$"
+            minlength="3" maxlength="100" required
+            title="Solo letras y espacios simples entre palabras, mínimo 3 caracteres. Ej. Juan Pérez García"
+            placeholder="Ej. Juan Pérez García" autocomplete="name" inputmode="text"><br><br>
+    
+        <label for="telefono">Teléfono:</label>
+        <input type="tel" id="telefono" name="telefono" pattern="^(\+52\s?)?\d{10}$" minlength="10" maxlength="13"
+            title="Ingrese un teléfono válido de 10 dígitos, opcionalmente con +52. Ej. 7821234567 o +52 7821234567"
+            placeholder="Ej. 7821234567" required autocomplete="tel" inputmode="tel">
+    
+        <label for="correo">Correo electrónico:</label>
+        <input type="email" id="correo" name="correo" pattern="^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$"
+            title="Ingrese un correo electrónico válido. Ej. juan@correo.com" placeholder="Ej. juan@correo.com" required
+            autocomplete="email" inputmode="email" maxlength="254"><br><br>
+    
+        <label for="mensaje">Mensaje:</label>
+        <textarea id="mensaje" name="mensaje" rows="8" minlength="10" maxlength="1000" required
+            title="El mensaje debe tener entre 10 y 1000 caracteres"
+            placeholder="Escriba su mensaje o preguntas"></textarea><br><br>
+    
+        <label id="mensajeContacto" style="color: black; display: block; margin-bottom: 10px;"></label>
+    
+        <button type="button" onclick="window.location.href='index.html'">Cancelar</button>
+        <button type="reset">Limpiar</button>
+        <button type="submit">Enviar</button>
+    
+    </form>
     </main>
 
     <script src="../js/frmContacto.js"></script>

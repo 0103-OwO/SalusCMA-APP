@@ -101,10 +101,12 @@
 
         <form id="formEditConsultorio">
             <input type="hidden" id="input-id-consultorio" name="id_consultorio">
-
+        
             <label for="nombre">Nombre:</label><br>
-            <input type="text" id="nombre" name="nombre" required><br><br>
-
+            <input type="text" id="nombre" name="nombre" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9\s\-\.]{2,80}$" minlength="2"
+                maxlength="80" title="Entre 2 y 80 caracteres. Letras, números, guiones y puntos permitidos."
+                placeholder="Ej. Consultorio A-101" autocomplete="off" inputmode="text" required><br><br>
+        
             <label for="select-area">Área:</label><br>
             <select id="select-area" name="area" required>
                 <option value="" disabled>-- Seleccione --</option>
@@ -117,7 +119,7 @@
                 <option value="Odontología">Odontología</option>
                 <option value="Laboratorio">Laboratorio</option>
             </select><br><br>
-
+        
             <label for="select-piso">Piso:</label><br>
             <select id="select-piso" name="piso" required>
                 <option value="" disabled>-- Seleccione --</option>
@@ -125,13 +127,15 @@
                 <option value="2">2</option>
                 <option value="3">3</option>
             </select><br><br>
-
+        
             <label for="descripcion">Descripción:</label><br>
-            <textarea id="descripcion" name="descripcion" rows="4" cols="50" maxlength="500" required
+            <textarea id="descripcion" name="descripcion" rows="4" cols="50" minlength="10" maxlength="500"
+                title="Descripción entre 10 y 500 caracteres. Solo letras y espacios."
+                placeholder="Ingrese una breve descripción..." required
                 oninput="this.value = this.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, '')"></textarea><br><br>
-
+        
             <label id="mensajeEdit" style="display: block; margin-bottom: 10px;"></label>
-
+        
             <button type="button" onclick="window.location.href='adminConsultorioList.html'">Cancelar</button>
             <button type="submit" id="btnActualizar">Actualizar Cambios</button>
         </form>

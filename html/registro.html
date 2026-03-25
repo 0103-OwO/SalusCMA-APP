@@ -45,45 +45,53 @@
 
     <main>
         <h2>Registro</h2>
-        <form id="formRegistro" method="POST">
-
+        <form id="formRegistro" method="POST" novalidate>
+        
             <label>CURP:</label>
-            <input type="text" name="curp" maxlength="18" pattern="^[A-Z]{4}\d{6}[HM][A-Z]{5}[A-Z0-9]\d$"
-                title="Ingrese una CURP válida" required><br><br>
-
+            <input type="text" name="curp" maxlength="18" minlength="18" pattern="^[A-Z]{4}\d{6}[HM][A-Z]{5}[A-Z0-9]\d$"
+                title="CURP de 18 caracteres en mayúsculas. Ej. LOMP850101HDFPRS09" placeholder="Ej. LOMP850101HDFPRS09"
+                autocomplete="off" inputmode="text" required><br><br>
+        
             <label>Nombre:</label>
-            <input type="text" name="nombre" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,50}$" title="Ingrese solo letras"
-                required><br><br>
-
+            <input type="text" name="nombre" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ]+(\s[A-Za-zÁÉÍÓÚáéíóúÑñ]+)*$" minlength="2"
+                maxlength="50" title="Solo letras y espacios simples entre palabras, sin espacios al inicio o al final."
+                placeholder="Ej. Juan" autocomplete="given-name" inputmode="text" required><br><br>
+        
             <label>Apellido Paterno:</label>
-            <input type="text" name="app" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,50}$" title="Ingrese solo letras"
-                required><br><br>
-
+            <input type="text" name="app" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ]+(\s[A-Za-zÁÉÍÓÚáéíóúÑñ]+)*$" minlength="2"
+                maxlength="50" title="Solo letras y espacios simples entre palabras, sin espacios al inicio o al final."
+                placeholder="Ej. Pérez" autocomplete="family-name" inputmode="text" required><br><br>
+        
             <label>Apellido Materno:</label>
-            <input type="text" name="apm" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,50}$" title="Ingrese solo letras"
-                required><br><br>
-
+            <input type="text" name="apm" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ]+(\s[A-Za-zÁÉÍÓÚáéíóúÑñ]+)*$" minlength="2"
+                maxlength="50" title="Solo letras y espacios simples entre palabras, sin espacios al inicio o al final."
+                placeholder="Ej. García" autocomplete="additional-name" inputmode="text" required><br><br>
+        
             <label>Fecha de Nacimiento:</label>
-            <input type="date" name="fecha_nac" id="fecha_nac" title="La fecha no puede ser posterior a hoy"
+            <input type="date" name="fecha_nac" id="fecha_nac" min="1900-01-01" max="2025-03-24"
+                title="La fecha debe estar entre 1900 y hoy. No puede ser una fecha futura." autocomplete="bday"
                 required><br><br>
-
+        
             <label>Correo electrónico:</label>
-            <input type="email" name="correo" pattern="^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-z]{2,}$"
-                title="Ingrese un correo válido" required><br><br>
-
+            <input type="email" name="correo" pattern="^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$" maxlength="254"
+                title="Ingrese un correo electrónico válido. Ej. juan@correo.com" placeholder="Ej. juan@correo.com"
+                autocomplete="email" inputmode="email" required><br><br>
+        
             <label>Usuario:</label>
-            <input type="text" name="usuario" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,50}$" title="Ingrese solo letras"
-                required><br><br>
-
+            <input type="text" name="usuario" pattern="^[a-zA-Z0-9_\-]{3,30}$" minlength="3" maxlength="30"
+                title="Entre 3 y 30 caracteres. Solo letras, números, guion bajo (_) y guion medio (-)."
+                placeholder="Ej. juan_perez" autocomplete="username" inputmode="text" required><br><br>
+        
             <label>Contraseña:</label>
-            <input type="password" name="contrasena" minlength="8"
-                pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&]{8,}$"
-                title="Debe tener al menos 8 caracteres, incluyendo una letra y un número." required><br><br>
-
+            <input type="password" name="contrasena" minlength="8" maxlength="72"
+                pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&]{8,72}$"
+                title="Mínimo 8 caracteres, máximo 72. Debe incluir al menos una letra y un número. Caracteres especiales permitidos: @$!%*#?&"
+                autocomplete="new-password" required><br><br>
+        
             <label id="mensajeRegistro" style="color:red; display:block; margin-bottom:10px;"></label>
-
+        
             <button type="submit">Registrar</button>
-
+        
         </form>
 
         <script>

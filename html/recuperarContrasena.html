@@ -46,17 +46,18 @@
     <main class="mainUnaColumna">
         <h2>Recuperar contraseña</h2>
         <form id="formContacto" method="POST">
-
+        
             <label>Correo electrónico:</label>
-            <input type="email" name="correo" pattern="^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-z]{2,}$"
-                title="Ingrese un correo válido" required><br><br>
-
+            <input type="email" name="correo" pattern="^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$" maxlength="254"
+                title="Ingrese un correo electrónico válido. Ej. juan@correo.com" placeholder="Ej. juan@correo.com"
+                autocomplete="email" inputmode="email" required><br><br>
+        
             <label id="mensajeContacto" style="color:red; display:block; margin-bottom:10px;"></label>
-
+        
             <button type="button" onclick="window.location.href='loginn.html'">Cancelar</button>
             <button type="reset">Limpiar</button>
             <button type="submit">Enviar</button>
-
+        
         </form>
     </main>
     <script src="../js/global.js"></script>

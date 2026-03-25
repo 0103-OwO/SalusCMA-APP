@@ -96,48 +96,66 @@
     <main>
         <h2>Registrar Nuevo Trabajador</h2>
 
-        <form id="formTrabajador" enctype="multipart/form-data">
-            <label for="nombre">Nombre(s):</label>
-            <input type="text" id="nombre" name="nombre" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,50}$" required>
-
-            <label for="apellido_paterno">Apellido Paterno:</label>
-            <input type="text" id="apellido_paterno" name="apellido_paterno" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,50}$"
-                required>
-
-            <label for="apellido_materno">Apellido Materno:</label>
-            <input type="text" id="apellido_materno" name="apellido_materno" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,50}$"
-                required>
-
-            <label for="cedula">Cédula Profesional:</label>
-            <input type="text" id="cedula" name="cedula" maxlength="8" pattern="^[A-Z]?\d{6,8}$" required>
-
-            <label for="rfc">RFC:</label>
-            <input type="text" id="rfc" name="rfc" maxlength="13"
-                pattern="^([A-ZÑ&]{3,4})(\d{2})(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])[A-Z0-9]{3}$" required>
-
-            <label for="correo">Correo Electrónico:</label>
-            <input type="email" id="correo" name="correo" required>
-
-            <label for="telefono">Teléfono:</label>
-            <input type="tel" id="telefono" name="telefono" pattern="^\d{10}$" maxlength="10" required>
-
-            <label for="id_especialidad">Especialidad:</label>
-            <select id="id_especialidad" name="id_especialidad" required>
-                <option value="" disabled selected>Seleccione una opción</option>
-            </select>
-
-            <label for="foto_trabajador">Foto de Perfil:</label>
-            <input type="file" id="foto" name="foto" accept=".png,.jpg,.jpeg" required>
-
-            <label for="informacion">Información Adicional:</label>
-            <textarea id="informacion" name="informacion" rows="4" required></textarea>
-
-            <div id="mensajeTrabajador" style="color: red; margin: 10px 0;"></div>
-
-            <button type="button" onclick="window.location.href='adminTrabajadorList.html'">Cancelar</button>
-            <button type="reset">Limpiar</button>
-            <button type="submit" id="btnGuardar">Guardar Trabajador</button>
-        </form>
+    <form id="formTrabajador" enctype="multipart/form-data">
+        <label for="nombre">Nombre(s):</label>
+        <input type="text" id="nombre" name="nombre" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ]+(\s[A-Za-zÁÉÍÓÚáéíóúÑñ]+)*$"
+            minlength="2" maxlength="50"
+            title="Solo letras y espacios simples entre palabras, sin espacios al inicio o al final." placeholder="Ej. Juan"
+            autocomplete="given-name" inputmode="text" required>
+    
+        <label for="apellido_paterno">Apellido Paterno:</label>
+        <input type="text" id="apellido_paterno" name="apellido_paterno"
+            pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ]+(\s[A-Za-zÁÉÍÓÚáéíóúÑñ]+)*$" minlength="2" maxlength="50"
+            title="Solo letras y espacios simples entre palabras, sin espacios al inicio o al final."
+            placeholder="Ej. Pérez" autocomplete="family-name" inputmode="text" required>
+    
+        <label for="apellido_materno">Apellido Materno:</label>
+        <input type="text" id="apellido_materno" name="apellido_materno"
+            pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ]+(\s[A-Za-zÁÉÍÓÚáéíóúÑñ]+)*$" minlength="2" maxlength="50"
+            title="Solo letras y espacios simples entre palabras, sin espacios al inicio o al final."
+            placeholder="Ej. García" autocomplete="additional-name" inputmode="text" required>
+    
+        <label for="cedula">Cédula Profesional:</label>
+        <input type="text" id="cedula" name="cedula" pattern="^[A-Z]?\d{6,8}$" minlength="6" maxlength="8"
+            title="Entre 6 y 8 dígitos numéricos, opcionalmente precedidos por una letra mayúscula. Ej. 1234567 o A1234567"
+            placeholder="Ej. 1234567" autocomplete="off" inputmode="text" required>
+    
+        <label for="rfc">RFC:</label>
+        <input type="text" id="rfc" name="rfc"
+            pattern="^([A-ZÑ&]{3,4})(\d{2})(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])[A-Z0-9]{3}$" minlength="12" maxlength="13"
+            title="RFC válido de 12 caracteres (persona moral) o 13 (persona física). Ej. LOMP850101AB2"
+            placeholder="Ej. LOMP850101AB2" autocomplete="off" inputmode="text" required>
+    
+        <label for="correo">Correo Electrónico:</label>
+        <input type="email" id="correo" name="correo" pattern="^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$"
+            maxlength="254" title="Ingrese un correo electrónico válido. Ej. trabajador@clinica.com"
+            placeholder="Ej. trabajador@clinica.com" autocomplete="email" inputmode="email" required>
+    
+        <label for="telefono">Teléfono:</label>
+        <input type="tel" id="telefono" name="telefono" pattern="^\d{10}$" minlength="10" maxlength="10"
+            title="Exactamente 10 dígitos sin espacios ni guiones. Ej. 7821234567" placeholder="Ej. 7821234567"
+            autocomplete="tel" inputmode="tel" required>
+    
+        <label for="id_especialidad">Especialidad:</label>
+        <select id="id_especialidad" name="id_especialidad" required>
+            <option value="" disabled selected>Seleccione una opción</option>
+        </select>
+    
+        <label for="foto_trabajador">Foto de Perfil:</label>
+        <input type="file" id="foto" name="foto" accept=".png,.jpg,.jpeg"
+            title="Seleccione una imagen en formato PNG, JPG o JPEG." required>
+    
+        <label for="informacion">Información Adicional:</label>
+        <textarea id="informacion" name="informacion" rows="4" minlength="10" maxlength="1000"
+            title="Entre 10 y 1000 caracteres. Información relevante del trabajador."
+            placeholder="Ej. Especialista con 10 años de experiencia en..." required></textarea>
+    
+        <div id="mensajeTrabajador" style="color: red; margin: 10px 0;"></div>
+    
+        <button type="button" onclick="window.location.href='adminTrabajadorList.html'">Cancelar</button>
+        <button type="reset">Limpiar</button>
+        <button type="submit" id="btnGuardar">Guardar Trabajador</button>
+    </form>
     </main>
 
     <script src="../js/global.js"></script>

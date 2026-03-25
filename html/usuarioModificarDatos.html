@@ -51,56 +51,58 @@
 
 
     <main>
-        <h2>Modificar mis datos personales</h2>
-        <form id="formModificarDatos">
-
-            <input type="hidden" name="id_pacientes" id="id_pacientes">
-
-            <label for="curp">CURP:</label>
-            <input type="text" name="curp" id="curp" pattern="^[A-Z]{4}\d{6}[HM][A-Z]{5}[A-Z0-9]\d$" maxlength="18"
+        <h2>Modificar datos</h2>
+        <form id="formModificarDatos" method="POST">
+        
+            <input type="hidden" name="id_pacientes" id="id_pacientes" value="">
+        
+            <label>CURP:</label>
+            <input type="text" name="curp" id="curp" pattern="^[A-Z]{4}\d{6}[HM][A-Z]{5}[A-Z0-9]\d$" minlength="18"
+                maxlength="18" title="CURP de 18 caracteres en mayúsculas. Ej. LOMP850101HDFPRS09"
+                placeholder="Ej. LOMP850101HDFPRS09" autocomplete="off" inputmode="text" required><br><br>
+        
+            <label>Nombre:</label>
+            <input type="text" name="nombre" id="nombre" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ]+(\s[A-Za-zÁÉÍÓÚáéíóúÑñ]+)*$"
+                minlength="2" maxlength="50"
+                title="Solo letras y espacios simples entre palabras, sin espacios al inicio o al final." placeholder="Ej. Juan"
+                autocomplete="given-name" inputmode="text" required><br><br>
+        
+            <label>Apellido Paterno:</label>
+            <input type="text" name="app" id="app" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ]+(\s[A-Za-zÁÉÍÓÚáéíóúÑñ]+)*$" minlength="2"
+                maxlength="50" title="Solo letras y espacios simples entre palabras, sin espacios al inicio o al final."
+                placeholder="Ej. Pérez" autocomplete="family-name" inputmode="text" required><br><br>
+        
+            <label>Apellido Materno:</label>
+            <input type="text" name="apm" id="apm" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ]+(\s[A-Za-zÁÉÍÓÚáéíóúÑñ]+)*$" minlength="2"
+                maxlength="50" title="Solo letras y espacios simples entre palabras, sin espacios al inicio o al final."
+                placeholder="Ej. García" autocomplete="additional-name" inputmode="text" required><br><br>
+        
+            <label>Fecha de Nacimiento:</label>
+            <input type="date" name="fecha_nac" id="fecha_nac" min="1900-01-01" max="2025-03-24"
+                title="La fecha debe estar entre 1900 y hoy. No puede ser una fecha futura." autocomplete="bday"
                 required><br><br>
-
-            <label for="nombre">Nombre(s):</label>
-            <input type="text" name="nombre" id="nombre" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,50}$" required><br><br>
-
-            <label for="app">Apellido Paterno:</label>
-            <input type="text" name="app" id="app" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,50}$" required><br><br>
-
-            <label for="apm">Apellido Materno:</label>
-            <input type="text" name="apm" id="apm" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]{2,50}$" required><br><br>
-
-            <label>Sexo:</label>
-            <div class="contenedor-sexo">
-                <input type="radio" name="sexo" id="sexoH" value="H" required>
-                <label for="sexoH">Hombre</label>
-
-                <input type="radio" name="sexo" id="sexoM" value="M" required>
-                <label for="sexoM">Mujer</label>
-            </div><br>
-
-            <label for="fecha_nac">Fecha de Nacimiento:</label>
-            <input type="date" name="fecha_nac" id="fecha_nac" required><br><br>
-
-            <label for="correo">Correo electrónico:</label>
-            <input type="email" name="correo" id="correo" pattern="^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-z]{2,}$"
-                required><br><br>
-
-            <label for="usuario">Nombre de Usuario:</label>
-            <input type="text" name="usuario" id="usuario" pattern="^[a-zA-Z0-9_]{4,20}$"
-                title="Mínimo 4 caracteres, letras, números o guiones bajos." required><br><br>
-
-            <label id="mensajeModificar" style="display:none; margin-bottom:10px; font-weight: bold;"></label>
-
-            <div class="contenedor-acciones">
-                <button type="button" onclick="window.location.href='usuarioPrincipal.html'">Cancelar</button>
-                <button type="reset">Limpiar formulario</button>
-                <button type="submit" id="btnActualizar">Guardar Cambios</button>
-            </div>
-
+        
+            <label>Correo electrónico:</label>
+            <input type="email" name="correo" id="correo" pattern="^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$"
+                maxlength="254" title="Ingrese un correo electrónico válido. Ej. juan@correo.com"
+                placeholder="Ej. juan@correo.com" autocomplete="email" inputmode="email" required><br><br>
+        
+            <label>Usuario:</label>
+            <input type="text" name="usuario" id="usuario" title="El usuario no puede modificarse." autocomplete="username"
+                readonly required><br><br>
+        
+            <label id="mensajeModificar" style="color:red; display:block; margin-bottom:10px;"></label>
+        
+            <button type="button" onclick="window.location.href='usuarioPrincipal.html'">Cancelar</button>
+            <button type="reset">Limpiar</button>
+            <button type="submit" name="btnActualizar">Guardar</button>
+        
         </form>
-    </main>
 
-    <script src="../js/usuarioDatosEdit.js"></script>
+        <script>
+            document.getElementById('fecha_nac').max = new Date().toISOString().split('T')[0];
+        </script>
+    </main>
     <script src="../js/global.js"></script>
     <script src="../js/Check.js"></script>
     <footer>

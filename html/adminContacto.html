@@ -99,33 +99,31 @@
         <h2>Modificar Contacto</h2>
 
         <form id="formContacto">
-
-
+        
             <input type="hidden" id="input-id-contacto" name="id_contacto" value="1">
-
+        
             <label for="direccion">Dirección:</label><br>
-
-            <textarea id="direccion" name="direccion" rows="4" cols="30" maxlength="100" title="Ingrese la dirección"
+            <textarea id="direccion" name="direccion" rows="4" cols="30" minlength="10" maxlength="200"
+                title="Ingrese la dirección. Mínimo 10 caracteres, máximo 200."
                 required>Av. Ejemplo 123, Col. Centro, Poza Rica, Ver.</textarea><br><br>
-
+        
             <label for="correo">Correo:</label><br>
-
-            <input type="email" id="correo" name="correo" maxlength="100" value=""
-                title="Ingrese un correo válido" required><br><br>
-
+            <input type="email" id="correo" name="correo" pattern="^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$"
+                maxlength="254" title="Ingrese un correo electrónico válido. Ej. contacto@clinica.com"
+                placeholder="Ej. contacto@clinica.com" autocomplete="email" inputmode="email" required><br><br>
+        
             <label for="telefono">Teléfono:</label><br>
-
-            <input type="text" id="telefono" name="telefono" maxlength="15" value="7821234567"
-                title="Ingrese solo números, espacios o guiones"
-                oninput="this.value = this.value.replace(/[^0-9\- ]/g, '')" required><br><br>
-
-
+            <input type="tel" id="telefono" name="telefono" pattern="^(\+52\s?)?\d{10}$" minlength="10" maxlength="15"
+                title="Ingrese un teléfono de 10 dígitos, opcionalmente con +52. Ej. 7821234567" placeholder="Ej. 7821234567"
+                autocomplete="tel" inputmode="tel" value="7821234567" required
+                oninput="this.value = this.value.replace(/[^0-9\- ]/g, '')"><br><br>
+        
             <label id="mensajeContacto" style="display: block; margin-bottom: 10px; color: red;"></label>
-
+        
             <button type="button" onclick="window.location.href='adminPrincipal.html'">Cancelar</button>
             <button type="reset">Limpiar</button>
             <button type="submit" id="btnActualizar">Guardar</button>
-
+        
         </form>
     </main>
 

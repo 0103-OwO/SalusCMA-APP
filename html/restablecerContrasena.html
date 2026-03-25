@@ -46,22 +46,25 @@
     <main class="mainUnaColumna">
         <h2>Cambio de Contraseña</h2>
         <form id="formRestablecer" method="POST">
-
+        
             <input type="hidden" name="token" id="token" value="">
-
+        
             <label>Contraseña Nueva:</label>
-            <input type="password" name="conNueva" id="conNueva" minlength="8"
-                pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&]{8,}$"
-                title="Debe tener al menos 8 caracteres, incluyendo una letra y un número." required><br><br>
-
+            <input type="password" name="conNueva" id="conNueva" minlength="8" maxlength="72"
+                pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&]{8,72}$"
+                title="Mínimo 8 caracteres, máximo 72. Debe incluir al menos una letra y un número. Caracteres especiales permitidos: @$!%*#?&"
+                autocomplete="new-password" required><br><br>
+        
             <label>Confirmación de contraseña:</label>
-            <input type="password" name="conConfirmacion" id="conConfirmacion" title="Repite la nueva contraseña."
-                required><br><br>
-
+            <input type="password" name="conConfirmacion" id="conConfirmacion" minlength="8" maxlength="72"
+                pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&]{8,72}$"
+                title="Repite la nueva contraseña con los mismos requisitos: mínimo 8 caracteres, al menos una letra y un número."
+                autocomplete="new-password" required><br><br>
+        
             <label id="mensajeRestablecer" style="color:red; display:block; margin-bottom:10px;"></label>
-
+        
             <button type="submit">Confirmar</button>
-
+        
         </form>
 
         <script>

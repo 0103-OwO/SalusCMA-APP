@@ -96,28 +96,29 @@
     <main>
         <h2>Modificar Usuario</h2>
 
-        <form id="formEditUsuario">
-            <input type="hidden" id="input-id-usuario" name="id_usuario">
-
-            <label for="usuario">Usuario:</label><br>
-            <input type="text" id="usuario" name="usuario" pattern="^[A-Za-z0-9ÁÉÍÓÚáéíóúÑñ._-]{4,30}$" minlength="4"
-                maxlength="30" title="4-30 caracteres, letras, números, . _ -" required><br><br>
-
-            <label for="select-rol">Rol:</label><br>
-            <select id="select-rol" name="id_rol" required>
-                <option value="" disabled selected>Cargando roles...</option>
-            </select><br><br>
-
-            <label for="select-trabajador">Trabajador:</label><br>
-            <select id="select-trabajador" name="id_trabajador" required>
-                <option value="" disabled>Cargando trabajadores...</option>
-            </select><br><br>
-
-            <label id="mensajeEdit" style="display: block; margin-bottom: 10px;"></label>
-
-            <button type="button" onclick="window.location.href='adminUsuarioList.html'">Cancelar</button>
-            <button type="submit" id="btnActualizar">Actualizar Cambios</button>
-        </form>
+    <form id="formEditUsuario">
+        <input type="hidden" id="input-id-usuario" name="id_usuario">
+    
+        <label for="usuario">Usuario:</label><br>
+        <input type="text" id="usuario" name="usuario" pattern="^[a-zA-Z0-9_\-]{3,30}$" minlength="3" maxlength="30"
+            title="Entre 3 y 30 caracteres. Solo letras, números, guion bajo (_) y guion medio (-)."
+            placeholder="Ej. admin_salus" autocomplete="username" inputmode="text" required><br><br>
+    
+        <label for="select-rol">Rol:</label><br>
+        <select id="select-rol" name="id_rol" required>
+            <option value="" disabled selected>Cargando roles...</option>
+        </select><br><br>
+    
+        <label for="select-trabajador">Trabajador:</label><br>
+        <select id="select-trabajador" name="id_trabajador" required>
+            <option value="" disabled>Cargando trabajadores...</option>
+        </select><br><br>
+    
+        <label id="mensajeEdit" style="display: block; margin-bottom: 10px;"></label>
+    
+        <button type="button" onclick="window.location.href='adminUsuarioList.html'">Cancelar</button>
+        <button type="submit" id="btnActualizar">Actualizar Cambios</button>
+    </form>
     </main>
     <script src="../js/adminUsuariosEdit.js"></script>
     <script src="../js/global.js"></script>

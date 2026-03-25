@@ -66,32 +66,34 @@
 
         <form id="formEditCita">
             <input type="hidden" id="input-id-cita" name="id_cita">
-
+        
             <label for="fecha">Fecha:</label>
-            <input type="date" id="fecha" name="fecha" required><br><br>
-
+            <input type="date" id="fecha" name="fecha" min="2025-03-24"
+                title="Establezca la fecha de la cita. No puede ser una fecha pasada." autocomplete="off" required><br><br>
+        
             <label for="hora">Hora:</label>
-            <input type="time" id="hora" name="hora" required><br><br>
-
+            <input type="time" id="hora" name="hora" min="07:00" max="21:00"
+                title="Establezca la hora de la cita. Horario disponible: 07:00 a 21:00." required><br><br>
+        
             <label for="select-paciente">Paciente:</label>
             <select id="select-paciente" name="id_paciente" required>
                 <option value="" disabled selected>Cargando...</option>
             </select><br><br>
-
+        
             <label for="select-medico">Médico:</label>
             <select id="select-medico" name="id_medico" required>
                 <option value="" disabled selected>Cargando...</option>
             </select><br><br>
-
+        
             <label for="select-consultorio">Consultorio:</label>
             <select id="select-consultorio" name="id_consultorio" required>
                 <option value="" disabled selected>Cargando...</option>
             </select><br><br>
-
+        
             <p><strong>Estado actual:</strong> <span id="txt-estado">Cargando...</span></p>
-
+        
             <label id="mensajeEdit" style="display: block; margin-bottom: 10px; font-weight: bold;"></label>
-
+        
             <div class="contenedor-botones">
                 <button type="button" onclick="window.location.href='recepcionistaCitaList.html'">Cancelar</button>
                 <button type="submit" id="btnActualizar">Guardar Cambios</button>

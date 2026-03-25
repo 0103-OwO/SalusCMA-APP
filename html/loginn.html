@@ -49,25 +49,26 @@
 
         <form id="formLogin">
             <label>Usuario:</label>
-            <input type="text" name="usuario" id="input-usuario" required title="Introduce tu usuario."><br><br>
-
+            <input type="text" name="usuario" id="input-usuario"
+                pattern="^([a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}|[a-zA-Z0-9_\-]{3,30})$" minlength="3"
+                maxlength="254" required
+                title="Ingresa tu correo electrónico (ej. juan@correo.com) o tu nombre de usuario (solo letras, números, guiones y guion bajo, entre 3 y 30 caracteres)."
+                placeholder="Ej. juanperez o juan@correo.com" autocomplete="username" inputmode="email"><br><br>
+        
             <label>Contraseña:</label>
-            <input type="password" name="contrasena" id="input-contrasena" required
-                title="Introduce tu contraseña."><br><br>
-
+            <input type="password" name="contrasena" id="input-contrasena" minlength="8" maxlength="72"
+                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,72}$" required
+                title="La contraseña debe tener entre 8 y 72 caracteres, al menos una mayúscula, una minúscula y un número."
+                autocomplete="current-password"><br><br>
+        
             <label id="mensajeLogin" style="color:red; display:block; margin-bottom:10px;"></label>
-
+        
             <!-- Aquí va el captcha de Cloudflare -->
-            <div
-                class="cf-turnstile"
-                data-sitekey="0x4AAAAAACtfQ8igZsBm66Lp"
-                data-callback="turnstileCallback"
-                data-theme="light"
-                data-size="compact"
-            ></div>
-
+            <div class="cf-turnstile" data-sitekey="0x4AAAAAACtfQ8igZsBm66Lp" data-callback="turnstileCallback"
+                data-theme="light" data-size="compact"></div>
+        
             <button type="submit" id="btn-login" disabled>Entrar</button>
-
+        
             <p>¿Aún no estás registrado?</p>
             <a href="registro.html">Registrarse</a>
             <br>
