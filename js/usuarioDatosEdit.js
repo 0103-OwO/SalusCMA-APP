@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const response = await fetch(`${API_BASE}/pacientes/perfil`, {
             method: 'GET',
             headers: {
-                'Authorization': `Bearer ${token}`,
+                'Authorization': `Bearer ${localStorage.getItem('token')}`,
                 'Content-Type': 'application/json'
             }
         });
