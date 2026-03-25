@@ -1,8 +1,8 @@
 //esta parte hace que el boton de login se habilite solo cuando se complete el captcha, y luego hace la logica para iniciar sesion
-function turnstileCallback() {
+/*function turnstileCallback() {
   const btn = document.getElementById('btn-login');
   if (btn) btn.disabled = false;
-}
+}*/
 
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('formLogin');
@@ -17,11 +17,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const contrasena = document.getElementById('input-contrasena').value;
             const token = document.querySelector('[name="cf-turnstile-response"]')?.value;
 
-            if (!token){
+            /*if (!token){
                 mensaje.style.color = 'red';
                 mensaje.innerText = 'Por favor completa la verificación de seguridad.';
                 return;
-            }
+            }*/
             try {
                 btn.disabled = true;
                 btn.innerText = "Verificando...";
