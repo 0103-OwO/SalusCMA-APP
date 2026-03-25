@@ -41,6 +41,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error(error);
         mensajeError.style.display = 'block';
         mensajeError.style.color = "red";
-        mensajeError.innerText = "No se pudo cargar tu información personal.";
+        mensajeError.innerText = "Fallo: " + error.message;
     }
 });
