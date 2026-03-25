@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const mensajeError = document.getElementById('mensajeModificar');
     const checkH = document.getElementById('sexoH');
     const checkM = document.getElementById('sexoM');
-    const btnGuardar = form.querySelector('button[type="submit"]');
+    const btnGuardar = document.getElementById('btnActualizar');
     const fechaInput = document.getElementById('fecha_nac');
     const token = localStorage.getItem('token');
 
@@ -20,34 +20,29 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         });
 
-        if (!response.ok) throw new Error("No se pudo obtener el perfil");
+        if (!response.ok) throw new Error("No se pudo obtener la información del perfil.");
 
         const pac = await response.json();
 
-        document.getElementById('id_pacientes').value = pac.id_pacientes;
-        document.getElementById('curp').value = pac.curp;
-        document.getElementById('nombre').value = pac.nombre;
-        document.getElementById('app').value = pac.apellido_paterno;
-        document.getElementById('apm').value = pac.apellido_materno;
-        document.getElementById('correo').value = pac.email;
-        document.getElementById('usuario').value = pac.usuario;
+        document.getElementById('curp').value = pac.curp || '';
+        document.getElementById('nombre').value = pac.nombre || '';
+        document.getElementById('app').value = pac.apellido_paterno || '';
+        document.getElementById('apm').value = pac.apellido_materno || '';
+        document.getElementById('correo').value = pac.email || '';
+        document.getElementById('usuario').value = pac.usuario || '';
 
         if (pac.fecha_nacimiento) {
             document.getElementById('fecha_nac').value = pac.fecha_nacimiento.split('T')[0];
         }
 
         if (pac.sexo === 'H') checkH.checked = true;
-        if (pac.sexo === 'M') checkM.checked = true;
+        else if (pac.sexo === 'M') checkM.checked = true;
 
     } catch (error) {
-        console.error(error);
-        mensajeError.style.color = "red";
-        mensajeError.innerText = "Error al cargar su información personal.";
         mensajeError.style.display = 'block';
+        mensajeError.style.color = "red";
+        mensajeError.innerText = error.message;
     }
-
-    checkH.addEventListener('change', () => { if (checkH.checked) checkM.checked = false; });
-    checkM.addEventListener('change', () => { if (checkM.checked) checkH.checked = false; });
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -59,8 +54,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             mensajeError.style.display = 'block';
             return;
         }
-
-        const idPaciente = document.getElementById('id_pacientes').value;
 
         const datosActualizados = {
             curp: document.getElementById('curp').value.toUpperCase().trim(),
@@ -77,7 +70,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             btnGuardar.disabled = true;
             btnGuardar.innerText = "Guardando...";
 
-            const response = await fetch(`${API_BASE}/pacientes/${idPaciente}`, {
+            const response = await fetch(`${API_BASE}/pacientes/actualizar-perfil`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -90,24 +83,15 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             if (response.ok) {
                 mensajeError.style.color = "green";
-                mensajeError.innerText = resData.msg || "Información actualizada con éxito.";
+                mensajeError.innerText = resData.msg || "Datos actualizados.";
                 mensajeError.style.display = 'block';
-
-                setTimeout(() => {
-                    window.location.href = 'usuarioPrincipal.html';
-                }, 1500);
-
+                setTimeout(() => window.location.href = 'usuarioPrincipal.html', 1500);
             } else {
-                mensajeError.style.color = "red";
-                mensajeError.innerText = resData.msg || "Error al actualizar.";
-                mensajeError.style.display = 'block';
-                btnGuardar.disabled = false;
-                btnGuardar.innerText = "Guardar Cambios";
+                throw new Error(resData.msg || "Error al actualizar.");
             }
         } catch (error) {
-            console.error(error);
             mensajeError.style.color = "red";
-            mensajeError.innerText = "Error de conexión con el servidor.";
+            mensajeError.innerText = error.message;
             mensajeError.style.display = 'block';
             btnGuardar.disabled = false;
             btnGuardar.innerText = "Guardar Cambios";
