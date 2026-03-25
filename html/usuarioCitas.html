@@ -51,7 +51,7 @@
 
 
     <main>
-        <h2>Citas pendientes</h2>
+        <h2>Mis Citas Agendadas</h2>
 
         <table id="tablaCitasUsuario">
             <thead>
@@ -61,53 +61,20 @@
                     <th>Paciente (CURP)</th>
                     <th>Médico</th>
                     <th>Consultorio</th>
+                    <th>Estado</th>
                 </tr>
             </thead>
-            <tbody id="tbody-citas">
-
-                <tr class="filaCitaUsuario">
-                    <td>2025-07-10</td>
-                    <td>10:00</td>
-                    <td>GOMC900101HVZRZR01</td>
-                    <td>Dr. Ramírez Soto</td>
-                    <td>Consultorio 1</td>
-                </tr>
-            </tbody>
+            <tbody id="tbody-citas"></tbody>
         </table>
 
         <div class="contenedor-botones">
-            <button id="prevCitaUsuario">&laquo; Anterior</button>
+            <button id="prevCitaUsuario" disabled>&laquo; Anterior</button>
             <span id="paginaCitaUsuario">Página 1 de 1</span>
-            <button id="nextCitaUsuario">Siguiente &raquo;</button>
+            <button id="nextCitaUsuario" disabled>Siguiente &raquo;</button>
         </div>
-
-        <script>
-            const filasCitaUsuario = document.querySelectorAll('.filaCitaUsuario');
-            const filasPorPaginaCitaUsuario = 10;
-            let paginaActualCitaUsuario = 0;
-            const totalPaginasCitaUsuario = Math.ceil(filasCitaUsuario.length / filasPorPaginaCitaUsuario);
-            const spanPaginaCitaUsuario = document.getElementById('paginaCitaUsuario');
-
-            function mostrarPaginaCitaUsuario(pagina) {
-                filasCitaUsuario.forEach((fila, index) => {
-                    fila.style.display = (index >= pagina * filasPorPaginaCitaUsuario && index < (pagina + 1) * filasPorPaginaCitaUsuario) ? '' : 'none';
-                });
-                spanPaginaCitaUsuario.textContent = `Página ${pagina + 1} de ${totalPaginasCitaUsuario}`;
-            }
-
-            document.getElementById('prevCitaUsuario').addEventListener('click', () => {
-                paginaActualCitaUsuario = (paginaActualCitaUsuario - 1 + totalPaginasCitaUsuario) % totalPaginasCitaUsuario;
-                mostrarPaginaCitaUsuario(paginaActualCitaUsuario);
-            });
-
-            document.getElementById('nextCitaUsuario').addEventListener('click', () => {
-                paginaActualCitaUsuario = (paginaActualCitaUsuario + 1) % totalPaginasCitaUsuario;
-                mostrarPaginaCitaUsuario(paginaActualCitaUsuario);
-            });
-
-            mostrarPaginaCitaUsuario(paginaActualCitaUsuario);
-        </script>
     </main>
+
+    <script src="../js/usuarioCitas.js"></script>
     <script src="../js/global.js"></script>
     <script src="../js/Check.js"></script>
     <footer>
