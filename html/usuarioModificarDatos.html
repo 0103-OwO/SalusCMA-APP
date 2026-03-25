@@ -86,11 +86,10 @@
                 required><br><br>
 
             <label for="usuario">Nombre de Usuario:</label>
-            <input type="text" name="usuario" id="usuario" readonly
-                title="El nombre de usuario no puede ser modificado por seguridad." required>
-            <small style="display:block; color: gray; margin-bottom: 10px;">(No editable)</small>
+            <input type="text" name="usuario" id="usuario" pattern="^[a-zA-Z0-9_]{4,20}$"
+                title="Mínimo 4 caracteres, letras, números o guiones bajos." required><br><br>
 
-            <label id="mensajeModificar" style="color:red; display:block; margin-bottom:10px;"></label>
+            <label id="mensajeModificar" style="display:none; margin-bottom:10px; font-weight: bold;"></label>
 
             <div class="contenedor-acciones">
                 <button type="button" onclick="window.location.href='usuarioPrincipal.html'">Cancelar</button>
