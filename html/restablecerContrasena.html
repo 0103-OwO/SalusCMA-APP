@@ -46,37 +46,26 @@
     <main class="mainUnaColumna">
         <h2>Cambio de Contraseña</h2>
         <form id="formRestablecer" method="POST">
-        
-            <input type="hidden" name="token" id="token" value="">
-        
+
+            <input type="hidden" name="id" id="userId">
+            <input type="hidden" name="token" id="userToken">
+            <input type="hidden" name="tipo" id="userTipo">
+
             <label>Contraseña Nueva:</label>
             <input type="password" name="conNueva" id="conNueva" minlength="8" maxlength="72"
                 pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&]{8,72}$"
-                title="Mínimo 8 caracteres, máximo 72. Debe incluir al menos una letra y un número. Caracteres especiales permitidos: @$!%*#?&"
+                title="Mínimo 8 caracteres, máximo 72. Debe incluir al menos una letra y un número."
                 autocomplete="new-password" required><br><br>
-        
+
             <label>Confirmación de contraseña:</label>
             <input type="password" name="conConfirmacion" id="conConfirmacion" minlength="8" maxlength="72"
-                pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&]{8,72}$"
-                title="Repite la nueva contraseña con los mismos requisitos: mínimo 8 caracteres, al menos una letra y un número."
+                pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*#?&]{8,72}$" title="Repite la nueva contraseña."
                 autocomplete="new-password" required><br><br>
-        
-            <label id="mensajeRestablecer" style="color:red; display:block; margin-bottom:10px;"></label>
-        
-            <button type="submit">Confirmar</button>
-        
-        </form>
 
-        <script>
-            const params = new URLSearchParams(window.location.search);
-            const token = params.get('token');
-            if (!token) {
-                alert('Token no válido o expirado.');
-                window.location.href = 'recuperarContrasena.html';
-            } else {
-                document.getElementById('token').value = token;
-            }
-        </script>
+            <label id="mensajeRestablecer" style="color:red; display:block; margin-bottom:10px;"></label>
+
+            <button type="submit" id="btnRestablecer">Confirmar</button>
+        </form>
     </main>
 
     <script src="../js/global.js"></script>
