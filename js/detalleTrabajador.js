@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             // Especialidad
             document.getElementById('especialidad-trabajador').innerText = 
-                tra.especialidad || 'Especialidad no definida';
+                tra.id_especialidad || 'Especialidad no definida';
 
             // Correo 
             const correoLink = document.getElementById('correo-trabajador');
