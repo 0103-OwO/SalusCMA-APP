@@ -25,9 +25,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             fotoImg.src = tra.foto || ''; 
             fotoImg.alt = `Foto de ${tra.nombre}`;
 
-            // Especialidad
             document.getElementById('especialidad-trabajador').innerText = 
-                tra.id_especialidad || 'Especialidad no definida';
+                tra.especialidad || 'Especialidad no definida';
 
             // Correo 
             const correoLink = document.getElementById('correo-trabajador');
