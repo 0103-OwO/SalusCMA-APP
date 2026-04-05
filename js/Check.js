@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('token');
     const rol = localStorage.getItem('rol');
     const nombre = localStorage.getItem('nombre') || 'Usuario';
-    
+
     const path = window.location.pathname;
     const currentFile = path.split('/').pop() || 'index.html';
     const estaEnCarpetaHtml = path.includes('/html/');
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
             case '7': panelLink = aHtml + 'adminPrincipal.html'; break;
             case '8': panelLink = aHtml + 'medicoPrincipal.html'; break;
             case '9': panelLink = aHtml + 'recepcionistaPrincipal.html'; break;
-            default:  panelLink = aHtml + 'usuarioPrincipal.html'; break;
+            default: panelLink = aHtml + 'usuarioPrincipal.html'; break;
         }
     }
 
@@ -36,9 +36,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const saludo = document.getElementById('saludo-bienvenida');
 
     if (token) {
-       
+
         if (saludo) saludo.innerText = `Bienvenido, ${nombre}`;
-        
+
         if (perfilContainer) {
             perfilContainer.innerHTML = `
                 <nav>
@@ -50,12 +50,13 @@ document.addEventListener('DOMContentLoaded', () => {
                             </a>
                             <ul class="submenu">
                                 <li><a href="${panelLink}">Mi Perfil</a></li>
-                                <li><a href="#" id="btn-logout">Cerrar sesión</a></li>
+                                <li><a href="${aHtml}cambiarContrasena.html" id="btn-cambiar-contrasena">Cambiar contraseña</a></li>
+                                <li><a href="#" id="btn-logout">Cerrar sesión</a></li>      
                             </ul>
                         </li>
                     </ul>
                 </nav>`;
-            
+
             document.getElementById('btn-logout').addEventListener('click', (e) => {
                 e.preventDefault();
                 localStorage.clear();
@@ -64,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     } else {
         if (saludo) saludo.innerText = "Bienvenido a Salus CMA";
-        
+
         if (perfilContainer) {
             perfilContainer.innerHTML = `
                 <a href="${aHtml}loginn.html">

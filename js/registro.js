@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 mensajeRegistro.style.display = 'block';
 
                 setTimeout(() => {
-                    window.location.href = 'login.html';
+                    window.location.href = 'loginn.html';
                 }, 2000);
             } else {
                 mensajeRegistro.innerText = resData.msg || "Error al registrarse.";
