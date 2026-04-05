@@ -28,12 +28,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 mensaje.style.color = "blue";
                 mensaje.innerText = "Iniciando sesión...";
 
-                const response = await fetch(`${API_BASE}/login`, { 
+                const response = await fetch(`${API_BASE}/login`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ identificador, contrasena, 'cf-turnstile-response': token})
+                    body: JSON.stringify({ identificador, contrasena, 'cf-turnstile-response': token })
                 });
 
                 const data = await response.json();
@@ -55,7 +55,21 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
                     }, 1500);
 
-                } else {
+                }
+                else if (response.status === 403 && data.cuentaInactiva) {
+                    btn.disabled = false;
+                    btn.innerText = "Entrar";
+
+                    const deseaReactivar = confirm("Tu cuenta está desactivada. ¿Deseas reactivarla ahora mismo?");
+                    if (deseaReactivar) {
+                        await ejecutarReactivacion(identificador);
+                    } else {
+                        mensaje.style.color = "orange";
+                        mensaje.innerText = "La cuenta permanece desactivada.";
+                    }
+                    return;
+                }
+                else {
                     throw new Error(data.error || "Credenciales incorrectas");
                 }
 
@@ -63,10 +77,34 @@ document.addEventListener('DOMContentLoaded', () => {
                 mensaje.style.color = "red";
                 mensaje.innerText = error.message;
 
-                if(typeof turnstile !== 'undefined') turnstile.reset();
+                if (typeof turnstile !== 'undefined') turnstile.reset();
                 btn.disabled = true;
                 btn.innerText = "Entrar";
             }
         });
+    }
+    async function ejecutarReactivacion(identificador) {
+        mensaje.style.color = "blue";
+        mensaje.innerText = "Reactivando cuenta...";
+
+        try {
+            const res = await fetch(`${API_BASE}/usuarios/reactivar`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ identificador })
+            });
+            const result = await res.json();
+
+            if (result.success) {
+                alert("¡Cuenta reactivada con éxito! Ahora puedes iniciar sesión normalmente.");
+                location.reload(); // Recargamos para limpiar estados
+            } else {
+                mensaje.style.color = "red";
+                mensaje.innerText = result.error || "No se pudo reactivar la cuenta.";
+            }
+        } catch (err) {
+            mensaje.style.color = "red";
+            mensaje.innerText = "Error de conexión al reactivar.";
+        }
     }
 });

@@ -17,7 +17,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         if (result.success) {
             const p = result.datos;
-            // Llenar inputs
             document.getElementById('id_pacientes').value = p.id_pacientes;
             document.getElementById('curp').value = p.curp;
             document.getElementById('nombre').value = p.nombre;
@@ -26,11 +25,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             document.getElementById('correo').value = p.email;
             document.getElementById('usuario').value = p.usuario;
 
-            // Sexo (Radio buttons)
             if (p.sexo === 'H') document.getElementById('sexoH').checked = true;
             if (p.sexo === 'M') document.getElementById('sexoM').checked = true;
 
-            // Fecha (Formato YYYY-MM-DD)
             if (p.fecha_nacimiento) {
                 document.getElementById('fecha_nac').value = p.fecha_nacimiento.split('T')[0];
             }
@@ -42,8 +39,42 @@ document.addEventListener('DOMContentLoaded', async () => {
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        const btn = e.target.querySelector('button[type="submit"]');
+        const botonActivo = e.submitter;
 
+        if (botonActivo.name === 'btnDesactivar') {
+            const confirmar = confirm("¿Estás seguro de que deseas desactivar tu cuenta? No podrás iniciar sesión hasta que la reactives.");
+            if (!confirmar) return;
+
+            try {
+                mensaje.style.color = "orange";
+                mensaje.textContent = "Procesando desactivación...";
+                botonActivo.disabled = true;
+
+                const response = await fetch(`${API_BASE}/usuarios/desactivar`, {
+                    method: 'PUT',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    alert("Cuenta desactivada correctamente.");
+                    localStorage.clear(); 
+                    window.location.href = '../index.html';
+                } else {
+                    mensaje.style.color = "red";
+                    mensaje.textContent = data.error || "No se pudo desactivar la cuenta.";
+                    botonActivo.disabled = false;
+                }
+            } catch (error) {
+                mensaje.style.color = "red";
+                mensaje.textContent = "Error de conexión al desactivar.";
+                botonActivo.disabled = false;
+            }
+            return; 
+        }
+
+        const btnGuardar = e.target.querySelector('button[name="btnActualizar"]');
         const sexoSeleccionado = document.querySelector('input[name="sexo"]:checked')?.value;
 
         const formData = {
@@ -56,10 +87,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             usuario: document.getElementById('usuario').value,
             sexo: sexoSeleccionado
         };
+
         try {
             mensaje.style.color = "blue";
             mensaje.textContent = "Validando y guardando cambios...";
-            btn.disabled = true; // Evita múltiples clics
+            btnGuardar.disabled = true;
 
             const response = await fetch(`${API_BASE}/pacientes/actualizar-perfil`, {
                 method: 'PUT',
@@ -73,26 +105,20 @@ document.addEventListener('DOMContentLoaded', async () => {
             const data = await response.json();
 
             if (data.success) {
-                // ÉXITO: Mensaje en verde y redirección tras una pequeña pausa
                 mensaje.style.color = "green";
                 mensaje.textContent = "¡Datos actualizados correctamente! Redirigiendo...";
-
                 setTimeout(() => {
                     window.location.href = 'usuarioPrincipal.html';
-                }, 2000); // 2 segundos de pausa para que el usuario lea el mensaje
-
+                }, 2000);
             } else {
-                // ERROR DE VALIDACIÓN: (CURP en uso, Correo duplicado, etc.)
                 mensaje.style.color = "red";
                 mensaje.textContent = data.error || "No se pudo actualizar la información.";
-                btn.disabled = false;
+                btnGuardar.disabled = false;
             }
-
         } catch (error) {
-            // ERROR DE RED
             mensaje.style.color = "red";
-            mensaje.textContent = "Error de conexión con el servidor. Intenta más tarde.";
-            btn.disabled = false;
+            mensaje.textContent = "Error de conexión con el servidor.";
+            btnGuardar.disabled = false;
         }
     });
 });
