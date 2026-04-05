@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const cargarCatalogos = async () => {
         try {
             const [resP, resM, resC] = await Promise.all([
-                fetch(`${API_BASE}/pacientes`, { headers: { 'Authorization': `Bearer ${token}` } }),
+                fetch(`${API_BASE}/pacientes/activos`, { headers: { 'Authorization': `Bearer ${token}` } }),
                 fetch(`${API_BASE}/trabajadores/medicos`, { headers: { 'Authorization': `Bearer ${token}` } }),
                 fetch(`${API_BASE}/consultorio`, { headers: { 'Authorization': `Bearer ${token}` } })
             ]);

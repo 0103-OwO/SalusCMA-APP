@@ -17,7 +17,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const inicializarPagina = async () => {
         try {
-            // Cargar Médicos
             const resMedicos = await fetch(`${API_BASE}/trabajadores`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
@@ -31,7 +30,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 selectTrabajador.appendChild(opt);
             });
 
-            // Cargar Datos del Horario
             const resHorario = await fetch(`${API_BASE}/horarios/${horarioId}`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
@@ -52,7 +50,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const llenarFormulario = (data) => {
         document.getElementById('input-id-horario').value = data.id_horario;
-        // Ajuste de fechas para inputs tipo date
         if(data.fecha_inicio) document.getElementById('finicio').value = data.fecha_inicio.split('T')[0];
         if(data.fecha_fin) document.getElementById('ffin').value = data.fecha_fin.split('T')[0];
         
@@ -60,7 +57,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         const dias = ['lunes', 'martes', 'miercoles', 'jueves', 'viernes'];
         dias.forEach(dia => {
-            // Aseguramos que si el valor es null, el input quede vacío
             document.getElementById(`${dia}_ent`).value = data[`${dia}_ent`] || "";
             document.getElementById(`${dia}_sal`).value = data[`${dia}_sal`] || "";
         });
@@ -69,8 +65,36 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (formEdit) {
         formEdit.addEventListener('submit', async (e) => {
             e.preventDefault();
+            mensaje.innerText = "";
+
+            const fInicio = document.getElementById('finicio').value;
+            const fFin = document.getElementById('ffin').value;
+
+            if (fInicio > fFin) {
+                mensaje.style.color = "red";
+                mensaje.innerText = "Error: La fecha de inicio no puede ser posterior a la fecha de fin.";
+                return;
+            }
+
+            const dias = ['lunes', 'martes', 'miercoles', 'jueves', 'viernes'];
             
-            // Estado visual de procesamiento
+            for (const dia of dias) {
+                const hEntrada = document.getElementById(`${dia}_ent`).value;
+                const hSalida = document.getElementById(`${dia}_sal`).value;
+
+                if (hEntrada && hSalida) {
+                    if (hEntrada >= hSalida) {
+                        mensaje.style.color = "red";
+                        mensaje.innerText = `Error en ${dia}: La hora de entrada debe ser menor a la hora de salida.`;
+                        return; 
+                    }
+                } else if ((hEntrada && !hSalida) || (!hEntrada && hSalida)) {
+                    mensaje.style.color = "red";
+                    mensaje.innerText = `Error en ${dia}: Debe completar tanto entrada como salida.`;
+                    return;
+                }
+            }
+            
             btnActualizar.disabled = true;
             mensaje.style.color = "blue";
             mensaje.innerText = "Actualizando información...";

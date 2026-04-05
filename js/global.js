@@ -87,9 +87,6 @@ async function cargarContenidoGlobal() {
 
     if (imgPerfil) {
         imgPerfil.src = urlImagenPerfil;
-        if (textoPerfil) {
-            textoPerfil.textContent = "Mi Perfil";
-        }
     }
 }
 

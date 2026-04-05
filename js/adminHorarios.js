@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', async () => {
     const formHorario = document.getElementById('formHorario');
-    const mensaje = document.getElementById('mensajeHorario'); // Usamos el ID de tu HTML
+    const mensaje = document.getElementById('mensajeHorario');
     const selectMedico = document.getElementById('select-medico');
     const btnGuardar = document.getElementById('btnGuardar');
     const token = localStorage.getItem('token');
@@ -10,12 +10,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             const res = await fetch(`${API_BASE}/trabajadores`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
-
             if (!res.ok) throw new Error("No se pudieron cargar los médicos");
-
             const medicos = await res.json();
             selectMedico.innerHTML = '<option value="" disabled selected>Seleccione un médico</option>';
-
             medicos.forEach(m => {
                 const opt = document.createElement('option');
                 opt.value = m.id_trabajador;
@@ -35,6 +32,29 @@ document.addEventListener('DOMContentLoaded', async () => {
         formHorario.addEventListener('submit', async (e) => {
             e.preventDefault();
 
+            const fInicio = document.getElementById('finicio').value;
+            const fFin = document.getElementById('ffin').value;
+
+            if (fInicio > fFin) {
+                mensaje.style.color = "red";
+                mensaje.innerText = "Error: La fecha de inicio no puede ser posterior a la fecha de fin.";
+                return;
+            }
+
+            const dias = ['lunes', 'martes', 'miercoles', 'jueves', 'viernes'];
+
+            for (const dia of dias) {
+                const hEntrada = document.getElementsByName(`${dia}_ent`)[0].value;
+                const hSalida = document.getElementsByName(`${dia}_sal`)[0].value;
+
+                if (hEntrada && hSalida) {
+                    if (hEntrada >= hSalida) {
+                        mensaje.style.color = "red";
+                        mensaje.innerText = `Error en ${dia}: La hora de entrada debe ser menor a la hora de salida.`;
+                        return;
+                    }
+                }
+            }
             btnGuardar.disabled = true;
             mensaje.style.color = "blue";
             mensaje.innerText = "Procesando horario...";
@@ -57,7 +77,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 if (response.ok) {
                     mensaje.style.color = "green";
                     mensaje.innerText = "¡Horario registrado con éxito!";
-
                     setTimeout(() => {
                         window.location.href = 'adminHorarioList.html';
                     }, 1500);
@@ -68,7 +87,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             } catch (error) {
                 mensaje.style.color = "red";
                 mensaje.innerText = error.message;
-                btnGuardar.disabled = false; 
+                btnGuardar.disabled = false;
+                btnGuardar.innerText = "Guardar";
             }
         });
     }
