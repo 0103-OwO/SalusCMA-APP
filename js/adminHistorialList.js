@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const res = await fetch(`${API_BASE}/historial`, {
                 method: 'GET',
                 headers: {
-                    'Authorization': `Bearer ${token}`, 
+                    'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
                 }
             });
@@ -40,18 +40,17 @@ document.addEventListener('DOMContentLoaded', async () => {
             const tr = document.createElement('tr');
             tr.className = 'filaHistorial';
             tr.innerHTML = `
-                <td>${h.numero_cita}</td>
-                <td>${h.id_paciente}</td>
-                <td>${h.id_medico}</td>
-                <td>${h.id_consultorio || 'N/A'}</td>
-                <td>${h.fecha}</td>
-                <td>${h.hora}</td>
-                <td>${h.tension_arterial}</td>
-                <td>${h.peso}kg</td>
-                <td>${h.talla}cm</td>
-                <td>${h.temperatura}°C</td>
-                <td>${h.descripcion}</td>
-            `;
+            <td>${h.numero_cita}</td>
+            <td>${h.nombre_paciente}</td> 
+            <td>${h.nombre_medico}</td>   
+            <td>${h.nombre_consultorio || 'N/A'}</td> <td>${h.fecha}</td>
+            <td>${h.hora}</td>
+            <td>${h.tension_arterial}</td>
+            <td>${h.peso}kg</td>
+            <td>${h.talla}cm</td>
+            <td>${h.temperatura}°C</td>
+            <td>${h.descripcion}</td>
+        `;
             tbody.appendChild(tr);
         });
 
