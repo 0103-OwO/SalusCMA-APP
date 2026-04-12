@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     const tr = document.createElement('tr');
                     tr.innerHTML = `
                         <td>${dia.nombre}</td>
+                        <td>${h.nombre_consultorio || 'Sin consultorio'}</td>
                         <td>${dia.ent.slice(0, 5)} - ${dia.sal.slice(0, 5)}</td>
                         <td>${h.fecha_inicio}</td>
                         <td>${h.fecha_fin}</td>
