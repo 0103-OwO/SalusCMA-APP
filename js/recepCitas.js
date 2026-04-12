@@ -69,14 +69,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     (i.id_trabajador ? `Dr(a). ${i.nombre} ${i.apellido_paterno}` : i.nombre);
                 return label === valor;
             });
-            console.log("¿Encontró coincidencia?", item); // DEBUG 1
+
             if (item) {
                 hidden.value = item.id_pacientes || item.id_trabajador || item.id_consultorio;
 
                 if (esMedico) {
-                    const horario = horariosGlobal.find(h => h.id_trabajador == item.id_trabajador);
+                    const medicoId = Number(item.id_trabajador);
+                    const horario = horariosGlobal.find(h => Number(h.id_trabajador) === medicoId);
+                    
                     if (horario) {
-                        const con = consultoriosGlobal.find(c => c.id_consultorio == horario.id_consultorio);
+                        const conId = Number(horario.id_consultorio);
+                        const con = consultoriosGlobal.find(c => Number(c.id_consultorio) === conId);
                         if (con) {
                             inpCon.value = con.nombre;
                             selConsultorio.value = con.id_consultorio;
@@ -85,6 +88,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             } else {
                 hidden.value = "";
+                if (esMedico) {
+                    inpCon.value = "";
+                    selConsultorio.value = "";
+                }
             }
         });
     };
