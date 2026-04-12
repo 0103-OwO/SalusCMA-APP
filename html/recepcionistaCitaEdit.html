@@ -76,53 +76,81 @@
             <input type="time" id="hora" name="hora" min="07:00" max="21:00"
                 title="Establezca la hora de la cita. Horario disponible: 07:00 a 21:00." required><br><br>
 
-            <label for="buscar-paciente">Paciente:</label>
-            <input list="lista-pacientes" id="input-paciente" placeholder="Escriba CURP o nombre...">
-            <datalist id="lista-pacientes"></datalist>
-            <input type="hidden" name="id_paciente" id="id_paciente_hidden"><br><br>
+            Para que el archivo de Modificar Cita funcione correctamente con el JavaScript que maneja los buscadores,
+            debes aplicar los mismos cambios en los id de los campos ocultos.
 
-            <label for="buscar-medico">Médico:</label>
-            <input list="lista-medicos" id="input-medico" placeholder="Escriba nombre del médico...">
-            <datalist id="lista-medicos"></datalist>
-            <input type="hidden" name="id_medico" id="id_medico_hidden"><br><br>
+            Actualmente tienes id="id_paciente_hidden", pero el script de edición que te proporcioné busca
+            específicamente los IDs select-paciente, select-medico y select-consultorio para poder pre-cargar los datos
+            de la cita que vas a editar.
 
-            <label for="buscar-consultorio">Consultorio:</label>
-            <input list="lista-consultorios" id="input-consultorio" placeholder="Escriba consultorio...">
-            <datalist id="lista-consultorios"></datalist>
-            <input type="hidden" name="id_consultorio" id="id_consultorio_hidden"><br><br>
+            Aquí tienes el <main> corregido para tu archivo HTML de edición:
 
-            <p><strong>Estado actual:</strong> <span id="txt-estado">Cargando...</span></p>
+                Bloque de Formulario Corregido
+                HTML
+                <main>
+                    <h2>Modificar Cita</h2>
 
-            <label id="mensajeEdit" style="display: block; margin-bottom: 10px; font-weight: bold;"></label>
+                    <form id="formEditCita">
+                        <input type="hidden" id="input-id-cita" name="id_cita">
 
-            <div class="contenedor-botones">
-                <button type="button" onclick="window.location.href='recepcionistaCitaList.html'">Cancelar</button>
-                <button type="submit" id="btnActualizar">Guardar Cambios</button>
-            </div>
-        </form>
-    </main>
+                        <label for="fecha">Fecha:</label>
+                        <input type="date" id="fecha" name="fecha" min="2025-03-24"
+                            title="Establezca la fecha de la cita. No puede ser una fecha pasada." autocomplete="off"
+                            required><br><br>
 
-    <script src="../js/recepCitasEdit.js"></script>
-    <script src="../js/global.js"></script>
-    <script src="../js/Check.js"></script>
-    <footer>
-        <div class="footer-container">
-            <div class="footer-section contact" id="footer-contacto">
-                <h3>Contacto</h3>
-                <p>Dirección: <span id="info-direccion">Cargando...</span></p>
-                <p>Teléfono: <span id="info-tel">Cargando...</span></p>
-                <p>Email: <span id="info-email">Cargando...</span></p>
-            </div>
-            <div class="footer-section links" id="footer-redes">
-                <h3>Enlaces</h3>
-                <a href="" id="link-fb"><img src="" alt="Facebook" width="30" height="30" id="icon-fb"></a>
-                <a href="" id="link-ig"><img src="" alt="Instagram" width="30" height="30" id="icon-ig"></a>
-                <a href="" id="link-x"><img src="" alt="X" width="30" height="30" id="icon-x"></a>
-            </div>
-            <div id="footer-mapa-container">
-            </div>
-        </div>
-    </footer>
+                        <label for="hora">Hora:</label>
+                        <input type="time" id="hora" name="hora" min="07:00" max="21:00"
+                            title="Establezca la hora de la cita. Horario disponible: 07:00 a 21:00." required><br><br>
+
+                        <label for="input-paciente">Paciente:</label>
+                        <input list="lista-pacientes" id="input-paciente" placeholder="Escriba CURP o nombre..."
+                            autocomplete="off">
+                        <datalist id="lista-pacientes"></datalist>
+                        <input type="hidden" name="id_paciente" id="select-paciente"><br><br>
+
+                        <label for="input-medico">Médico:</label>
+                        <input list="lista-medicos" id="input-medico" placeholder="Escriba nombre del médico..."
+                            autocomplete="off">
+                        <datalist id="lista-medicos"></datalist>
+                        <input type="hidden" name="id_medico" id="select-medico"><br><br>
+
+                        <label for="input-consultorio">Consultorio:</label>
+                        <input list="lista-consultorios" id="input-consultorio" placeholder="Escriba consultorio..."
+                            autocomplete="off">
+                        <datalist id="lista-consultorios"></datalist>
+                        <input type="hidden" name="id_consultorio" id="select-consultorio"><br><br>
+
+                        <label id="mensajeEdit" style="display: block; margin-bottom: 10px; font-weight: bold;"></label>
+
+                        <div class="contenedor-botones">
+                            <button type="button"
+                                onclick="window.location.href='recepcionistaCitaList.html'">Cancelar</button>
+                            <button type="submit" id="btnActualizar">Guardar Cambios</button>
+                        </div>
+                    </form>
+                </main>
+
+                <script src="../js/recepCitasEdit.js"></script>
+                <script src="../js/global.js"></script>
+                <script src="../js/Check.js"></script>
+                <footer>
+                    <div class="footer-container">
+                        <div class="footer-section contact" id="footer-contacto">
+                            <h3>Contacto</h3>
+                            <p>Dirección: <span id="info-direccion">Cargando...</span></p>
+                            <p>Teléfono: <span id="info-tel">Cargando...</span></p>
+                            <p>Email: <span id="info-email">Cargando...</span></p>
+                        </div>
+                        <div class="footer-section links" id="footer-redes">
+                            <h3>Enlaces</h3>
+                            <a href="" id="link-fb"><img src="" alt="Facebook" width="30" height="30" id="icon-fb"></a>
+                            <a href="" id="link-ig"><img src="" alt="Instagram" width="30" height="30" id="icon-ig"></a>
+                            <a href="" id="link-x"><img src="" alt="X" width="30" height="30" id="icon-x"></a>
+                        </div>
+                        <div id="footer-mapa-container">
+                        </div>
+                    </div>
+                </footer>
 
 </body>
 
