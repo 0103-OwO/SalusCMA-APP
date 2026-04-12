@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const formHorario = document.getElementById('formHorario');
     const mensaje = document.getElementById('mensajeHorario');
     const selectMedico = document.getElementById('select-medico');
+    const selectConsultorio = document.getElementById('select-consultorio');
     const btnGuardar = document.getElementById('btnGuardar');
     const token = localStorage.getItem('token');
 
@@ -25,7 +26,26 @@ document.addEventListener('DOMContentLoaded', async () => {
             mensaje.innerText = "Error al conectar con la lista de médicos.";
         }
     };
-
+    const cargarConsultorios = async () => {
+        try {
+            const res = await fetch(`${API_BASE}/consultorios`, { // Asegúrate que esta ruta exista en tu API
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            if (!res.ok) throw new Error("No se pudieron cargar los consultorios");
+            const consultorios = await res.json();
+            selectConsultorio.innerHTML = '<option value="" disabled selected>Seleccione un consultorio</option>';
+            consultorios.forEach(c => {
+                const opt = document.createElement('option');
+                opt.value = c.id_consultorio;
+                opt.textContent = c.nombre_consultorio || `Consultorio ${c.id_consultorio}`;
+                selectConsultorio.appendChild(opt);
+            });
+        } catch (error) {
+            console.error(error);
+            if(selectConsultorio) selectConsultorio.innerHTML = '<option value="">Error al cargar</option>';
+        }
+    };
+    await cargarConsultorios();
     await cargarMedicos();
 
     if (formHorario) {

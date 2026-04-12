@@ -18,8 +18,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             renderizarTabla();
         } catch (error) {
             console.error(error);
-            // CORRECCIÓN: Colspan a 6 para cubrir toda la tabla
-            if (tbody) tbody.innerHTML = `<tr><td colspan="6">Error al cargar datos</td></tr>`;
+            if (tbody) tbody.innerHTML = `<tr><td colspan="7">Error al cargar datos</td></tr>`;
         }
     };
 
@@ -35,9 +34,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         paginados.forEach(h => {
             const tr = document.createElement('tr');
 
-            // Formateo del resumen semanal
             const resumen = [];
-            // Usamos una función auxiliar para no repetir código y manejar nulos
             const formatDay = (dia, ent, sal) => {
                 return ent ? `${dia}: ${ent.slice(0, 5)}-${sal.slice(0, 5)}` : null;
             };
@@ -48,10 +45,11 @@ document.addEventListener('DOMContentLoaded', async () => {
                 formatDay('Mie', h.miercoles_ent, h.miercoles_sal),
                 formatDay('Jue', h.jueves_ent, h.jueves_sal),
                 formatDay('Vie', h.viernes_ent, h.viernes_sal)
-            ].filter(d => d !== null); // Quitamos los días que el médico no trabaja
+            ].filter(d => d !== null); 
 
             tr.innerHTML = `
                 <td>${h.nombre_trabajador || 'Sin nombre'}</td>
+                <td><strong>${h.nombre_consultorio || '<span style="color:gray">Sin consultorio</span>'}</strong></td>
                 <td style="font-size: 0.85em; line-height: 1.2;">
                     ${dias.join('<br>') || '<span style="color:gray">No asignado</span>'}
                 </td>

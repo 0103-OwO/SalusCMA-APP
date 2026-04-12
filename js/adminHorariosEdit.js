@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', async () => {
     const formEdit = document.getElementById('formEditHorario');
     const selectTrabajador = document.getElementById('select-trabajador');
+    const selectConsultorio = document.getElementById('select-consultorio');
     const mensaje = document.getElementById('mensajeEdit');
     const btnActualizar = document.getElementById('btnActualizar');
     const token = localStorage.getItem('token');
@@ -30,6 +31,19 @@ document.addEventListener('DOMContentLoaded', async () => {
                 selectTrabajador.appendChild(opt);
             });
 
+            const resConsultorios = await fetch(`${API_BASE}/consultorios`, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            const consultorios = await resConsultorios.json();
+            
+            selectConsultorio.innerHTML = '<option value="" disabled>Seleccione un consultorio</option>';
+            consultorios.forEach(c => {
+                const opt = document.createElement('option');
+                opt.value = c.id_consultorio;
+                opt.textContent = c.nombre_consultorio || `Consultorio ${c.id_consultorio}`;
+                selectConsultorio.appendChild(opt);
+            });
+
             const resHorario = await fetch(`${API_BASE}/horarios/${horarioId}`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
@@ -54,6 +68,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if(data.fecha_fin) document.getElementById('ffin').value = data.fecha_fin.split('T')[0];
         
         selectTrabajador.value = data.id_trabajador;
+        selectConsultorio.value = data.id_consultorio;
 
         const dias = ['lunes', 'martes', 'miercoles', 'jueves', 'viernes'];
         dias.forEach(dia => {
