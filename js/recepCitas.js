@@ -38,6 +38,13 @@ document.addEventListener('DOMContentLoaded', () => {
             consultoriosGlobal = await resC.json();
             horariosGlobal = await resH.json();
 
+            console.log("Catálogos cargados:", { 
+                pacientes: pacientesGlobal.length, 
+                medicos: medicosGlobal.length, 
+                consultorios: consultoriosGlobal.length, 
+                horarios: horariosGlobal.length 
+            });
+
             document.getElementById('lista-pacientes').innerHTML = pacientesGlobal.map(p =>
                 `<option value="${p.curp} - ${p.nombre} ${p.apellido_paterno}">`
             ).join('');
@@ -57,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             mensaje.style.color = "red";
             mensaje.innerText = "Error al conectar con el servidor para cargar los datos.";
-            console.error(error);
+            console.error("Error en cargarCatalogos:", error);
         }
     };
 
@@ -72,18 +79,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (item) {
                 hidden.value = item.id_pacientes || item.id_trabajador || item.id_consultorio;
+                console.log("Coincidencia encontrada:", item);
 
                 if (esMedico) {
                     const medicoId = Number(item.id_trabajador);
                     const horario = horariosGlobal.find(h => Number(h.id_trabajador) === medicoId);
                     
+                    console.log("Horario vinculado al médico:", horario);
+
                     if (horario) {
                         const conId = Number(horario.id_consultorio);
                         const con = consultoriosGlobal.find(c => Number(c.id_consultorio) === conId);
+                        
                         if (con) {
                             inpCon.value = con.nombre;
                             selConsultorio.value = con.id_consultorio;
+                            console.log("Consultorio autocompletado:", con);
+                        } else {
+                            console.warn("No se encontró el consultorio con ID:", conId);
                         }
+                    } else {
+                        console.warn("Este médico no tiene un horario/consultorio asignado en el sistema.");
                     }
                 }
             } else {
@@ -110,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (citaDateTime < ahora) {
             mensaje.style.color = "red";
-            mensaje.innerText = "La cita no puede ser en el pasado (revisa la hora).";
+            mensaje.innerText = "La cita no puede ser en el pasado.";
             return;
         }
 
@@ -121,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         btnGuardar.disabled = true;
-        btnGuardar.innerText = "Validando disponibilidad...";
+        btnGuardar.innerText = "Guardando...";
 
         const datos = {
             fecha: fechaSel,
@@ -155,6 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
             mensaje.innerText = error.message;
             btnGuardar.disabled = false;
             btnGuardar.innerText = "Guardar";
+            console.error("Error al enviar cita:", error);
         }
     });
 });
