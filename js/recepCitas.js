@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let pacientesGlobal = [];
     let medicosGlobal = [];
     let consultoriosGlobal = [];
+    let horariosGlobal = [];
 
     const hoy = new Date();
     const fechaMin = hoy.toISOString().split('T')[0]; 
@@ -25,15 +26,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const cargarCatalogos = async () => {
         try {
-            const [resP, resM, resC] = await Promise.all([
+            const [resP, resM, resC, resH] = await Promise.all([
                 fetch(`${API_BASE}/pacientes/activos`, { headers: { 'Authorization': `Bearer ${token}` } }),
                 fetch(`${API_BASE}/trabajadores/medicos`, { headers: { 'Authorization': `Bearer ${token}` } }),
-                fetch(`${API_BASE}/consultorio`, { headers: { 'Authorization': `Bearer ${token}` } })
+                fetch(`${API_BASE}/consultorio`, { headers: { 'Authorization': `Bearer ${token}` } }),
+                fetch(`${API_BASE}/horarios`, { headers: { 'Authorization': `Bearer ${token}` } })
             ]);
 
             pacientesGlobal = await resP.json();
             medicosGlobal = await resM.json();
             consultoriosGlobal = await resC.json();
+            horariosGlobal = await resH.json();
 
             document.getElementById('lista-pacientes').innerHTML = pacientesGlobal.map(p => 
                 `<option value="${p.curp} - ${p.nombre} ${p.apellido_paterno}">`
@@ -46,6 +49,10 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('lista-consultorios').innerHTML = consultoriosGlobal.map(c => 
                 `<option value="${c.nombre}">`
             ).join('');
+
+            configurarBuscador(inpPac, selPaciente, pacientesGlobal);
+            configurarBuscador(inpMed, selMedico, medicosGlobal, true);
+            configurarBuscador(inpCon, selConsultorio, consultoriosGlobal);
 
         } catch (error) {
             mensaje.style.color = "red";
@@ -66,11 +73,14 @@ document.addEventListener('DOMContentLoaded', () => {
             if (item) {
                 hidden.value = item.id_pacientes || item.id_trabajador || item.id_consultorio;
                 
-                if (esMedico && item.id_consultorio) {
-                    const con = consultoriosGlobal.find(c => c.id_consultorio == item.id_consultorio);
-                    if (con) {
-                        inpCon.value = con.nombre;
-                        selConsultorio.value = con.id_consultorio;
+                if (esMedico) {
+                    const horario = horariosGlobal.find(h => h.id_trabajador == item.id_trabajador);
+                    if (horario) {
+                        const con = consultoriosGlobal.find(c => c.id_consultorio == horario.id_consultorio);
+                        if (con) {
+                            inpCon.value = con.nombre;
+                            selConsultorio.value = con.id_consultorio;
+                        }
                     }
                 }
             } else {
@@ -80,10 +90,6 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     cargarCatalogos();
-
-    configurarBuscador(inpPac, selPaciente, pacientesGlobal);
-    configurarBuscador(inpMed, selMedico, medicosGlobal, true);
-    configurarBuscador(inpCon, selConsultorio, consultoriosGlobal);
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
