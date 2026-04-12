@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let pacientesGlobal = [];
     let medicosGlobal = [];
     let consultoriosGlobal = [];
-    let horariosGlobal = [];
+    let asignacionesGlobal = [];
 
     const hoy = new Date();
     const fechaMin = hoy.toISOString().split('T')[0];
@@ -26,24 +26,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const cargarCatalogos = async () => {
         try {
-            const [resP, resM, resC, resH] = await Promise.all([
+            const [resP, resM, resC, resA] = await Promise.all([
                 fetch(`${API_BASE}/pacientes/activos`, { headers: { 'Authorization': `Bearer ${token}` } }),
                 fetch(`${API_BASE}/trabajadores/medicos`, { headers: { 'Authorization': `Bearer ${token}` } }),
                 fetch(`${API_BASE}/consultorio`, { headers: { 'Authorization': `Bearer ${token}` } }),
-                fetch(`${API_BASE}/horarios`, { headers: { 'Authorization': `Bearer ${token}` } })
+                fetch(`${API_BASE}/asignaciones/autocompletar`, { headers: { 'Authorization': `Bearer ${token}` } })
             ]);
 
             pacientesGlobal = await resP.json();
             medicosGlobal = await resM.json();
             consultoriosGlobal = await resC.json();
-            horariosGlobal = await resH.json();
-
-            console.log("Catálogos cargados:", { 
-                pacientes: pacientesGlobal.length, 
-                medicos: medicosGlobal.length, 
-                consultorios: consultoriosGlobal.length, 
-                horarios: horariosGlobal.length 
-            });
+            asignacionesGlobal = await resA.json();
 
             document.getElementById('lista-pacientes').innerHTML = pacientesGlobal.map(p =>
                 `<option value="${p.curp} - ${p.nombre} ${p.apellido_paterno}">`
@@ -81,21 +74,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 hidden.value = item.id_pacientes || item.id_trabajador || item.id_consultorio;
 
                 if (esMedico) {
-                    const medicoIdBuscado = Number(item.id_trabajador);
-                    
-                    // Log para ver qué IDs hay en horariosGlobal
-                    console.log("IDs de médicos con horario en sistema:", horariosGlobal.map(h => h.id_trabajador));
-                    
-                    const horario = horariosGlobal.find(h => Number(h.id_trabajador) === medicoIdBuscado);
-                    
-                    if (horario) {
-                        const con = consultoriosGlobal.find(c => Number(c.id_consultorio) === Number(horario.id_consultorio));
-                        if (con) {
-                            inpCon.value = con.nombre;
-                            selConsultorio.value = con.id_consultorio;
-                        }
-                    } else {
-                        console.warn(`No se encontró horario para el ID: ${medicoIdBuscado}`);
+                    const asignacion = asignacionesGlobal.find(a => Number(a.id_trabajador) === Number(item.id_trabajador));
+                    if (asignacion) {
+                        inpCon.value = asignacion.nombre_consultorio;
+                        selConsultorio.value = asignacion.id_consultorio;
                     }
                 }
             } else {
