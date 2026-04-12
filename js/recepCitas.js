@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const inputHora = document.getElementById('hora');
     const mensaje = document.getElementById('mensajeCita');
     const btnGuardar = document.getElementById('btnGuardar');
-    
+
     const selPaciente = document.getElementById('select-paciente');
     const selMedico = document.getElementById('select-medico');
     const selConsultorio = document.getElementById('select-consultorio');
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let horariosGlobal = [];
 
     const hoy = new Date();
-    const fechaMin = hoy.toISOString().split('T')[0]; 
+    const fechaMin = hoy.toISOString().split('T')[0];
     inputFecha.setAttribute('min', fechaMin);
 
     const cargarCatalogos = async () => {
@@ -38,15 +38,15 @@ document.addEventListener('DOMContentLoaded', () => {
             consultoriosGlobal = await resC.json();
             horariosGlobal = await resH.json();
 
-            document.getElementById('lista-pacientes').innerHTML = pacientesGlobal.map(p => 
+            document.getElementById('lista-pacientes').innerHTML = pacientesGlobal.map(p =>
                 `<option value="${p.curp} - ${p.nombre} ${p.apellido_paterno}">`
             ).join('');
 
-            document.getElementById('lista-medicos').innerHTML = medicosGlobal.map(m => 
+            document.getElementById('lista-medicos').innerHTML = medicosGlobal.map(m =>
                 `<option value="Dr(a). ${m.nombre} ${m.apellido_paterno}">`
             ).join('');
 
-            document.getElementById('lista-consultorios').innerHTML = consultoriosGlobal.map(c => 
+            document.getElementById('lista-consultorios').innerHTML = consultoriosGlobal.map(c =>
                 `<option value="${c.nombre}">`
             ).join('');
 
@@ -65,14 +65,14 @@ document.addEventListener('DOMContentLoaded', () => {
         input.addEventListener('input', (e) => {
             const valor = e.target.value;
             const item = data.find(i => {
-                const label = i.curp ? `${i.curp} - ${i.nombre} ${i.apellido_paterno}` : 
-                              (i.id_trabajador ? `Dr(a). ${i.nombre} ${i.apellido_paterno}` : i.nombre);
+                const label = i.curp ? `${i.curp} - ${i.nombre} ${i.apellido_paterno}` :
+                    (i.id_trabajador ? `Dr(a). ${i.nombre} ${i.apellido_paterno}` : i.nombre);
                 return label === valor;
             });
 
             if (item) {
                 hidden.value = item.id_pacientes || item.id_trabajador || item.id_consultorio;
-                
+
                 if (esMedico) {
                     const horario = horariosGlobal.find(h => h.id_trabajador == item.id_trabajador);
                     if (horario) {
@@ -94,10 +94,10 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
         mensaje.innerText = "";
-        
+
         const fechaSel = inputFecha.value;
         const horaSel = inputHora.value;
-        
+
         const ahora = new Date();
         const citaDateTime = new Date(`${fechaSel}T${horaSel}`);
 
