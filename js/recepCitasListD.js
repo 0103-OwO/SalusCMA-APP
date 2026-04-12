@@ -71,12 +71,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const ordenarCitas = (columna) => {
         ordenAsc = !ordenAsc;
         todasLasCitas.sort((a, b) => {
-            let valA = a[columna] ? a[columna].toString().toLowerCase() : '';
-            let valB = b[columna] ? b[columna].toString().toLowerCase() : '';
+            let valA = a[columna] || '';
+            let valB = b[columna] || '';
 
-            if (columna === 'fecha' && valA.includes('-')) {
-                valA = new Date(valA);
-                valB = new Date(valB);
+            if (columna === 'fecha') {
+                const [diaA, mesA, anioA] = valA.split('/');
+                const [diaB, mesB, anioB] = valB.split('/');
+
+                valA = new Date(`${anioA}-${mesA}-${diaA}`);
+                valB = new Date(`${anioB}-${mesB}-${diaB}`);
+            } else {
+                valA = valA.toString().toLowerCase();
+                valB = valB.toString().toLowerCase();
             }
 
             if (valA < valB) return ordenAsc ? -1 : 1;
