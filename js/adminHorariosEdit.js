@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             consultorios.forEach(c => {
                 const opt = document.createElement('option');
                 opt.value = c.id_consultorio;
-                opt.textContent = c.nombre_consultorio || `Consultorio ${c.id_consultorio}`;
+                opt.textContent = c.nombre_consultorio || `${c.nombre}`;
                 selectConsultorio.appendChild(opt);
             });
 

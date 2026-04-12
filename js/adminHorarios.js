@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     };
     const cargarConsultorios = async () => {
         try {
-            const res = await fetch(`${API_BASE}/consultorio`, { // Asegúrate que esta ruta exista en tu API
+            const res = await fetch(`${API_BASE}/consultorio`, { 
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             if (!res.ok) throw new Error("No se pudieron cargar los consultorios");
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             consultorios.forEach(c => {
                 const opt = document.createElement('option');
                 opt.value = c.id_consultorio;
-                opt.textContent = c.nombre_consultorio || `Consultorio ${c.id_consultorio}`;
+                opt.textContent = c.nombre_consultorio || `${c.nombre}`;
                 selectConsultorio.appendChild(opt);
             });
         } catch (error) {

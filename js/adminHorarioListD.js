@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             tr.innerHTML = `
                 <td>${h.nombre_trabajador || 'Sin nombre'}</td>
-                <td><strong>${h.nombre_consultorio || '<span style="color:gray">Sin consultorio</span>'}</strong></td>
+                <td>${h.nombre_consultorio || 'Sin consultorio'}</td>
                 <td style="font-size: 0.85em; line-height: 1.2;">
                     ${dias.join('<br>') || '<span style="color:gray">No asignado</span>'}
                 </td>
