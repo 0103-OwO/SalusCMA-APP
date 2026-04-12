@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 fetch(`${API_BASE}/pacientes/activos`, { headers: { 'Authorization': `Bearer ${token}` } }),
                 fetch(`${API_BASE}/trabajadores/medicos`, { headers: { 'Authorization': `Bearer ${token}` } }),
                 fetch(`${API_BASE}/consultorio`, { headers: { 'Authorization': `Bearer ${token}` } }),
-                fetch(`${API_BASE}/asignaciones/autocompletar`, { headers: { 'Authorization': `Bearer ${token}` } })
+                fetch(`${API_BASE}/horarios/activas`, { headers: { 'Authorization': `Bearer ${token}` } })
             ]);
 
             pacientesGlobal = await resP.json();
