@@ -21,13 +21,33 @@ document.addEventListener('DOMContentLoaded', () => {
     let listaPacientes = [];
     let listaMedicos = [];
     let listaConsultorios = [];
-    let asignacionesGlobal = []; // Cambiado de listaHorarios a asignacionesGlobal
+    let asignacionesGlobal = [];
 
     if (!idCita) {
         alert("ID de cita no proporcionado.");
         window.location.href = 'recepcionistaCitaList.html';
         return;
     }
+
+    const generarOpcionesHora = () => {
+        if (!inputHora) return;
+        inputHora.innerHTML = '<option value="">Seleccione una hora</option>';
+        for (let h = 7; h <= 21; h++) {
+            const horaPad = h < 10 ? `0${h}` : h;
+            const opt0 = document.createElement('option');
+            opt0.value = `${horaPad}:00`;
+            opt0.textContent = `${horaPad}:00`;
+            inputHora.appendChild(opt0);
+            
+            if (h < 21) {
+                const opt3 = document.createElement('option');
+                opt3.value = `${horaPad}:30`;
+                opt3.textContent = `${horaPad}:30`;
+                inputHora.appendChild(opt3);
+            }
+        }
+    };
+    generarOpcionesHora();
 
     const configurarBuscador = (input, hidden, data, esMedico = false) => {
         if (!input) return;
@@ -43,7 +63,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 hidden.value = item.id_pacientes || item.id_trabajador || item.id_consultorio;
                 
                 if (esMedico) {
-                    // Usar la lógica del endpoint especializado
                     const asignacion = asignacionesGlobal.find(a => Number(a.id_trabajador) === Number(item.id_trabajador));
                     if (asignacion) {
                         inpCon.value = asignacion.nombre_consultorio;
@@ -66,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 fetch(`${API_BASE}/pacientes`, { headers: { 'Authorization': `Bearer ${token}` } }),
                 fetch(`${API_BASE}/trabajadores/medicos`, { headers: { 'Authorization': `Bearer ${token}` } }),
                 fetch(`${API_BASE}/consultorio`, { headers: { 'Authorization': `Bearer ${token}` } }),
-                fetch(`${API_BASE}/horarios/activas`, { headers: { 'Authorization': `Bearer ${token}` } }), // Nuevo endpoint
+                fetch(`${API_BASE}/horarios/activas`, { headers: { 'Authorization': `Bearer ${token}` } }),
                 fetch(`${API_BASE}/citas/${idCita}`, { headers: { 'Authorization': `Bearer ${token}` } })
             ]);
 
@@ -111,7 +130,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 inputId.value = cita.id_cita;
                 inputFecha.value = cita.fecha ? cita.fecha.split('T')[0] : "";
-                inputHora.value = cita.hora || "";
+                
+                if (cita.hora) {
+                    const horaLimpia = cita.hora.substring(0, 5);
+                    inputHora.value = horaLimpia;
+                }
             }
 
         } catch (error) {

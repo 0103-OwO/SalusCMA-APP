@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('formCita');
     const inputFecha = document.getElementById('fecha');
-    const inputHora = document.getElementById('hora');
+    const inputHora = document.getElementById('hora'); 
     const mensaje = document.getElementById('mensajeCita');
     const btnGuardar = document.getElementById('btnGuardar');
 
@@ -23,6 +23,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const hoy = new Date();
     const fechaMin = hoy.toISOString().split('T')[0];
     inputFecha.setAttribute('min', fechaMin);
+
+    const generarOpcionesHora = () => {
+        if (!inputHora) return;
+        inputHora.innerHTML = '<option value="">Seleccione una hora</option>';
+        for (let h = 7; h <= 21; h++) {
+            const horaPad = h < 10 ? `0${h}` : h;
+            const opt0 = document.createElement('option');
+            opt0.value = `${horaPad}:00`;
+            opt0.textContent = `${horaPad}:00`;
+            inputHora.appendChild(opt0);
+
+            if (h < 21) {
+                const opt3 = document.createElement('option');
+                opt3.value = `${horaPad}:30`;
+                opt3.textContent = `${horaPad}:30`;
+                inputHora.appendChild(opt3);
+            }
+        }
+    };
+    generarOpcionesHora();
 
     const cargarCatalogos = async () => {
         try {

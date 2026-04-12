@@ -73,9 +73,10 @@
                 required><br><br>
 
             <label for="hora">Hora:</label>
-            <input type="time" id="hora" name="hora" min="07:00" max="21:00"
-                title="Establezca la hora de la cita. Horario disponible: 07:00 a 21:00." required><br><br>
-
+            <select id="hora" name="hora" class="form-control" required>
+                <option value="">Seleccione una hora</option>
+            </select><br><br>
+            
             <label for="input-paciente">Paciente:</label>
             <input list="lista-pacientes" id="input-paciente" placeholder="Escriba CURP o nombre..." autocomplete="off">
             <datalist id="lista-pacientes"></datalist>
