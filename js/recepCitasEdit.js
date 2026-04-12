@@ -15,13 +15,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const inpMed = document.getElementById('input-medico');
     const inpCon = document.getElementById('input-consultorio');
 
-    let listaMedicos = [];
-    let listaPacientes = [];
-    let listaConsultorios = [];
-
     const token = localStorage.getItem('token');
     const urlParams = new URLSearchParams(window.location.search);
     const idCita = urlParams.get('id_cita');
+
+    let listaPacientes = [];
+    let listaMedicos = [];
+    let listaConsultorios = [];
 
     if (!idCita) {
         alert("ID de cita no proporcionado.");
@@ -45,9 +45,17 @@ document.addEventListener('DOMContentLoaded', () => {
             listaConsultorios = await resC.json();
             const cita = await resCita.json();
 
-            document.getElementById('lista-pacientes').innerHTML = listaPacientes.map(p => `<option value="${p.curp} - ${p.nombre} ${p.apellido_paterno}">`).join('');
-            document.getElementById('lista-medicos').innerHTML = listaMedicos.map(m => `<option value="Dr(a). ${m.nombre} ${m.apellido_paterno}">`).join('');
-            document.getElementById('lista-consultorios').innerHTML = listaConsultorios.map(c => `<option value="${c.nombre}">`).join('');
+            document.getElementById('lista-pacientes').innerHTML = listaPacientes.map(p => 
+                `<option value="${p.curp} - ${p.nombre} ${p.apellido_paterno}">`
+            ).join('');
+
+            document.getElementById('lista-medicos').innerHTML = listaMedicos.map(m => 
+                `<option value="Dr(a). ${m.nombre} ${m.apellido_paterno}">`
+            ).join('');
+
+            document.getElementById('lista-consultorios').innerHTML = listaConsultorios.map(c => 
+                `<option value="${c.nombre}">`
+            ).join('');
 
             const pacActual = listaPacientes.find(p => p.id_pacientes == cita.id_paciente);
             if (pacActual) {
@@ -68,46 +76,49 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             inputId.value = cita.id_cita;
-            if (cita.fecha) inputFecha.value = cita.fecha.split('T')[0];
+            if (cita.fecha) {
+                inputFecha.value = cita.fecha.split('T')[0];
+            }
             inputHora.value = cita.hora;
             txtEstado.innerText = cita.estado || "N/A";
 
         } catch (error) {
             console.error(error);
             mensaje.style.color = "red";
-            mensaje.innerText = "Error al cargar datos.";
+            mensaje.innerText = "Error al cargar datos. Verifique su conexión o sesión.";
         }
     };
 
-    const vincularBuscador = (inputVisual, hiddenId, dataArray, esMedico = false) => {
-        inputVisual.addEventListener('input', (e) => {
-            const texto = e.target.value;
-            const encontrado = dataArray.find(item => {
-                const etiqueta = item.curp ? `${item.curp} - ${item.nombre} ${item.apellido_paterno}` :
-                    (item.id_trabajador ? `Dr(a). ${item.nombre} ${item.apellido_paterno}` : item.nombre);
-                return etiqueta === texto;
+    const configurarBuscador = (input, hidden, data, esMedico = false) => {
+        input.addEventListener('input', (e) => {
+            const valor = e.target.value;
+            const item = data.find(i => {
+                const label = i.curp ? `${i.curp} - ${i.nombre} ${i.apellido_paterno}` : 
+                              (i.id_trabajador ? `Dr(a). ${i.nombre} ${i.apellido_paterno}` : i.nombre);
+                return label === valor;
             });
 
-            if (encontrado) {
-                hiddenId.value = encontrado.id_pacientes || encontrado.id_trabajador || encontrado.id_consultorio;
-                if (esMedico && encontrado.id_consultorio) {
-                    const con = listaConsultorios.find(c => c.id_consultorio == encontrado.id_consultorio);
+            if (item) {
+                hidden.value = item.id_pacientes || item.id_trabajador || item.id_consultorio;
+                
+                if (esMedico && item.id_consultorio) {
+                    const con = listaConsultorios.find(c => c.id_consultorio == item.id_consultorio);
                     if (con) {
                         inpCon.value = con.nombre;
                         selConsultorio.value = con.id_consultorio;
                     }
                 }
             } else {
-                hiddenId.value = "";
+                hidden.value = ""; 
             }
         });
     };
 
-    vincularBuscador(inpPac, selPaciente, listaPacientes);
-    vincularBuscador(inpMed, selMedico, listaMedicos, true);
-    vincularBuscador(inpCon, selConsultorio, listaConsultorios);
-
     cargarDatosYCatalogos();
+
+    configurarBuscador(inpPac, selPaciente, listaPacientes);
+    configurarBuscador(inpMed, selMedico, listaMedicos, true);
+    configurarBuscador(inpCon, selConsultorio, listaConsultorios);
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -124,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (!selPaciente.value || !selMedico.value || !selConsultorio.value) {
             mensaje.style.color = "red";
-            mensaje.innerText = "Por favor, seleccione elementos válidos de la lista.";
+            mensaje.innerText = "Seleccione opciones válidas de la lista desplegable.";
             return;
         }
 

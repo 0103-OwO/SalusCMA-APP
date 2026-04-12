@@ -1,12 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('formEditCita');
-    const inputId = document.getElementById('input-id-cita');
+    const form = document.getElementById('formCita');
     const inputFecha = document.getElementById('fecha');
     const inputHora = document.getElementById('hora');
-    const mensaje = document.getElementById('mensajeEdit');
-    const btnActualizar = document.getElementById('btnActualizar');
-    const txtEstado = document.getElementById('txt-estado');
-
+    const mensaje = document.getElementById('mensajeCita');
+    const btnGuardar = document.getElementById('btnGuardar');
+    
     const selPaciente = document.getElementById('select-paciente');
     const selMedico = document.getElementById('select-medico');
     const selConsultorio = document.getElementById('select-consultorio');
@@ -15,133 +13,114 @@ document.addEventListener('DOMContentLoaded', () => {
     const inpMed = document.getElementById('input-medico');
     const inpCon = document.getElementById('input-consultorio');
 
-    let listaMedicos = [];
-    let listaPacientes = [];
-    let listaConsultorios = [];
-
     const token = localStorage.getItem('token');
-    const urlParams = new URLSearchParams(window.location.search);
-    const idCita = urlParams.get('id_cita');
 
-    if (!idCita) {
-        alert("ID de cita no proporcionado.");
-        window.location.href = 'recepcionistaCitaList.html';
-        return;
-    }
+    let pacientesGlobal = [];
+    let medicosGlobal = [];
+    let consultoriosGlobal = [];
 
-    const cargarDatosYCatalogos = async () => {
+    const hoy = new Date();
+    const fechaMin = hoy.toISOString().split('T')[0]; 
+    inputFecha.setAttribute('min', fechaMin);
+
+    const cargarCatalogos = async () => {
         try {
-            const [resP, resM, resC, resCita] = await Promise.all([
-                fetch(`${API_BASE}/pacientes`, { headers: { 'Authorization': `Bearer ${token}` } }),
+            const [resP, resM, resC] = await Promise.all([
+                fetch(`${API_BASE}/pacientes/activos`, { headers: { 'Authorization': `Bearer ${token}` } }),
                 fetch(`${API_BASE}/trabajadores/medicos`, { headers: { 'Authorization': `Bearer ${token}` } }),
-                fetch(`${API_BASE}/consultorio`, { headers: { 'Authorization': `Bearer ${token}` } }),
-                fetch(`${API_BASE}/citas/${idCita}`, { headers: { 'Authorization': `Bearer ${token}` } })
+                fetch(`${API_BASE}/consultorio`, { headers: { 'Authorization': `Bearer ${token}` } })
             ]);
 
-            if (!resCita.ok) throw new Error("No se pudo obtener los datos de la cita.");
+            pacientesGlobal = await resP.json();
+            medicosGlobal = await resM.json();
+            consultoriosGlobal = await resC.json();
 
-            listaPacientes = await resP.json();
-            listaMedicos = await resM.json();
-            listaConsultorios = await resC.json();
-            const cita = await resCita.json();
+            document.getElementById('lista-pacientes').innerHTML = pacientesGlobal.map(p => 
+                `<option value="${p.curp} - ${p.nombre} ${p.apellido_paterno}">`
+            ).join('');
 
-            document.getElementById('lista-pacientes').innerHTML = listaPacientes.map(p => `<option value="${p.curp} - ${p.nombre} ${p.apellido_paterno}">`).join('');
-            document.getElementById('lista-medicos').innerHTML = listaMedicos.map(m => `<option value="Dr(a). ${m.nombre} ${m.apellido_paterno}">`).join('');
-            document.getElementById('lista-consultorios').innerHTML = listaConsultorios.map(c => `<option value="${c.nombre}">`).join('');
+            document.getElementById('lista-medicos').innerHTML = medicosGlobal.map(m => 
+                `<option value="Dr(a). ${m.nombre} ${m.apellido_paterno}">`
+            ).join('');
 
-            const pacActual = listaPacientes.find(p => p.id_pacientes == cita.id_paciente);
-            if (pacActual) {
-                inpPac.value = `${pacActual.curp} - ${pacActual.nombre} ${pacActual.apellido_paterno}`;
-                selPaciente.value = pacActual.id_pacientes;
-            }
-
-            const medActual = listaMedicos.find(m => m.id_trabajador == cita.id_medico);
-            if (medActual) {
-                inpMed.value = `Dr(a). ${medActual.nombre} ${medActual.apellido_paterno}`;
-                selMedico.value = medActual.id_trabajador;
-            }
-
-            const conActual = listaConsultorios.find(c => c.id_consultorio == cita.id_consultorio);
-            if (conActual) {
-                inpCon.value = conActual.nombre;
-                selConsultorio.value = conActual.id_consultorio;
-            }
-
-            inputId.value = cita.id_cita;
-            if (cita.fecha) inputFecha.value = cita.fecha.split('T')[0];
-            inputHora.value = cita.hora;
-            txtEstado.innerText = cita.estado || "N/A";
+            document.getElementById('lista-consultorios').innerHTML = consultoriosGlobal.map(c => 
+                `<option value="${c.nombre}">`
+            ).join('');
 
         } catch (error) {
-            console.error(error);
             mensaje.style.color = "red";
-            mensaje.innerText = "Error al cargar datos.";
+            mensaje.innerText = "Error al conectar con el servidor para cargar los datos.";
+            console.error(error);
         }
     };
 
-    const vincularBuscador = (inputVisual, hiddenId, dataArray, esMedico = false) => {
-        inputVisual.addEventListener('input', (e) => {
-            const texto = e.target.value;
-            const encontrado = dataArray.find(item => {
-                const etiqueta = item.curp ? `${item.curp} - ${item.nombre} ${item.apellido_paterno}` : 
-                                 (item.id_trabajador ? `Dr(a). ${item.nombre} ${item.apellido_paterno}` : item.nombre);
-                return etiqueta === texto;
+    const configurarBuscador = (input, hidden, data, esMedico = false) => {
+        input.addEventListener('input', (e) => {
+            const valor = e.target.value;
+            const item = data.find(i => {
+                const label = i.curp ? `${i.curp} - ${i.nombre} ${i.apellido_paterno}` : 
+                              (i.id_trabajador ? `Dr(a). ${i.nombre} ${i.apellido_paterno}` : i.nombre);
+                return label === valor;
             });
 
-            if (encontrado) {
-                hiddenId.value = encontrado.id_pacientes || encontrado.id_trabajador || encontrado.id_consultorio;
-                if (esMedico && encontrado.id_consultorio) {
-                    const con = listaConsultorios.find(c => c.id_consultorio == encontrado.id_consultorio);
+            if (item) {
+                hidden.value = item.id_pacientes || item.id_trabajador || item.id_consultorio;
+                
+                if (esMedico && item.id_consultorio) {
+                    const con = consultoriosGlobal.find(c => c.id_consultorio == item.id_consultorio);
                     if (con) {
                         inpCon.value = con.nombre;
                         selConsultorio.value = con.id_consultorio;
                     }
                 }
             } else {
-                hiddenId.value = "";
+                hidden.value = "";
             }
         });
     };
 
-    vincularBuscador(inpPac, selPaciente, listaPacientes);
-    vincularBuscador(inpMed, selMedico, listaMedicos, true);
-    vincularBuscador(inpCon, selConsultorio, listaConsultorios);
+    cargarCatalogos();
 
-    cargarDatosYCatalogos();
+    configurarBuscador(inpPac, selPaciente, pacientesGlobal);
+    configurarBuscador(inpMed, selMedico, medicosGlobal, true);
+    configurarBuscador(inpCon, selConsultorio, consultoriosGlobal);
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
         mensaje.innerText = "";
-
+        
+        const fechaSel = inputFecha.value;
+        const horaSel = inputHora.value;
+        
         const ahora = new Date();
-        const citaDateTime = new Date(`${inputFecha.value}T${inputHora.value}`);
+        const citaDateTime = new Date(`${fechaSel}T${horaSel}`);
 
         if (citaDateTime < ahora) {
             mensaje.style.color = "red";
-            mensaje.innerText = "No puedes reprogramar la cita a una fecha u hora pasada.";
+            mensaje.innerText = "La cita no puede ser en el pasado (revisa la hora).";
             return;
         }
 
         if (!selPaciente.value || !selMedico.value || !selConsultorio.value) {
             mensaje.style.color = "red";
-            mensaje.innerText = "Por favor, seleccione elementos válidos de la lista.";
+            mensaje.innerText = "Seleccione opciones válidas de la lista.";
             return;
         }
 
-        btnActualizar.disabled = true;
-        btnActualizar.innerText = "Guardando cambios...";
+        btnGuardar.disabled = true;
+        btnGuardar.innerText = "Validando disponibilidad...";
 
         const datos = {
-            fecha: inputFecha.value,
-            hora: inputHora.value,
+            fecha: fechaSel,
+            hora: horaSel,
             id_paciente: selPaciente.value,
             id_medico: selMedico.value,
             id_consultorio: selConsultorio.value
         };
 
         try {
-            const response = await fetch(`${API_BASE}/citas/${idCita}`, {
-                method: 'PUT',
+            const response = await fetch(`${API_BASE}/citas`, {
+                method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
@@ -153,16 +132,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (response.ok) {
                 mensaje.style.color = "green";
-                mensaje.innerText = "Cita actualizada correctamente.";
+                mensaje.innerText = "¡Cita agendada con éxito!";
                 setTimeout(() => window.location.href = 'recepcionistaCitaList.html', 1500);
             } else {
-                throw new Error(resData.error || "Error al actualizar");
+                throw new Error(resData.error || "Error al agendar");
             }
         } catch (error) {
             mensaje.style.color = "red";
             mensaje.innerText = error.message;
-            btnActualizar.disabled = false;
-            btnActualizar.innerText = "Guardar";
+            btnGuardar.disabled = false;
+            btnGuardar.innerText = "Guardar";
         }
     });
 });
