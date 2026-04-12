@@ -38,22 +38,21 @@ async function cargarContenidoGlobal() {
         </iframe>`;
             }
         }
-
+        const resBanners = await fetch(`${API_BASE}/publicidad`);
+        const dataBanners = await resBanners.json();
         const slides = document.querySelectorAll('.carrusel-slide img');
         if (slides.length > 0) {
-            const resBanners = await fetch(`${API_BASE}/publicidad`);
-            const dataBanners = await resBanners.json();
+
             if (dataBanners) {
-
-                const imgPrincipal = document.getElementById('principal');
-                if (imgPrincipal && dataBanners.img_uno) {
-                    imgPrincipal.src = dataBanners.img_uno;
-                }
-
                 if (dataBanners.img_uno) slides[0].src = dataBanners.img_uno;
                 if (dataBanners.img_dos) slides[1].src = dataBanners.img_dos;
                 if (dataBanners.img_tres) slides[2].src = dataBanners.img_tres;
             }
+        }
+
+        const imgPrincipal = document.getElementById('principal');
+        if (imgPrincipal && dataBanners.img_uno) {
+            imgPrincipal.src = dataBanners.img_uno;
         }
 
         const logoImg = document.getElementById('logo');
