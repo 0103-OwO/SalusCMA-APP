@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     (i.id_trabajador ? `Dr(a). ${i.nombre} ${i.apellido_paterno}` : i.nombre);
                 return label === valor;
             });
-
+            console.log("¿Encontró coincidencia?", item); // DEBUG 1
             if (item) {
                 hidden.value = item.id_pacientes || item.id_trabajador || item.id_consultorio;
 
