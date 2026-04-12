@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     };
     const cargarConsultorios = async () => {
         try {
-            const res = await fetch(`${API_BASE}/consultorios`, { // Asegúrate que esta ruta exista en tu API
+            const res = await fetch(`${API_BASE}/consultorio`, { // Asegúrate que esta ruta exista en tu API
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             if (!res.ok) throw new Error("No se pudieron cargar los consultorios");

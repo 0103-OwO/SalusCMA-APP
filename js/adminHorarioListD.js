@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             renderizarTabla();
         } catch (error) {
             console.error(error);
-            if (tbody) tbody.innerHTML = `<tr><td colspan="7">Error al cargar datos</td></tr>`;
+            if (tbody) tbody.innerHTML = `<tr><td colspan="6">Error al cargar datos</td></tr>`;
         }
     };
 

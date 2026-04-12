@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 selectTrabajador.appendChild(opt);
             });
 
-            const resConsultorios = await fetch(`${API_BASE}/consultorios`, {
+            const resConsultorios = await fetch(`${API_BASE}/consultorio`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             const consultorios = await resConsultorios.json();
