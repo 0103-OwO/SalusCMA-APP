@@ -67,29 +67,30 @@
         <form id="formCita">
             <label for="fecha">Fecha:</label>
             <input type="date" id="fecha" name="fecha" min="2025-03-24"
-                title="Establezca la fecha de la cita. No puede ser una fecha pasada." autocomplete="off" required><br><br>
-        
+                title="Establezca la fecha de la cita. No puede ser una fecha pasada." autocomplete="off"
+                required><br><br>
+
             <label for="hora">Hora:</label>
             <input type="time" id="hora" name="hora" min="07:00" max="21:00"
                 title="Establezca la hora de la cita. Horario disponible: 07:00 a 21:00." required><br><br>
-        
-            <label for="select-paciente">Paciente:</label>
-            <select id="select-paciente" name="id_paciente" required>
-                <option value="" disabled selected>Seleccione un Paciente</option>
-            </select><br><br>
-        
-            <label for="select-medico">Médico:</label>
-            <select id="select-medico" name="id_medico" required>
-                <option value="" disabled selected>Seleccione un Médico</option>
-            </select><br><br>
-        
-            <label for="select-consultorio">Consultorio:</label>
-            <select id="select-consultorio" name="id_consultorio" required>
-                <option value="" disabled selected>Seleccione un Consultorio</option>
-            </select><br><br>
-        
+
+            <label for="buscar-paciente">Paciente:</label>
+            <input list="lista-pacientes" id="input-paciente" placeholder="Escriba CURP o nombre...">
+            <datalist id="lista-pacientes"></datalist>
+            <input type="hidden" name="id_paciente" id="id_paciente_hidden"><br><br>
+
+            <label for="buscar-medico">Médico:</label>
+            <input list="lista-medicos" id="input-medico" placeholder="Escriba nombre del médico...">
+            <datalist id="lista-medicos"></datalist>
+            <input type="hidden" name="id_medico" id="id_medico_hidden"><br><br>
+
+            <label for="buscar-consultorio">Consultorio:</label>
+            <input list="lista-consultorios" id="input-consultorio" placeholder="Escriba consultorio...">
+            <datalist id="lista-consultorios"></datalist>
+            <input type="hidden" name="id_consultorio" id="id_consultorio_hidden"><br><br>
+
             <label id="mensajeCita" style="display: block; margin-bottom: 10px; font-weight: bold;"></label>
-        
+
             <button type="button" onclick="window.location.href='recepcionistaCitaList.html'">Cancelar</button>
             <button type="reset">Limpiar</button>
             <button type="submit" id="btnGuardar">Guardar</button>
