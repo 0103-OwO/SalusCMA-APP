@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let listaPacientes = [];
     let listaMedicos = [];
     let listaConsultorios = [];
-    let listaHorarios = [];
+    let asignacionesGlobal = []; // Cambiado de listaHorarios a asignacionesGlobal
 
     if (!idCita) {
         alert("ID de cita no proporcionado.");
@@ -43,35 +43,37 @@ document.addEventListener('DOMContentLoaded', () => {
                 hidden.value = item.id_pacientes || item.id_trabajador || item.id_consultorio;
                 
                 if (esMedico) {
-                    const horario = listaHorarios.find(h => h.id_trabajador == item.id_trabajador);
-                    if (horario) {
-                        const con = listaConsultorios.find(c => c.id_consultorio == horario.id_consultorio);
-                        if (con) {
-                            inpCon.value = con.nombre;
-                            selConsultorio.value = con.id_consultorio;
-                        }
+                    // Usar la lógica del endpoint especializado
+                    const asignacion = asignacionesGlobal.find(a => Number(a.id_trabajador) === Number(item.id_trabajador));
+                    if (asignacion) {
+                        inpCon.value = asignacion.nombre_consultorio;
+                        selConsultorio.value = asignacion.id_consultorio;
                     }
                 }
             } else {
                 hidden.value = "";
+                if (esMedico) {
+                    inpCon.value = "";
+                    selConsultorio.value = "";
+                }
             }
         });
     };
 
     const cargarDatosYCatalogos = async () => {
         try {
-            const [resP, resM, resC, resH, resCita] = await Promise.all([
+            const [resP, resM, resC, resA, resCita] = await Promise.all([
                 fetch(`${API_BASE}/pacientes`, { headers: { 'Authorization': `Bearer ${token}` } }),
                 fetch(`${API_BASE}/trabajadores/medicos`, { headers: { 'Authorization': `Bearer ${token}` } }),
                 fetch(`${API_BASE}/consultorio`, { headers: { 'Authorization': `Bearer ${token}` } }),
-                fetch(`${API_BASE}/horarios`, { headers: { 'Authorization': `Bearer ${token}` } }),
+                fetch(`${API_BASE}/horarios/activas`, { headers: { 'Authorization': `Bearer ${token}` } }), // Nuevo endpoint
                 fetch(`${API_BASE}/citas/${idCita}`, { headers: { 'Authorization': `Bearer ${token}` } })
             ]);
 
             listaPacientes = await resP.json();
             listaMedicos = await resM.json();
             listaConsultorios = await resC.json();
-            listaHorarios = await resH.json();
+            asignacionesGlobal = await resA.json();
             const cita = await resCita.json();
 
             document.getElementById('lista-pacientes').innerHTML = listaPacientes.map(p => 
