@@ -268,8 +268,8 @@ code { background:var(--teal-light); color:var(--teal-dark); padding:1px 5px; bo
 // ────────────────────────────────────────────
 // CONFIGURACIÓN — CAMBIAR ESTOS VALORES
 // ────────────────────────────────────────────
-//const API_BASE = 'https://saluscma-api-1.onrender.com/api';
-//const TOKEN = localStorage.getItem('token') ;
+
+const token = localStorage.getItem('token') ;
 // ────────────────────────────────────────────
 // CATÁLOGOS ESTÁTICOS (del SQL)
 // ────────────────────────────────────────────
@@ -328,7 +328,7 @@ async function cargarHistorial() {
   try {
     const res = await fetch(`${API_BASE}/historial`,{
       method:'GET',
-      headers:{'Authorization':`Bearer ${TOKEN}`,'Content-Type':'application/json'}
+      headers:{'Authorization':`Bearer ${token}`,'Content-Type':'application/json'}
     });
     if (res.status===401){ console.warn('Token inválido'); return null; }
     const data = await res.json();
