@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const aRaiz = estaEnCarpetaHtml ? '../' : '';
     const aHtml = estaEnCarpetaHtml ? '' : 'html/';
 
-    const paginasLibres = ['index.html', 'vision.html', 'personal.html', 'contacto.html', 'mapaPrincipal.html', 'loginn.html', 'detalleTrabajador.html', 'registro.html', 'recuperarContrasena.html', 'restablecerContrasena.html'];
+    const paginasLibres = ['index.html', 'vision.html', 'personal.html', 'contacto.html', 'mapaPrincipal.html', 'loginn.html', 'detalleTrabajador.html', 'registro.html', 'recuperarContrasena.html', 'restablecerContrasena.html', 'prediccion.html'];
 
     const esAdmin = currentFile.startsWith('admin') && rol !== '7';
     const esMedico = currentFile.startsWith('medico') && rol !== '8';

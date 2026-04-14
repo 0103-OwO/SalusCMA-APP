@@ -13,7 +13,42 @@
         href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap"
         rel="stylesheet">
 
-    <title>Historial - Listado | Salus CMA</title>
+    <title>Historial - Listado | Salus CMA</title> 
+    <style>
+            .barra-prediccion {
+            margin: 20px 0;
+            text-align: center;
+            }
+
+            .barra-prediccion hr {
+            border: none;
+            border-top: 2px solid #ddd;
+            margin-bottom: 15px;
+            }
+
+            .barra-prediccion a {
+            text-decoration: none;
+            }
+
+            .btn-prediccion {
+            padding: 10px 25px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            }
+
+            .btn-prediccion:hover {
+            background-color: #0056b3;
+            }
+
+            .btn-prediccion:active {
+            background-color: #004085;
+            }
+        </style>
 </head>
 
 <body>
@@ -96,6 +131,12 @@
 
     <main>
         <h2>Historial</h2>
+        <div class="barra-prediccion">
+            <hr>
+            <a href="prediccion.html" id="enlace-prediccion">
+            <button class="btn-prediccion">Ver Predicción</button>
+            </a>
+        </div>
 
         <table id="tablaHistorial">
             <thead>
