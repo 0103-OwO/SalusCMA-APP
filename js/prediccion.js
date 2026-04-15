@@ -661,18 +661,6 @@ N(${tP}) = ${modelo.C} · e^(${kS}${kD} · ${tP})
       <div class="metric-value">${mesActual?.n ?? '—'}</div>
       <div class="metric-sub">${mesActual?.mes ?? ''}</div>
     </div>
-    <div class="metric">
-      <div class="metric-label">Variación mensual</div>
-      <div class="metric-value" style="color:${parseFloat(varPct) >= 0 ? 'var(--success)' : 'var(--red)'}">
-        ${varPct !== '—' ? (parseFloat(varPct) >= 0 ? '+' : '') + varPct + '%' : '—'}
-      </div>
-      <div class="metric-sub">vs mes anterior</div>
-    </div>
-    <div class="metric">
-      <div class="metric-label">P1 (t=${tP})</div>
-      <div class="metric-value" style="color:var(--teal-dark)">${resultElg?.Nt ?? '—'}</div>
-      <div class="metric-sub">citas proyectadas</div>
-    </div>
     ${modelo ? `
     <div class="metric">
       <div class="metric-label">C1 · condición inicial</div>
@@ -686,6 +674,19 @@ N(${tP}) = ${modelo.C} · e^(${kS}${kD} · ${tP})
       </div>
       <div class="metric-sub">constante de crecimiento</div>
     </div>` : ''}
+    <div class="metric">
+      <div class="metric-label">Variación mensual</div>
+      <div class="metric-value" style="color:${parseFloat(varPct) >= 0 ? 'var(--success)' : 'var(--red)'}">
+        ${varPct !== '—' ? (parseFloat(varPct) >= 0 ? '+' : '') + varPct + '%' : '—'}
+      </div>
+      <div class="metric-sub">vs mes anterior</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">P1 (t=${tP})</div>
+      <div class="metric-value" style="color:var(--teal-dark)">${resultElg?.Nt ?? '—'}</div>
+      <div class="metric-sub">citas proyectadas</div>
+    </div>
+    
   </div>
 
   ${resultBox}
