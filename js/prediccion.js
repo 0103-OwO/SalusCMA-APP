@@ -5,10 +5,10 @@
 //  (igual que en el resto de tus páginas del frontend).
 //  Si no, se usa un fallback para desarrollo local.
 // ═══════════════════════════════════════════════════════════════
-if (typeof API_BASE === 'undefined') {
+/* if (typeof API_BASE === 'undefined') {
   // ⚠️  CAMBIAR esta URL por la de tu entorno si no tienes API_BASE global
   var API_BASE = 'https://saluscma-api-1.onrender.com/api';
-}
+} */
 
 // ═══════════════════════════════════════════════════════════════
 //  CATÁLOGOS ESTÁTICOS (extraídos del SQL — trabajadores tabla)
