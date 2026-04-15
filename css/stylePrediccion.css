@@ -1,8 +1,8 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --teal-dark:  #085E63;
-  --teal-mid:   #064A4E;
+  --teal-dark:  #066469;
+  --teal-mid:   #07575c;
   --teal-light: #e0f0ec;
   --teal-pale:  #f2f9f7;
   --white:      #ffffff;
