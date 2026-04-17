@@ -690,8 +690,7 @@ N(${tP}) = ${modelo.C} · e^(${kS}${kD} · ${tP})
   </div>
 
   ${resultBox}
-  ${tablaDatos}
-  ${pasos}
+
   ${tablaProyeccion}
 
   <div class="charts-grid">
