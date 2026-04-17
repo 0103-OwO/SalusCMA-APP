@@ -455,7 +455,7 @@ function renderHTML(mensual, ultimos6, modelo, proy5, mesesProy, filtroLabel, ra
   }[tipoFiltro] || 'Distribución';
 
   // ── PASO 0: tabla C1 / K / P1 ───────────────────────────────
-  /* const tablaDatos = modelo ? `
+  const tablaDatos = modelo ? `
   <div class="card">
     <div class="card-header"><div class="card-dot"></div>
       <div class="card-title">Paso 0 — Identificación de datos para el cálculo</div>
@@ -583,7 +583,7 @@ N(${tP}) = ${modelo.C} · e^(${kS}${kD} · ${tP})
 
     </div>
   </div>`;
-  })() : ''; */
+  })() : ''; 
 
   // ── TABLA DE PROYECCIÓN (5 meses) ───────────────────────────
   // Ahora usa tRelativo para el label de "meses después de K"
@@ -690,7 +690,8 @@ N(${tP}) = ${modelo.C} · e^(${kS}${kD} · ${tP})
   </div>
 
   ${resultBox}
-  
+  ${tablaDatos}
+  ${pasos}
   ${tablaProyeccion}
 
   <div class="charts-grid">
